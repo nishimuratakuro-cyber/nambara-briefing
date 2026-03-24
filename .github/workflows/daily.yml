@@ -5,6 +5,9 @@ on:
     - cron: '0 0 * * 1-5'   # 毎週月〜金 9:00 JST (UTC 0:00)
   workflow_dispatch:          # 手動実行ボタン
 
+permissions:
+  contents: write
+
 jobs:
   generate:
     runs-on: ubuntu-latest
