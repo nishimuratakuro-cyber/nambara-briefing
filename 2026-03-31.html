@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ブリーフィング — 2026年3月31日（月）</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans JP',sans-serif;background:#f5f6f8;color:#1a1a2e;min-height:100vh}
+header{background:#fff;border-bottom:2px solid #e8eaf0;padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.logo-badge{background:#1a73e8;color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:4px}
+.header-title{font-size:15px;font-weight:500;color:#2d2d2d;margin-left:12px}
+.header-date{font-size:12px;color:#888}
+.back-link{background:#f1f3f4;color:#444;font-size:11px;font-weight:500;padding:5px 12px;border-radius:6px;text-decoration:none;border:1px solid #ddd}
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:24px 20px;gap:24px}
+.sidebar{width:220px;flex-shrink:0}
+.sidebar-card{background:#fff;border-radius:8px;border:1px solid #e8eaf0;padding:16px 0;position:sticky;top:72px}
+.sidebar-title{font-size:11px;font-weight:700;color:#888;letter-spacing:.1em;padding:0 16px 12px;text-transform:uppercase}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 16px;cursor:pointer;transition:background .15s;border-left:3px solid transparent;text-decoration:none;color:inherit}
+.nav-item:hover{background:#f0f4ff}
+.nav-item.active{background:#e8f0fe;border-left-color:#1a73e8}
+.nav-time{font-size:11px;color:#1a73e8;font-weight:500;min-width:42px}
+.nav-name{font-size:13px;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.nav-dot.pending{background:#dadce0}.nav-dot.now{background:#ea4335;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.main{flex:1;min-width:0}
+.day-banner{background:#fff;border-radius:8px;border:1px solid #e8eaf0;padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between}
+.day-info h1{font-size:18px;font-weight:700;color:#1a1a2e;margin-bottom:4px}
+.day-info p{font-size:12px;color:#777}
+.day-stats{display:flex;gap:16px}
+.stat{text-align:center}
+.stat-num{font-size:22px;font-weight:700;color:#1a73e8;line-height:1}
+.stat-label{font-size:10px;color:#888;margin-top:2px}
+.card{background:#fff;border-radius:8px;border:1px solid #e8eaf0;margin-bottom:12px;overflow:hidden;transition:box-shadow .2s,border-color .2s;scroll-margin-top:72px}
+.card:hover{box-shadow:0 2px 12px rgba(0,0,0,.08);border-color:#c5d0e6}
+.card.highlighted{border-color:#1a73e8;box-shadow:0 0 0 2px rgba(26,115,232,.15)}
+.card-top{display:flex;align-items:flex-start;gap:16px;padding:18px 20px}
+.card-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:700;flex-shrink:0}
+.card-main{flex:1;min-width:0}
+.card-meta{display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap}
+.card-time-badge{background:#e8f0fe;color:#1a73e8;font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px}
+.status-badge{font-size:10px;padding:2px 8px;border-radius:12px;font-weight:500}
+.status-badge.pending{background:#f1f3f4;color:#888}
+.card-title{font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:3px}
+.card-company{font-size:12px;color:#777;margin-bottom:6px}
+.card-purpose{font-size:12px;color:#555;background:#f8f9fc;border-left:3px solid #e0e4ef;padding:6px 10px;border-radius:0 4px 4px 0;line-height:1.6}
+.card-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0;padding-left:8px}
+.btn-zoom{display:inline-flex;align-items:center;gap:6px;background:#1a73e8;color:#fff;text-decoration:none;font-size:12px;font-weight:500;padding:7px 14px;border-radius:6px;white-space:nowrap;transition:background .15s}
+.btn-zoom:hover{background:#1557b0}
+.btn-gijiroku-pending{display:inline-flex;align-items:center;gap:6px;background:#f1f3f4;color:#888;font-size:12px;font-weight:500;padding:7px 14px;border-radius:6px;white-space:nowrap}
+.card-footer{border-top:1px solid #f1f3f4;padding:10px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.attendee-chip{display:inline-flex;align-items:center;gap:5px;background:#f1f3f4;border-radius:12px;padding:3px 10px;font-size:11px;color:#555}
+.attendee-chip .dot{width:5px;height:5px;border-radius:50%}
+.attendee-chip .dot.ok{background:#34a853}.attendee-chip .dot.ng{background:#dadce0}
+.zoom-id-text{font-size:10px;color:#aaa;margin-left:auto}
+@keyframes highlightAnim{0%{border-color:#e8eaf0}40%{border-color:#1a73e8;box-shadow:0 0 0 2px rgba(26,115,232,.2)}100%{border-color:#1a73e8;box-shadow:0 0 0 2px rgba(26,115,232,.15)}}
+.card.pop{animation:highlightAnim .5s ease forwards}
+#pw-overlay{position:fixed;inset:0;background:#1a1a2e;display:flex;align-items:center;justify-content:center;z-index:9999}
+#pw-box{background:#fff;border-radius:12px;padding:40px 36px;width:320px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)}
+#pw-box h2{font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:6px}
+#pw-box p{font-size:12px;color:#888;margin-bottom:20px}
+#pw-input{width:100%;border:1.5px solid #e0e4ef;border-radius:8px;padding:10px 14px;font-size:18px;letter-spacing:.3em;text-align:center;outline:none;margin-bottom:12px}
+#pw-input:focus{border-color:#1a73e8}
+#pw-btn{width:100%;background:#1a73e8;color:#fff;border:none;border-radius:8px;padding:10px;font-size:14px;font-weight:700;cursor:pointer}
+#pw-btn:hover{background:#1557b0}
+#pw-err{font-size:12px;color:#ea4335;margin-top:8px;display:none}
+</style>
+</head>
+<body>
+<div id="pw-overlay">
+  <div id="pw-box">
+    <h2>ブリーフィング</h2>
+    <p>パスワードを入力してください</p>
+    <input id="pw-input" type="password" placeholder="••••" maxlength="20" autofocus>
+    <button id="pw-btn" onclick="checkPw()">開く</button>
+    <div id="pw-err">パスワードが違います</div>
+  </div>
+</div>
+<script>
+(function(){
+  if(sessionStorage.getItem('bpw')==='ok'){
+    document.getElementById('pw-overlay').style.display='none';
+  }
+})();
+function checkPw(){
+  if(document.getElementById('pw-input').value==='2467'){
+    sessionStorage.setItem('bpw','ok');
+    document.getElementById('pw-overlay').style.display='none';
+  }else{
+    document.getElementById('pw-err').style.display='block';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+  }
+}
+document.getElementById('pw-input').addEventListener('keydown',function(e){
+  if(e.key==='Enter')checkPw();
+});
+</script>
+<header>
+  <div style="display:flex;align-items:center">
+    <span class="logo-badge">ブリーフィング</span>
+    <span class="header-title">南原竜樹 — 本日の面談</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <div class="header-date">2026年3月31日（月）</div>
+    <a class="back-link" href="index.html">← 日付一覧</a>
+    <a href="https://editor.shabelab.com/login.html" target="_blank" class="back-link">いきなり議事録</a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="sidebar-title">タイムライン</div>
+      <a class="nav-item" href="#meet-1" onclick="jump('meet-1',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">09:00</div>
+        <div class="nav-name">斎藤若葉</div></a>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="day-banner">
+      <div class="day-info">
+        <h1>2026年3月31日（月）</h1>
+        <p>本日のZoom面談スケジュール</p>
+      </div>
+      <div class="day-stats">
+        <div class="stat"><div class="stat-num">1</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">1</div><div class="stat-label">録音待ち</div></div>
+      </div>
+    </div>
+    
+    <div class="card" id="meet-1">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">斎</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">09:00 〜 09:30</span>
+            <span class="status-badge pending">録音待ち</span>
+          </div>
+          <div class="card-title">斎藤若葉</div>
+          <div class="card-company">wakaba02072001@gmail.com</div>
+          <div class="card-purpose">よろしくお願いします</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/86316514456?pwd=QBSY5QEYuCh8g5kcAKyslNDWA9dm1h.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+        </div>
+      </div>
+      <div class="card-footer"><span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>斎藤若葉 ✓</span><span class="zoom-id-text">ID: 863 1651 4456 ／ PW: 371833</span></div>
+    </div>
+  </main>
+</div>
+<script>
+function jump(id,el){
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  if(el)el.classList.add('active');
+  const card=document.getElementById(id);
+  if(!card)return;
+  card.scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.card').forEach(c=>c.classList.remove('highlighted','pop'));
+  setTimeout(()=>{card.classList.add('highlighted','pop')},300);
+}
+(function(){
+  const now=new Date();
+  const m=now.getHours()*60+now.getMinutes();
+  const sch=[{s:540,e:570}];
+  document.querySelectorAll('.nav-item').forEach((el,i)=>{
+    if(!sch[i])return;
+    if(m>=sch[i].s&&m<sch[i].e){
+      el.classList.add('active');
+      el.querySelector('.nav-dot').className='nav-dot now';
+      document.getElementById('meet-'+(i+1))?.classList.add('highlighted');
+    }
+  });
+})();
+</script>
+</body>
+</html>
