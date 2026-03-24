@@ -1,7 +1,7 @@
 """
 毎朝自動でブリーフィングページを生成するスクリプト
 """
-import os, json, datetime
+import os, json, datetime, re
 from zoneinfo import ZoneInfo
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
@@ -11,7 +11,7 @@ import time
 
 JST = ZoneInfo("Asia/Tokyo")
 TODAY = datetime.date.today()
-TODAY_STR = TODAY.strftime("%Y年%-m月%-d日")
+TODAY_STR = f"{TODAY.year}年{TODAY.month}月{TODAY.day}日"
 WEEKDAY = ["月","火","水","木","金","土","日"][TODAY.weekday()]
 
 # ── Google Calendar ──────────────────────────────────────────
@@ -50,7 +50,6 @@ def get_calendar_events():
             continue
 
         # Zoom URL抽出
-        import re
         zoom_url = re.search(r'https://[^\s<"]+zoom\.us/j/[^\s<"]+', desc)
         meeting_id = re.search(r'ミーティングID[：:]\s*([\d\s]+)', desc)
         password = re.search(r'パスワード[：:]\s*(\S+)', desc)
@@ -110,49 +109,43 @@ def get_gijiroku_links(meetings):
 
         today_str = TODAY.strftime("%Y/%m/%d")
 
-        for i, meeting in enumerate(meetings):
-            # 今日の議事録：日付+タイトルで検索
-            page.goto("https://editor.shabelab.com/narancia_top.html?folder=team")
-            page.wait_for_load_state("networkidle")
-            time.sleep(2)
-
-            # 名前抽出（"渡野友和 x 南原竜樹: ..." → "渡野友和"）
-            import re
-            name_match = re.match(r'^([^xX×]+?)\s*[xX×]', meeting["title"])
-            name = name_match.group(1).strip() if name_match else ""
-            if not name:
-                results[i] = {"today": None, "past": None, "past_count": 0}
-                continue
-
-            # キーワード検索
+        def search_links(keyword):
             page.locator("text=キーワード").first.click()
             time.sleep(0.5)
             try:
                 inp = page.locator('input[type="text"], input:not([type])').first
-                inp.fill(name[:4])
+                inp.fill(keyword)
                 page.keyboard.press("Enter")
                 time.sleep(0.5)
             except:
                 pass
             page.locator("text=検索").first.click()
             time.sleep(2)
-
-            links = page.eval_on_selector_all(
+            return page.eval_on_selector_all(
                 'a[href*="gijiroku_detail"]',
                 'els => els.map(e => e.href)'
             )
 
-            today_link = None
-            past_link  = None
-            past_count = 0
+        for i, meeting in enumerate(meetings):
+            page.goto("https://editor.shabelab.com/narancia_top.html?folder=team")
+            page.wait_for_load_state("networkidle")
+            time.sleep(2)
 
-            for link in links:
-                # 詳細ページで日付確認（簡易：最初のリンクを今日候補とする）
-                if today_link is None and not past_link:
-                    today_link = link
-                elif past_link is None:
-                    past_link  = link
-                    past_count = len(links) - 1
+            name_match = re.match(r'^([^xX×]+?)\s*[xX×]', meeting["title"])
+            name = name_match.group(1).strip() if name_match else ""
+            if not name:
+                results[i] = {"today": None, "past": None, "past_count": 0}
+                continue
+
+            # 今日の議事録：日付+名前で検索
+            today_links = search_links(f"{name[:4]} {today_str}")
+            today_link  = today_links[0] if today_links else None
+
+            # 全件：名前のみで検索
+            all_links  = search_links(name[:4])
+            past_links = [l for l in all_links if l != today_link]
+            past_link  = past_links[0] if past_links else None
+            past_count = len(past_links)
 
             results[i] = {
                 "today":      today_link,
@@ -192,6 +185,8 @@ def make_card(i, meeting, links):
     color  = COLORS[idx]
     name   = meeting["title"].split(" x ")[0].split("×")[0].strip()
     avatar = name[0] if name else "？"
+    guest  = meeting["guests"][0] if meeting["guests"] else None
+    guest_email = guest.get("email", "") if guest else ""
 
     today_link = links.get("today")
     past_link  = links.get("past")
@@ -225,7 +220,7 @@ def make_card(i, meeting, links):
             </span>
           </div>
           <div class="card-title">{name}</div>
-          <div class="card-company">{meeting["title"]}</div>
+          <div class="card-company">{guest_email}</div>
           {msg_html}
         </div>
         <div class="card-actions">
@@ -241,24 +236,33 @@ def make_card(i, meeting, links):
     </div>"""
 
 
-def make_nav_items(meetings):
+def make_nav_items(meetings, gijiroku):
     items = ""
     for i, m in enumerate(meetings):
         name = m["title"].split(" x ")[0].split("×")[0].strip()
+        dot_cls = "recorded" if gijiroku.get(i, {}).get("today") else "pending"
         items += f"""
       <a class="nav-item" href="#meet-{i+1}" onclick="jump('meet-{i+1}',this)">
-        <div class="nav-dot pending"></div>
+        <div class="nav-dot {dot_cls}"></div>
         <div class="nav-time">{m["start"]}</div>
         <div class="nav-name">{name}</div>
       </a>"""
     return items
 
 
+def _time_to_min(t):
+    h, m = t.split(":")
+    return int(h) * 60 + int(m)
+
 def generate_html(meetings, gijiroku):
     cards    = "".join(make_card(i, m, gijiroku.get(i, {})) for i, m in enumerate(meetings))
-    nav      = make_nav_items(meetings)
+    nav      = make_nav_items(meetings, gijiroku)
     count    = len(meetings)
     recorded = sum(1 for v in gijiroku.values() if v.get("today"))
+    schedule_js = ",".join(
+        f"{{s:{_time_to_min(m['start'])},e:{_time_to_min(m['end'])}}}"
+        for m in meetings if m.get("start") and m.get("end")
+    )
 
     return f"""<!DOCTYPE html>
 <html lang="ja">
@@ -325,9 +329,47 @@ header{{background:#fff;border-bottom:2px solid #e8eaf0;padding:0 32px;height:56
 .zoom-id-text{{font-size:10px;color:#aaa;margin-left:auto}}
 @keyframes highlightAnim{{0%{{border-color:#e8eaf0;box-shadow:none}}40%{{border-color:#1a73e8;box-shadow:0 0 0 2px rgba(26,115,232,.2)}}100%{{border-color:#1a73e8;box-shadow:0 0 0 2px rgba(26,115,232,.15)}}}}
 .card.pop{{animation:highlightAnim .5s ease forwards}}
+#pw-overlay{{position:fixed;inset:0;background:#1a1a2e;display:flex;align-items:center;justify-content:center;z-index:9999}}
+#pw-box{{background:#fff;border-radius:12px;padding:40px 36px;width:320px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)}}
+#pw-box h2{{font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:6px}}
+#pw-box p{{font-size:12px;color:#888;margin-bottom:20px}}
+#pw-input{{width:100%;border:1.5px solid #e0e4ef;border-radius:8px;padding:10px 14px;font-size:18px;letter-spacing:.3em;text-align:center;outline:none;margin-bottom:12px}}
+#pw-input:focus{{border-color:#1a73e8}}
+#pw-btn{{width:100%;background:#1a73e8;color:#fff;border:none;border-radius:8px;padding:10px;font-size:14px;font-weight:700;cursor:pointer}}
+#pw-btn:hover{{background:#1557b0}}
+#pw-err{{font-size:12px;color:#ea4335;margin-top:8px;display:none}}
 </style>
 </head>
 <body>
+<div id="pw-overlay">
+  <div id="pw-box">
+    <h2>ブリーフィング</h2>
+    <p>パスワードを入力してください</p>
+    <input id="pw-input" type="password" placeholder="••••" maxlength="20" autofocus>
+    <button id="pw-btn" onclick="checkPw()">開く</button>
+    <div id="pw-err">パスワードが違います</div>
+  </div>
+</div>
+<script>
+(function(){{
+  if(sessionStorage.getItem('bpw')==='ok'){{
+    document.getElementById('pw-overlay').style.display='none';
+  }}
+}})();
+function checkPw(){{
+  if(document.getElementById('pw-input').value==='2467'){{
+    sessionStorage.setItem('bpw','ok');
+    document.getElementById('pw-overlay').style.display='none';
+  }}else{{
+    document.getElementById('pw-err').style.display='block';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+  }}
+}}
+document.getElementById('pw-input').addEventListener('keydown',function(e){{
+  if(e.key==='Enter')checkPw();
+}});
+</script>
 <header>
   <div style="display:flex;align-items:center">
     <span class="logo-badge">ブリーフィング</span>
@@ -376,12 +418,10 @@ function jump(id,el){{
 (function(){{
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
+  const sch=[{schedule_js}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{{
-    const t=el.querySelector('.nav-time');
-    if(!t)return;
-    const [h,min]=t.innerText.split(':').map(Number);
-    const start=h*60+min;
-    if(m>=start&&m<start+30){{
+    if(!sch[i])return;
+    if(m>=sch[i].s&&m<sch[i].e){{
       el.classList.add('active');
       el.querySelector('.nav-dot').className='nav-dot now';
       document.getElementById('meet-'+(i+1))?.classList.add('highlighted');
