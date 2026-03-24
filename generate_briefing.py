@@ -85,14 +85,26 @@ def get_calendar_events(target_date=None):
 
 
 # ── いきなり議事録 ────────────────────────────────────────────
-def get_gijiroku_links(meetings):
+def get_all_gijiroku_links(meetings_by_date):
+    """
+    meetings_by_date: {date: [meeting, ...]}
+    ブラウザを1回だけ起動し、名前ごとに1回だけ検索して全日付分の議事録リンクを返す。
+    returns: {date: {index: {today, past, past_count}}}
+    """
     email    = os.environ.get("GIJIROKU_EMAIL")
     password = os.environ.get("GIJIROKU_PASSWORD")
 
+    empty = lambda meetings: {i: {"today": None, "past": None, "past_count": 0} for i in range(len(meetings))}
     if not email or not password:
-        return {i: {"today": None, "past": None, "past_count": 0} for i in range(len(meetings))}
+        return {d: empty(m) for d, m in meetings_by_date.items()}
 
-    results = {}
+    today_str = TODAY.strftime("%Y/%m/%d")
+
+    # 全日付から名前一覧を収集（重複除去）
+    name_cache = {}  # name_key -> {all_links, today_link}
+
+    results = {d: {} for d in meetings_by_date}
+
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page(viewport={"width": 1400, "height": 900})
@@ -108,8 +120,6 @@ def get_gijiroku_links(meetings):
         except:
             pass
         time.sleep(2)
-
-        today_str = TODAY.strftime("%Y/%m/%d")
 
         def search_links(keyword):
             page.goto("https://editor.shabelab.com/narancia_top.html?folder=team")
@@ -131,30 +141,41 @@ def get_gijiroku_links(meetings):
                 'els => els.map(e => e.href)'
             )
 
-        for i, meeting in enumerate(meetings):
+        for target_date, meetings in meetings_by_date.items():
+            is_today = (target_date == TODAY)
+            for i, meeting in enumerate(meetings):
+                name_match = re.match(r'^([^xX×]+?)\s*[xX×]', meeting["title"])
+                name = name_match.group(1).strip() if name_match else ""
+                if not name:
+                    results[target_date][i] = {"today": None, "past": None, "past_count": 0}
+                    continue
 
-            name_match = re.match(r'^([^xX×]+?)\s*[xX×]', meeting["title"])
-            name = name_match.group(1).strip() if name_match else ""
-            if not name:
-                results[i] = {"today": None, "past": None, "past_count": 0}
-                continue
+                name_key = name[:4]
 
-            # 今日の議事録：日付+名前で検索
-            today_links = search_links(f"{name[:4]} {today_str}")
-            today_link  = today_links[0] if today_links else None
+                # 名前ごとに1回だけ全件検索（キャッシュ済みならスキップ）
+                if name_key not in name_cache:
+                    all_links = search_links(name_key)
+                    name_cache[name_key] = all_links
+                    print(f"  検索: {name} → {len(all_links)}件")
+                else:
+                    all_links = name_cache[name_key]
 
-            # 全件：名前のみで検索
-            all_links  = search_links(name[:4])
-            past_links = [l for l in all_links if l != today_link]
-            past_link  = past_links[0] if past_links else None
-            past_count = len(past_links)
+                # 今日の議事録：今日のみ日付+名前で検索
+                if is_today:
+                    today_links = search_links(f"{name_key} {today_str}")
+                    today_link  = today_links[0] if today_links else None
+                else:
+                    today_link = None  # 未来は今日の議事録なし
 
-            results[i] = {
-                "today":      today_link,
-                "past":       past_link,
-                "past_count": past_count,
-            }
-            print(f"  {name}: today={today_link is not None}, past={past_count}件")
+                past_links = [l for l in all_links if l != today_link]
+                past_link  = past_links[0] if past_links else None
+                past_count = len(past_links)
+
+                results[target_date][i] = {
+                    "today":      today_link,
+                    "past":       past_link,
+                    "past_count": past_count,
+                }
 
         browser.close()
     return results
@@ -534,41 +555,44 @@ h1{{font-size:16px;font-weight:700;color:#555;margin-bottom:16px}}
 
 
 if __name__ == "__main__":
-    # 今日 + 今後6日 = 計7日分を生成
     GENERATE_DAYS = 7
 
-    # 今日だけいきなり議事録を検索（未来は録音が存在しない）
-    print(f"📅 {TODAY_STR} のいきなり議事録を検索中...")
-    try:
-        today_meetings = get_calendar_events(TODAY)
-        today_gijiroku = get_gijiroku_links(today_meetings)
-    except Exception as e:
-        print(f"⚠️ 今日の議事録取得失敗: {e}")
-        today_meetings = []
-        today_gijiroku = {}
+    # 1. 全日付のカレンダーイベントを取得
+    print("1. Googleカレンダーを取得中...")
+    meetings_by_date = {}
+    for offset in range(GENERATE_DAYS):
+        target = TODAY + datetime.timedelta(days=offset)
+        try:
+            meetings_by_date[target] = get_calendar_events(target)
+            print(f"   {target}: {len(meetings_by_date[target])}件")
+        except Exception as e:
+            print(f"   {target}: 取得失敗 ({e})")
+            meetings_by_date[target] = []
 
+    # 2. いきなり議事録を全日付まとめて取得（ブラウザ1回・名前重複なし）
+    print("\n2. いきなり議事録を検索中...")
+    try:
+        all_gijiroku = get_all_gijiroku_links(meetings_by_date)
+    except Exception as e:
+        print(f"⚠️ 議事録取得失敗: {e}")
+        all_gijiroku = {d: {} for d in meetings_by_date}
+
+    # 3. 各日付のHTMLを生成
+    print("\n3. HTML生成中...")
     for offset in range(GENERATE_DAYS):
         target = TODAY + datetime.timedelta(days=offset)
         date_filename = target.strftime("%Y-%m-%d") + ".html"
-        date_str_log  = f"{target.year}年{target.month}月{target.day}日"
-        print(f"\n📅 {date_str_log} を生成中...")
+        d_str = f"{target.year}年{target.month}月{target.day}日"
         try:
-            if offset == 0:
-                meetings = today_meetings
-                gijiroku = today_gijiroku
-            else:
-                meetings = get_calendar_events(target)
-                gijiroku = {}  # 未来日付は議事録なし
-
+            meetings = meetings_by_date[target]
+            gijiroku = all_gijiroku.get(target, {})
             html = generate_html(meetings, gijiroku, target)
             with open(date_filename, "w", encoding="utf-8") as f:
                 f.write(html)
-            print(f"✅ {date_filename} 生成完了 ({len(meetings)}件)")
-
+            print(f"   ✅ {date_filename} ({len(meetings)}件)")
         except Exception as e:
-            print(f"❌ {date_str_log} エラー: {e}")
-            d_str = f"{target.year}年{target.month}月{target.day}日"
-            wday  = ["月","火","水","木","金","土","日"][target.weekday()]
+            print(f"   ❌ {d_str} エラー: {e}")
+            wday = ["月","火","水","木","金","土","日"][target.weekday()]
             error_html = f"""<!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8">
 <title>エラー</title>
@@ -583,5 +607,5 @@ h1{{color:#ea4335;font-size:18px;margin-bottom:12px}}p{{color:#555;font-size:13p
             with open(date_filename, "w", encoding="utf-8") as f:
                 f.write(error_html)
 
-    print("\n📋 index.html 再生成中...")
+    print("\n4. index.html 再生成中...")
     regenerate_index()
