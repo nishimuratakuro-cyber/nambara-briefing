@@ -15,7 +15,9 @@ TODAY_STR = f"{TODAY.year}年{TODAY.month}月{TODAY.day}日"
 WEEKDAY = ["月","火","水","木","金","土","日"][TODAY.weekday()]
 
 # ── Google Calendar ──────────────────────────────────────────
-def get_calendar_events():
+def get_calendar_events(target_date=None):
+    if target_date is None:
+        target_date = TODAY
     creds_json = os.environ.get("GOOGLE_TOKEN")
     client_json = os.environ.get("GOOGLE_CLIENT")
 
@@ -28,8 +30,8 @@ def get_calendar_events():
 
     service = build("calendar", "v3", credentials=creds)
 
-    time_min = datetime.datetime.combine(TODAY, datetime.time.min, tzinfo=JST).isoformat()
-    time_max = datetime.datetime.combine(TODAY, datetime.time.max, tzinfo=JST).isoformat()
+    time_min = datetime.datetime.combine(target_date, datetime.time.min, tzinfo=JST).isoformat()
+    time_max = datetime.datetime.combine(target_date, datetime.time.max, tzinfo=JST).isoformat()
 
     calendar_id = os.environ.get("CALENDAR_ID", "t.nambara.autotrading@gmail.com")
 
@@ -254,7 +256,11 @@ def _time_to_min(t):
     h, m = t.split(":")
     return int(h) * 60 + int(m)
 
-def generate_html(meetings, gijiroku):
+def generate_html(meetings, gijiroku, target_date=None):
+    if target_date is None:
+        target_date = TODAY
+    date_str = f"{target_date.year}年{target_date.month}月{target_date.day}日"
+    weekday  = ["月","火","水","木","金","土","日"][target_date.weekday()]
     cards    = "".join(make_card(i, m, gijiroku.get(i, {})) for i, m in enumerate(meetings))
     nav      = make_nav_items(meetings, gijiroku)
     count    = len(meetings)
@@ -269,7 +275,7 @@ def generate_html(meetings, gijiroku):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ブリーフィング — {TODAY_STR}</title>
+<title>ブリーフィング — {date_str}</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 *{{margin:0;padding:0;box-sizing:border-box}}
@@ -376,7 +382,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){{
     <span class="header-title">南原竜樹 — 本日の面談</span>
   </div>
   <div style="display:flex;align-items:center;gap:12px">
-    <div class="header-date">{TODAY_STR}（{WEEKDAY}）</div>
+    <div class="header-date">{date_str}（{weekday}）</div>
     <a href="https://editor.shabelab.com/login.html" target="_blank"
        style="background:#f1f3f4;color:#444;font-size:11px;font-weight:500;padding:5px 12px;border-radius:6px;text-decoration:none;border:1px solid #ddd">
       いきなり議事録 ログイン
@@ -393,7 +399,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){{
   <main class="main">
     <div class="day-banner">
       <div class="day-info">
-        <h1>{TODAY_STR}（{WEEKDAY}）</h1>
+        <h1>{date_str}（{weekday}）</h1>
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
@@ -528,29 +534,42 @@ h1{{font-size:16px;font-weight:700;color:#555;margin-bottom:16px}}
 
 
 if __name__ == "__main__":
-    print(f"📅 {TODAY_STR} のブリーフィングを生成中...")
-    date_filename = TODAY.strftime("%Y-%m-%d") + ".html"
+    # 今日 + 今後6日 = 計7日分を生成
+    GENERATE_DAYS = 7
+
+    # 今日だけいきなり議事録を検索（未来は録音が存在しない）
+    print(f"📅 {TODAY_STR} のいきなり議事録を検索中...")
     try:
-        print("1. Googleカレンダーを取得中...")
-        meetings = get_calendar_events()
-        print(f"   Zoom面談 {len(meetings)}件 取得")
-
-        print("2. いきなり議事録を検索中...")
-        gijiroku = get_gijiroku_links(meetings)
-
-        print("3. HTML生成中...")
-        html = generate_html(meetings, gijiroku)
-
-        with open(date_filename, "w", encoding="utf-8") as f:
-            f.write(html)
-        print(f"✅ {date_filename} 生成完了")
-
-        print("4. index.html 再生成中...")
-        regenerate_index()
-
+        today_meetings = get_calendar_events(TODAY)
+        today_gijiroku = get_gijiroku_links(today_meetings)
     except Exception as e:
-        print(f"❌ エラー: {e}")
-        error_html = f"""<!DOCTYPE html>
+        print(f"⚠️ 今日の議事録取得失敗: {e}")
+        today_meetings = []
+        today_gijiroku = {}
+
+    for offset in range(GENERATE_DAYS):
+        target = TODAY + datetime.timedelta(days=offset)
+        date_filename = target.strftime("%Y-%m-%d") + ".html"
+        date_str_log  = f"{target.year}年{target.month}月{target.day}日"
+        print(f"\n📅 {date_str_log} を生成中...")
+        try:
+            if offset == 0:
+                meetings = today_meetings
+                gijiroku = today_gijiroku
+            else:
+                meetings = get_calendar_events(target)
+                gijiroku = {}  # 未来日付は議事録なし
+
+            html = generate_html(meetings, gijiroku, target)
+            with open(date_filename, "w", encoding="utf-8") as f:
+                f.write(html)
+            print(f"✅ {date_filename} 生成完了 ({len(meetings)}件)")
+
+        except Exception as e:
+            print(f"❌ {date_str_log} エラー: {e}")
+            d_str = f"{target.year}年{target.month}月{target.day}日"
+            wday  = ["月","火","水","木","金","土","日"][target.weekday()]
+            error_html = f"""<!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8">
 <title>エラー</title>
 <style>body{{font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f5f6f8}}
@@ -558,10 +577,11 @@ if __name__ == "__main__":
 h1{{color:#ea4335;font-size:18px;margin-bottom:12px}}p{{color:#555;font-size:13px;line-height:1.6}}</style>
 </head><body><div class="box">
 <h1>⚠️ 生成エラー</h1>
-<p>{TODAY_STR}（{WEEKDAY}）のブリーフィング生成に失敗しました。</p>
+<p>{d_str}（{wday}）のブリーフィング生成に失敗しました。</p>
 <p style="margin-top:12px;color:#aaa;font-size:11px">{e}</p>
 </div></body></html>"""
-        with open(date_filename, "w", encoding="utf-8") as f:
-            f.write(error_html)
-        regenerate_index()
-        raise
+            with open(date_filename, "w", encoding="utf-8") as f:
+                f.write(error_html)
+
+    print("\n📋 index.html 再生成中...")
+    regenerate_index()
