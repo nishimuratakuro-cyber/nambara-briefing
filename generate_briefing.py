@@ -54,7 +54,7 @@ def get_calendar_events(target_date=None):
         # Zoom URL抽出
         zoom_url = re.search(r'https://[^\s<"]+zoom\.us/j/[^\s<"]+', desc)
         meeting_id = re.search(r'ミーティングID[：:]\s*([\d\s]+)', desc)
-        password = re.search(r'パスワード[：:]\s*(\S+)', desc)
+        password = re.search(r'パスワード[：:]\s*([^\s<]+)', desc)
 
         attendees = ev.get("attendees", [])
         guests = [a for a in attendees if not a.get("self")]
@@ -186,14 +186,14 @@ def get_all_gijiroku_links(meetings_by_date):
                 else:
                     all_links = name_cache[name_key]
 
-                # 今日の議事録：今日のみ日付+名前で検索
+                # 今日の議事録：最新順なので先頭が最新（今日）の議事録
                 if is_today:
-                    today_links = search_links(f"{name_key} {today_str}")
-                    today_link  = today_links[0] if today_links else None
+                    today_link = all_links[0] if all_links else None
+                    past_links = all_links[1:]
                 else:
                     today_link = None  # 未来は今日の議事録なし
+                    past_links = all_links
 
-                past_links = [l for l in all_links if l != today_link]
                 past_link  = past_links[0] if past_links else None
                 past_count = len(past_links)
 
