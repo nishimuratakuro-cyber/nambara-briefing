@@ -110,6 +110,9 @@ def get_gijiroku_links(meetings):
         today_str = TODAY.strftime("%Y/%m/%d")
 
         def search_links(keyword):
+            page.goto("https://editor.shabelab.com/narancia_top.html?folder=team")
+            page.wait_for_load_state("networkidle")
+            time.sleep(2)
             page.locator("text=キーワード").first.click()
             time.sleep(0.5)
             try:
@@ -127,9 +130,6 @@ def get_gijiroku_links(meetings):
             )
 
         for i, meeting in enumerate(meetings):
-            page.goto("https://editor.shabelab.com/narancia_top.html?folder=team")
-            page.wait_for_load_state("networkidle")
-            time.sleep(2)
 
             name_match = re.match(r'^([^xX×]+?)\s*[xX×]', meeting["title"])
             name = name_match.group(1).strip() if name_match else ""
