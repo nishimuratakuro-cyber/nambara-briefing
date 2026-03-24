@@ -44,4 +44,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "📅 ブリーフィング自動更新 $(date '+%Y-%m-%d')"
-          file_pattern: index.html
+          file_pattern: "*.html"

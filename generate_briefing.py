@@ -433,8 +433,103 @@ function jump(id,el){{
 </html>"""
 
 
+PW_SCRIPT = """
+(function(){
+  if(sessionStorage.getItem('bpw')==='ok'){
+    document.getElementById('pw-overlay').style.display='none';
+  }
+})();
+function checkPw(){
+  if(document.getElementById('pw-input').value==='2467'){
+    sessionStorage.setItem('bpw','ok');
+    document.getElementById('pw-overlay').style.display='none';
+  }else{
+    document.getElementById('pw-err').style.display='block';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+  }
+}
+document.getElementById('pw-input').addEventListener('keydown',function(e){
+  if(e.key==='Enter')checkPw();
+});
+"""
+
+
+def regenerate_index():
+    import glob as _glob
+    files = sorted(_glob.glob("20??-??-??.html"), reverse=True)
+    cards = ""
+    for fname in files:
+        date_key = fname.replace(".html", "")
+        try:
+            y, m, d = date_key.split("-")
+            label = f"{y}年{int(m)}月{int(d)}日"
+        except Exception:
+            label = date_key
+        cards += f"""
+        <a class="day-card" href="{fname}">
+          <div class="day-card-date">{label}</div>
+          <div class="day-card-arrow">→</div>
+        </a>"""
+    html = f"""<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ブリーフィング 日付一覧</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{{margin:0;padding:0;box-sizing:border-box}}
+body{{font-family:'Noto Sans JP',sans-serif;background:#f5f6f8;color:#1a1a2e;min-height:100vh}}
+header{{background:#fff;border-bottom:2px solid #e8eaf0;padding:0 32px;height:56px;display:flex;align-items:center;box-shadow:0 1px 4px rgba(0,0,0,.06)}}
+.logo-badge{{background:#1a73e8;color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:4px}}
+.header-title{{font-size:15px;font-weight:500;color:#2d2d2d;margin-left:12px}}
+.wrap{{max-width:600px;margin:40px auto;padding:0 20px}}
+h1{{font-size:16px;font-weight:700;color:#555;margin-bottom:16px}}
+.day-card{{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid #e8eaf0;border-radius:8px;padding:18px 20px;margin-bottom:10px;text-decoration:none;color:inherit;transition:box-shadow .15s,border-color .15s}}
+.day-card:hover{{box-shadow:0 2px 12px rgba(0,0,0,.08);border-color:#c5d0e6}}
+.day-card-date{{flex:1;font-size:15px;font-weight:700;color:#1a1a2e}}
+.day-card-arrow{{font-size:16px;color:#1a73e8}}
+#pw-overlay{{position:fixed;inset:0;background:#1a1a2e;display:flex;align-items:center;justify-content:center;z-index:9999}}
+#pw-box{{background:#fff;border-radius:12px;padding:40px 36px;width:320px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)}}
+#pw-box h2{{font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:6px}}
+#pw-box p{{font-size:12px;color:#888;margin-bottom:20px}}
+#pw-input{{width:100%;border:1.5px solid #e0e4ef;border-radius:8px;padding:10px 14px;font-size:18px;letter-spacing:.3em;text-align:center;outline:none;margin-bottom:12px}}
+#pw-input:focus{{border-color:#1a73e8}}
+#pw-btn{{width:100%;background:#1a73e8;color:#fff;border:none;border-radius:8px;padding:10px;font-size:14px;font-weight:700;cursor:pointer}}
+#pw-btn:hover{{background:#1557b0}}
+#pw-err{{font-size:12px;color:#ea4335;margin-top:8px;display:none}}
+</style>
+</head>
+<body>
+<div id="pw-overlay">
+  <div id="pw-box">
+    <h2>ブリーフィング</h2>
+    <p>パスワードを入力してください</p>
+    <input id="pw-input" type="password" placeholder="••••" maxlength="20" autofocus>
+    <button id="pw-btn" onclick="checkPw()">開く</button>
+    <div id="pw-err">パスワードが違います</div>
+  </div>
+</div>
+<script>{PW_SCRIPT}</script>
+<header>
+  <span class="logo-badge">ブリーフィング</span>
+  <span class="header-title">南原竜樹 — 面談一覧</span>
+</header>
+<div class="wrap">
+  <h1>日付を選択</h1>
+  {cards}
+</div>
+</body>
+</html>"""
+    with open("index.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    print("index.html 再生成完了")
+
+
 if __name__ == "__main__":
     print(f"📅 {TODAY_STR} のブリーフィングを生成中...")
+    date_filename = TODAY.strftime("%Y-%m-%d") + ".html"
     try:
         print("1. Googleカレンダーを取得中...")
         meetings = get_calendar_events()
@@ -446,10 +541,12 @@ if __name__ == "__main__":
         print("3. HTML生成中...")
         html = generate_html(meetings, gijiroku)
 
-        with open("index.html", "w", encoding="utf-8") as f:
+        with open(date_filename, "w", encoding="utf-8") as f:
             f.write(html)
+        print(f"✅ {date_filename} 生成完了")
 
-        print("✅ index.html 生成完了")
+        print("4. index.html 再生成中...")
+        regenerate_index()
 
     except Exception as e:
         print(f"❌ エラー: {e}")
@@ -464,6 +561,7 @@ h1{{color:#ea4335;font-size:18px;margin-bottom:12px}}p{{color:#555;font-size:13p
 <p>{TODAY_STR}（{WEEKDAY}）のブリーフィング生成に失敗しました。</p>
 <p style="margin-top:12px;color:#aaa;font-size:11px">{e}</p>
 </div></body></html>"""
-        with open("index.html", "w", encoding="utf-8") as f:
+        with open(date_filename, "w", encoding="utf-8") as f:
             f.write(error_html)
+        regenerate_index()
         raise
