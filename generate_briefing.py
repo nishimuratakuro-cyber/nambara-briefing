@@ -404,10 +404,8 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){{
   </div>
   <div style="display:flex;align-items:center;gap:12px">
     <div class="header-date">{date_str}（{weekday}）</div>
-    <a href="https://editor.shabelab.com/login.html" target="_blank"
-       style="background:#f1f3f4;color:#444;font-size:11px;font-weight:500;padding:5px 12px;border-radius:6px;text-decoration:none;border:1px solid #ddd">
-      いきなり議事録 ログイン
-    </a>
+    <a href="index.html" style="background:#f1f3f4;color:#444;font-size:11px;font-weight:500;padding:5px 12px;border-radius:6px;text-decoration:none;border:1px solid #ddd">← 日付一覧</a>
+    <a href="https://editor.shabelab.com/login.html" target="_blank" style="background:#f1f3f4;color:#444;font-size:11px;font-weight:500;padding:5px 12px;border-radius:6px;text-decoration:none;border:1px solid #ddd">いきなり議事録 ログイン</a>
   </div>
 </header>
 <div class="layout">
