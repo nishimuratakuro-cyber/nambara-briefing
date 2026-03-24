@@ -35,6 +35,9 @@ jobs:
       - name: 最新コードを取得
         run: git pull --rebase origin master
 
+      - name: 日付を環境変数にセット
+        run: echo "TODAY=$(TZ=Asia/Tokyo date '+%Y-%m-%d')" >> $GITHUB_ENV
+
       - name: ブリーフィングページを生成
         env:
           GOOGLE_TOKEN:      ${{ secrets.GOOGLE_TOKEN }}
@@ -46,5 +49,5 @@ jobs:
       - name: GitHub Pages にプッシュ
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "📅 ブリーフィング自動更新 $(date '+%Y-%m-%d')"
+          commit_message: "📅 ブリーフィング自動更新 ${{ env.TODAY }}"
           file_pattern: "*.html"

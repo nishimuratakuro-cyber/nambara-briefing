@@ -144,8 +144,7 @@ def get_all_gijiroku_links(meetings_by_date):
         for target_date, meetings in meetings_by_date.items():
             is_today = (target_date == TODAY)
             for i, meeting in enumerate(meetings):
-                name_match = re.match(r'^([^xX×]+?)\s*[xX×]', meeting["title"])
-                name = name_match.group(1).strip() if name_match else ""
+                name = meeting["title"].split(" x ")[0].split("×")[0].strip()
                 if not name:
                     results[target_date][i] = {"today": None, "past": None, "past_count": 0}
                     continue
