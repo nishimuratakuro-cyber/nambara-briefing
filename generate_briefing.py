@@ -531,18 +531,37 @@ def regenerate_index(meetings_by_date=None):
         today_badge  = '<span class="today-badge">今日</span>' if is_today else ""
         future_badge = '<span class="future-badge">予定</span>' if is_future else ""
 
-        # スケジュール情報
+        # スケジュール情報（今日・未来はmeetings_by_dateから、過去はHTMLから読み取る）
         events = (meetings_by_date or {}).get(page_date, [])
         count = len(events)
-        if count == 0:
-            schedule_html = '<div class="day-card-no-meetings">面談なし</div>'
-        else:
+        if count > 0:
             items = "".join(
                 f'<span class="sch-item"><span class="sch-time">{ev["start"]}</span>'
                 f'<span class="sch-name">{ev["title"].split(" x ")[0].split("×")[0].strip()}</span></span>'
                 for ev in events
             )
             schedule_html = f'<div class="day-card-schedule">{items}</div>'
+        elif page_date < TODAY:
+            # 過去日付: HTMLファイルのサイドバーから件数・スケジュールを復元
+            try:
+                with open(fname, encoding="utf-8") as fp:
+                    fh = fp.read()
+                nav_times = re.findall(r'<div class="nav-time">([^<]+)</div>', fh)
+                nav_names = re.findall(r'<div class="nav-name">([^<]+)</div>', fh)
+                count = len(nav_times)
+                if count > 0:
+                    items = "".join(
+                        f'<span class="sch-item"><span class="sch-time">{t}</span>'
+                        f'<span class="sch-name">{n}</span></span>'
+                        for t, n in zip(nav_times, nav_names)
+                    )
+                    schedule_html = f'<div class="day-card-schedule">{items}</div>'
+                else:
+                    schedule_html = '<div class="day-card-no-meetings">面談なし</div>'
+            except Exception:
+                schedule_html = '<div class="day-card-no-meetings">面談なし</div>'
+        else:
+            schedule_html = '<div class="day-card-no-meetings">面談なし</div>'
 
         cards += f"""
         <a class="day-card{'  day-today' if is_today else ''}" href="{fname}">
