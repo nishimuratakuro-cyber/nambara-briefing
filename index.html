@@ -3,429 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>本日のブリーフィング — 南原竜樹</title>
+<title>ブリーフィング — 2026年3月24日</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  font-family: 'Noto Sans JP', sans-serif;
-  background: #f5f6f8;
-  color: #1a1a2e;
-  min-height: 100vh;
-}
-
-/* HEADER */
-header {
-  background: #fff;
-  border-bottom: 2px solid #e8eaf0;
-  padding: 0 32px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-}
-
-.header-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.logo-badge {
-  background: #1a73e8;
-  color: white;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 3px 9px;
-  border-radius: 4px;
-  letter-spacing: 0.05em;
-}
-
-.header-title {
-  font-size: 15px;
-  font-weight: 500;
-  color: #2d2d2d;
-}
-
-.header-date {
-  font-size: 12px;
-  color: #888;
-}
-
-/* LAYOUT */
-.layout {
-  display: flex;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px 20px;
-  gap: 24px;
-}
-
-/* SIDEBAR */
-.sidebar {
-  width: 220px;
-  flex-shrink: 0;
-}
-
-.sidebar-card {
-  background: #fff;
-  border-radius: 8px;
-  border: 1px solid #e8eaf0;
-  padding: 16px 0;
-  position: sticky;
-  top: 72px;
-}
-
-.sidebar-title {
-  font-size: 11px;
-  font-weight: 700;
-  color: #888;
-  letter-spacing: 0.1em;
-  padding: 0 16px 12px;
-  text-transform: uppercase;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 16px;
-  cursor: pointer;
-  transition: background 0.15s;
-  border-left: 3px solid transparent;
-  text-decoration: none;
-  color: inherit;
-}
-
-.nav-item:hover { background: #f0f4ff; }
-
-.nav-item.active {
-  background: #e8f0fe;
-  border-left-color: #1a73e8;
-}
-
-.nav-time {
-  font-size: 11px;
-  color: #1a73e8;
-  font-weight: 500;
-  min-width: 42px;
-}
-
-.nav-name {
-  font-size: 13px;
-  color: #333;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.nav-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.nav-dot.recorded { background: #34a853; }
-.nav-dot.pending  { background: #dadce0; }
-.nav-dot.now      { background: #ea4335; animation: blink 1.5s infinite; }
-
-@keyframes blink {
-  0%,100% { opacity:1; } 50% { opacity:0.3; }
-}
-
-.sidebar-divider {
-  margin: 8px 16px;
-  border: none;
-  border-top: 1px solid #e8eaf0;
-}
-
-.nav-nonmeeting {
-  padding: 7px 16px;
-  font-size: 11px;
-  color: #aaa;
-}
-
-/* MAIN */
-.main {
-  flex: 1;
-  min-width: 0;
-}
-
-.day-banner {
-  background: #fff;
-  border-radius: 8px;
-  border: 1px solid #e8eaf0;
-  padding: 20px 24px;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.day-info h1 {
-  font-size: 18px;
-  font-weight: 700;
-  color: #1a1a2e;
-  margin-bottom: 4px;
-}
-
-.day-info p {
-  font-size: 12px;
-  color: #777;
-}
-
-.day-stats {
-  display: flex;
-  gap: 16px;
-}
-
-.stat {
-  text-align: center;
-}
-
-.stat-num {
-  font-size: 22px;
-  font-weight: 700;
-  color: #1a73e8;
-  line-height: 1;
-}
-
-.stat-label {
-  font-size: 10px;
-  color: #888;
-  margin-top: 2px;
-}
-
-/* MEETING CARDS */
-.card {
-  background: #fff;
-  border-radius: 8px;
-  border: 1px solid #e8eaf0;
-  margin-bottom: 12px;
-  overflow: hidden;
-  transition: box-shadow 0.2s, border-color 0.2s;
-  scroll-margin-top: 72px;
-}
-
-.card:hover {
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  border-color: #c5d0e6;
-}
-
-.card.highlighted {
-  border-color: #1a73e8;
-  box-shadow: 0 0 0 2px rgba(26,115,232,0.15), 0 4px 16px rgba(26,115,232,0.1);
-}
-
-.card-top {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 18px 20px;
-}
-
-.card-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1a73e8, #4285f4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 16px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-
-.card-main {
-  flex: 1;
-  min-width: 0;
-}
-
-.card-meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 4px;
-  flex-wrap: wrap;
-}
-
-.card-time-badge {
-  background: #e8f0fe;
-  color: #1a73e8;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 2px 8px;
-  border-radius: 12px;
-}
-
-.status-badge {
-  font-size: 10px;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-weight: 500;
-}
-
-.status-badge.recorded {
-  background: #e6f4ea;
-  color: #188038;
-}
-
-.status-badge.pending {
-  background: #f1f3f4;
-  color: #888;
-}
-
-.card-title {
-  font-size: 15px;
-  font-weight: 700;
-  color: #1a1a2e;
-  margin-bottom: 3px;
-}
-
-.card-company {
-  font-size: 12px;
-  color: #777;
-  margin-bottom: 6px;
-}
-
-.card-purpose {
-  font-size: 12px;
-  color: #555;
-  background: #f8f9fc;
-  border-left: 3px solid #e0e4ef;
-  padding: 6px 10px;
-  border-radius: 0 4px 4px 0;
-  line-height: 1.6;
-}
-
-.card-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-  flex-shrink: 0;
-  padding-left: 8px;
-}
-
-.btn-zoom {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #1a73e8;
-  color: white;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 7px 14px;
-  border-radius: 6px;
-  white-space: nowrap;
-  transition: background 0.15s;
-}
-
-.btn-zoom:hover { background: #1557b0; }
-
-.btn-gijiroku {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #34a853;
-  color: white;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 7px 14px;
-  border-radius: 6px;
-  white-space: nowrap;
-  transition: background 0.15s;
-}
-
-.btn-gijiroku:hover { background: #1e8e3e; }
-
-.btn-gijiroku-pending {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #f1f3f4;
-  color: #888;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 7px 14px;
-  border-radius: 6px;
-  white-space: nowrap;
-  cursor: default;
-}
-
-.btn-past {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #fff;
-  color: #5f6368;
-  text-decoration: none;
-  font-size: 11px;
-  font-weight: 500;
-  padding: 5px 12px;
-  border-radius: 6px;
-  border: 1px solid #dadce0;
-  white-space: nowrap;
-  transition: background 0.15s;
-}
-.btn-past:hover { background: #f1f3f4; }
-
-.card-footer {
-  border-top: 1px solid #f1f3f4;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.attendee-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  background: #f1f3f4;
-  border-radius: 12px;
-  padding: 3px 10px;
-  font-size: 11px;
-  color: #555;
-}
-
-.attendee-chip .dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-}
-
-.attendee-chip .dot.ok  { background: #34a853; }
-.attendee-chip .dot.ng  { background: #dadce0; }
-
-.zoom-id-text {
-  font-size: 10px;
-  color: #aaa;
-  margin-left: auto;
-}
-
-/* SCROLL ANIMATION */
-@keyframes highlightAnim {
-  0%   { border-color: #e8eaf0; box-shadow: none; }
-  40%  { border-color: #1a73e8; box-shadow: 0 0 0 2px rgba(26,115,232,0.2); }
-  100% { border-color: #1a73e8; box-shadow: 0 0 0 2px rgba(26,115,232,0.15); }
-}
-
-.card.pop {
-  animation: highlightAnim 0.5s ease forwards;
-}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans JP',sans-serif;background:#f5f6f8;color:#1a1a2e;min-height:100vh}
+header{background:#fff;border-bottom:2px solid #e8eaf0;padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.logo-badge{background:#1a73e8;color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:4px}
+.header-title{font-size:15px;font-weight:500;color:#2d2d2d;margin-left:12px}
+.header-date{font-size:12px;color:#888}
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:24px 20px;gap:24px}
+.sidebar{width:220px;flex-shrink:0}
+.sidebar-card{background:#fff;border-radius:8px;border:1px solid #e8eaf0;padding:16px 0;position:sticky;top:72px}
+.sidebar-title{font-size:11px;font-weight:700;color:#888;letter-spacing:.1em;padding:0 16px 12px;text-transform:uppercase}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 16px;cursor:pointer;transition:background .15s;border-left:3px solid transparent;text-decoration:none;color:inherit}
+.nav-item:hover{background:#f0f4ff}
+.nav-item.active{background:#e8f0fe;border-left-color:#1a73e8}
+.nav-time{font-size:11px;color:#1a73e8;font-weight:500;min-width:42px}
+.nav-name{font-size:13px;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nav-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.nav-dot.pending{background:#dadce0}.nav-dot.now{background:#ea4335;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.main{flex:1;min-width:0}
+.day-banner{background:#fff;border-radius:8px;border:1px solid #e8eaf0;padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between}
+.day-info h1{font-size:18px;font-weight:700;color:#1a1a2e;margin-bottom:4px}
+.day-info p{font-size:12px;color:#777}
+.day-stats{display:flex;gap:16px}
+.stat{text-align:center}
+.stat-num{font-size:22px;font-weight:700;color:#1a73e8;line-height:1}
+.stat-label{font-size:10px;color:#888;margin-top:2px}
+.card{background:#fff;border-radius:8px;border:1px solid #e8eaf0;margin-bottom:12px;overflow:hidden;transition:box-shadow .2s,border-color .2s;scroll-margin-top:72px}
+.card:hover{box-shadow:0 2px 12px rgba(0,0,0,.08);border-color:#c5d0e6}
+.card.highlighted{border-color:#1a73e8;box-shadow:0 0 0 2px rgba(26,115,232,.15),0 4px 16px rgba(26,115,232,.1)}
+.card-top{display:flex;align-items:flex-start;gap:16px;padding:18px 20px}
+.card-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:700;flex-shrink:0}
+.card-main{flex:1;min-width:0}
+.card-meta{display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap}
+.card-time-badge{background:#e8f0fe;color:#1a73e8;font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px}
+.status-badge{font-size:10px;padding:2px 8px;border-radius:12px;font-weight:500}
+.status-badge.pending{background:#f1f3f4;color:#888}
+.card-title{font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:3px}
+.card-company{font-size:12px;color:#777;margin-bottom:6px}
+.card-purpose{font-size:12px;color:#555;background:#f8f9fc;border-left:3px solid #e0e4ef;padding:6px 10px;border-radius:0 4px 4px 0;line-height:1.6}
+.card-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0;padding-left:8px}
+.btn-zoom{display:inline-flex;align-items:center;gap:6px;background:#1a73e8;color:#fff;text-decoration:none;font-size:12px;font-weight:500;padding:7px 14px;border-radius:6px;white-space:nowrap;transition:background .15s}
+.btn-zoom:hover{background:#1557b0}
+.btn-gijiroku-pending{display:inline-flex;align-items:center;gap:6px;background:#f1f3f4;color:#888;font-size:12px;font-weight:500;padding:7px 14px;border-radius:6px;white-space:nowrap}
+.card-footer{border-top:1px solid #f1f3f4;padding:10px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.attendee-chip{display:inline-flex;align-items:center;gap:5px;background:#f1f3f4;border-radius:12px;padding:3px 10px;font-size:11px;color:#555}
+.attendee-chip .dot{width:5px;height:5px;border-radius:50%}
+.attendee-chip .dot.ok{background:#34a853}.attendee-chip .dot.ng{background:#dadce0}
+.zoom-id-text{font-size:10px;color:#aaa;margin-left:auto}
+@keyframes highlightAnim{0%{border-color:#e8eaf0;box-shadow:none}40%{border-color:#1a73e8;box-shadow:0 0 0 2px rgba(26,115,232,.2)}100%{border-color:#1a73e8;box-shadow:0 0 0 2px rgba(26,115,232,.15)}}
+.card.pop{animation:highlightAnim .5s ease forwards}
 #pw-overlay{position:fixed;inset:0;background:#1a1a2e;display:flex;align-items:center;justify-content:center;z-index:9999}
 #pw-box{background:#fff;border-radius:12px;padding:40px 36px;width:320px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)}
 #pw-box h2{font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:6px}
@@ -468,290 +98,243 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
 });
 </script>
 <header>
-  <div class="header-logo">
+  <div style="display:flex;align-items:center">
     <span class="logo-badge">ブリーフィング</span>
     <span class="header-title">南原竜樹 — 本日の面談</span>
   </div>
-  <div style="display:flex;align-items:center;gap:12px;">
-    <div class="header-date">2026年3月24日（火）</div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <div class="header-date">2026年3月24日（月）</div>
     <a href="https://editor.shabelab.com/login.html" target="_blank"
-       style="background:#f1f3f4;color:#444;font-size:11px;font-weight:500;padding:5px 12px;border-radius:6px;text-decoration:none;border:1px solid #ddd;"
-       id="login-btn">
-      いきなり議事録 ログイン確認
+       style="background:#f1f3f4;color:#444;font-size:11px;font-weight:500;padding:5px 12px;border-radius:6px;text-decoration:none;border:1px solid #ddd">
+      いきなり議事録 ログイン
     </a>
   </div>
 </header>
-
 <div class="layout">
-
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <div class="sidebar-card">
       <div class="sidebar-title">タイムライン</div>
-
-      <div class="nav-nonmeeting">08:00 ゴルフ練習</div>
-      <div class="nav-nonmeeting">09:00 LINE確認返信</div>
-      <hr class="sidebar-divider">
-
+      
       <a class="nav-item" href="#meet-1" onclick="jump('meet-1',this)">
-        <div class="nav-dot recorded"></div>
-        <div class="nav-time">11:30</div>
-        <div class="nav-name">渡野友和</div>
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">11:00</div>
+        <div class="nav-name">西村拓朗</div>
       </a>
       <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
-        <div class="nav-dot recorded"></div>
-        <div class="nav-time">12:00</div>
-        <div class="nav-name">酒井信彰</div>
-      </a>
-      <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">12:30</div>
-        <div class="nav-name">近藤（ウナシ）</div>
+        <div class="nav-name">株式会社ウナシ　近藤</div>
       </a>
-      <a class="nav-item" href="#meet-4" onclick="jump('meet-4',this)">
+      <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">13:00</div>
         <div class="nav-name">氣仙隆造</div>
       </a>
-      <a class="nav-item" href="#meet-5" onclick="jump('meet-5',this)">
+      <a class="nav-item" href="#meet-4" onclick="jump('meet-4',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">13:30</div>
         <div class="nav-name">可児</div>
       </a>
-      <a class="nav-item" href="#meet-6" onclick="jump('meet-6',this)">
+      <a class="nav-item" href="#meet-5" onclick="jump('meet-5',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">14:00</div>
         <div class="nav-name">近松虎太郎</div>
       </a>
-      <a class="nav-item" href="#meet-7" onclick="jump('meet-7',this)">
+      <a class="nav-item" href="#meet-6" onclick="jump('meet-6',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">14:30</div>
         <div class="nav-name">古谷隆一</div>
       </a>
+      <a class="nav-item" href="#meet-7" onclick="jump('meet-7',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">15:00</div>
+        <div class="nav-name">酒井信彰</div>
+      </a>
       <a class="nav-item" href="#meet-8" onclick="jump('meet-8',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">15:30</div>
-        <div class="nav-name">山下（KINS）</div>
+        <div class="nav-name">株式会社KINS山下</div>
       </a>
-
-      <hr class="sidebar-divider">
-      <div class="nav-nonmeeting">16:00 もとのり社長へ移動</div>
-      <div class="nav-nonmeeting">20:00 東京へ移動</div>
     </div>
   </aside>
-
-  <!-- MAIN -->
   <main class="main">
-
     <div class="day-banner">
       <div class="day-info">
-        <h1>2026年3月24日（火）</h1>
-        <p>名古屋発 → Zoom 8本連続 → もとのり社長訪問 → 東京移動</p>
+        <h1>2026年3月24日（月）</h1>
+        <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
         <div class="stat"><div class="stat-num">8</div><div class="stat-label">Zoom面談</div></div>
-        <div class="stat"><div class="stat-num" style="color:#34a853">2</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">6</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">8</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
-
-    <!-- 1 -->
+    
     <div class="card" id="meet-1">
       <div class="card-top">
-        <div class="card-avatar">渡</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">西</div>
         <div class="card-main">
           <div class="card-meta">
-            <span class="card-time-badge">11:30 〜 12:00</span>
-            <span class="status-badge recorded">✓ 議事録あり</span>
+            <span class="card-time-badge">11:00 〜 11:30</span>
+            <span class="status-badge pending">録音待ち</span>
           </div>
-          <div class="card-title">渡野 友和</div>
-          <div class="card-company">REJ株式会社 ／ t-watano@rej-inc.co.jp</div>
-          <div class="card-purpose">よろしくお願い申し上げます。</div>
+          <div class="card-title">西村拓朗</div>
+          <div class="card-company">nishimuratakuro@luft-hd.co.jp</div>
+          <div class="card-purpose">緊急</div>
         </div>
         <div class="card-actions">
-          <a class="btn-zoom" href="https://us06web.zoom.us/j/89487582005?pwd=NLUa3VqSqLojlPnAi2RMjUvxDDml3r.1" target="_blank">▶ Zoom参加</a>
-          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=651c40b82f8f70dfc45651a6c3f84cec5f8b6b4e1e45b29feed92c0e68a463ba" target="_blank">📋 本日の議事録</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=9b3b706be36565c205c4ee93b96a305bbcb5e6651f1a2cd69b56ce02701486c8" target="_blank">📂 過去の議事録（5件）</a>
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/86187444034?pwd=RKoX8bbuyfudfFrGlPBZM2IYsP1ItG.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
         </div>
       </div>
       <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>渡野友和 ✓</span>
-        <span class="attendee-chip"><span class="dot ok"></span>南原竜樹 ✓</span>
-        <span class="zoom-id-text">ID: 894 8758 2005 ／ PW: 833335</span>
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>西村拓朗 ✓</span>
+        <span class="zoom-id-text">ID: 861 8744 4034 ／ PW: 599057</span>
       </div>
     </div>
-
-    <!-- 2 -->
     <div class="card" id="meet-2">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">酒</div>
-        <div class="card-main">
-          <div class="card-meta">
-            <span class="card-time-badge">12:00 〜 12:30</span>
-            <span class="status-badge recorded">✓ 議事録あり</span>
-          </div>
-          <div class="card-title">酒井 信彰</div>
-          <div class="card-company">l-city ／ sakai@l-city.co.jp</div>
-          <div class="card-purpose">資金調達にあたり前回、経営計画の修正をしました。よろしくお願いします！</div>
-        </div>
-        <div class="card-actions">
-          <a class="btn-zoom" href="https://us06web.zoom.us/j/88464008458?pwd=k54Lj6Af5OCFnLrhQvJ1TrIMXGX08M.1" target="_blank">▶ Zoom参加</a>
-          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=5701fe1452a7a8661c2abe43163a7c01cd9da98fcdf6c1f52372fde2b48f5676" target="_blank">📋 本日の議事録</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=4481d9783d670cba1a4262c00709c0c8dd36ed5dd78c92c869d446398516b074" target="_blank">📂 過去の議事録（9件）</a>
-        </div>
-      </div>
-      <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>酒井信彰 ✓</span>
-        <span class="attendee-chip"><span class="dot ok"></span>南原竜樹 ✓</span>
-        <span class="zoom-id-text">ID: 884 6400 8458 ／ PW: 296632</span>
-      </div>
-    </div>
-
-    <!-- 3 -->
-    <div class="card" id="meet-3">
-      <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">近</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">株</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">12:30 〜 13:00</span>
             <span class="status-badge pending">録音待ち</span>
           </div>
-          <div class="card-title">近藤</div>
-          <div class="card-company">株式会社ウナシ ／ genaral@unashi.com</div>
-          <div class="card-purpose">「対決より解決」ch ディレクター候補・北澤様との三者面談。</div>
+          <div class="card-title">株式会社ウナシ　近藤</div>
+          <div class="card-company">genaral@unashi.com</div>
+          <div class="card-purpose">対決より解決ch ディレクター候補の北澤様との三者面談を実施させていただきます。よろしくお願いいたします。</div>
         </div>
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/87681817765?pwd=BbnTmh8eWaybndj6NCWW95xVkdWaw5.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=37edf1b2b8c55f7822ac39527b6135c7bfd7b692f50948eee543cd6d0acc4415" target="_blank">📂 過去の議事録（2件）</a>
         </div>
       </div>
       <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>近藤 ✓</span>
-        <span class="attendee-chip"><span class="dot ng"></span>北澤（候補）</span>
-        <span class="attendee-chip"><span class="dot ok"></span>南原竜樹 ✓</span>
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>株式会社ウナシ　近藤 ✓</span>
         <span class="zoom-id-text">ID: 876 8181 7765 ／ PW: 284127</span>
       </div>
     </div>
-
-    <!-- 4 -->
-    <div class="card" id="meet-4">
+    <div class="card" id="meet-3">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#00897b,#00acc1)">氣</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">氣</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">13:00 〜 13:30</span>
             <span class="status-badge pending">録音待ち</span>
           </div>
-          <div class="card-title">氣仙 隆造</div>
-          <div class="card-company">貿易support ／ r.kesen@bouekisupport.co.jp</div>
-          <div class="card-purpose">「商品再設計・マーケティング」vs「従業員マネジメント・仕組化」のトレードオフについて相談。事業を発展させたい（売上UP→組織化）。緊急連絡: 080-3416-5754</div>
+          <div class="card-title">氣仙隆造</div>
+          <div class="card-company">r.kesen@bouekisupport.co.jp</div>
+          <div class="card-purpose">当日の相談内容：事業を発展させるうえで今注力すべきことを相談したいです。</div>
         </div>
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/83517715657?pwd=HvtmiYUWtRaJHWwzZLLGhoO0jfijTy.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=a8c21a88f875e7971e43df49f64bef1747b5b89c356b4b7ef8bbc4fe862c6376" target="_blank">📂 過去の議事録（6件）</a>
         </div>
       </div>
       <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>氣仙隆造 ✓</span>
-        <span class="attendee-chip"><span class="dot ok"></span>南原竜樹 ✓</span>
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>氣仙隆造 ✓</span>
         <span class="zoom-id-text">ID: 835 1771 5657 ／ PW: 272675</span>
       </div>
     </div>
-
-    <!-- 5 -->
-    <div class="card" id="meet-5">
+    <div class="card" id="meet-4">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#f4511e,#ff8f00)">可</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#00897b,#00acc1)">可</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">13:30 〜 14:00</span>
             <span class="status-badge pending">録音待ち</span>
           </div>
           <div class="card-title">可児</div>
-          <div class="card-company">luft-hd ／ kaninaomi@luft-hd.co.jp</div>
-          <div class="card-purpose">（メッセージなし）</div>
+          <div class="card-company">kaninaomi@luft-hd.co.jp</div>
+          <div class="card-purpose">可児です。</div>
         </div>
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/89401097516?pwd=gu82Z4S2oIWxz0Zac1VIBOAaDVHVR0.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=f7e792f9d88708389c13f22d61dc5d08f69b81f79b394bc1d0208d6948844878" target="_blank">📂 過去の議事録（5件）</a>
         </div>
       </div>
       <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ng"></span>可児（未確認）</span>
-        <span class="attendee-chip"><span class="dot ok"></span>南原竜樹 ✓</span>
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ng"></span>可児 </span>
         <span class="zoom-id-text">ID: 894 0109 7516 ／ PW: 153420</span>
       </div>
     </div>
-
-    <!-- 6 -->
-    <div class="card" id="meet-6">
+    <div class="card" id="meet-5">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#0288d1,#0097a7)">近</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#f4511e,#ff8f00)">近</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">14:00 〜 14:30</span>
             <span class="status-badge pending">録音待ち</span>
           </div>
-          <div class="card-title">近松 虎太郎</div>
-          <div class="card-company">mitradata ／ k-chikamatsu@mitradata.jp</div>
-          <div class="card-purpose">マッチングプラットフォームについて（4名参加）</div>
+          <div class="card-title">近松虎太郎</div>
+          <div class="card-company">k-chikamatsu@mitradata.jp</div>
+          <div class="card-purpose">マッチングプラットフォームについて</div>
         </div>
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/85983851036?pwd=EuFIYOPpszeOkTfgD6j1iHnzNSAbbI.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=4c87e43c8acdf6b712f69f3199008ff7616b2c99bf6519748cf275ac29b98c10" target="_blank">📂 過去の議事録（4件）</a>
         </div>
       </div>
       <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>近松虎太郎 ✓</span>
-        <span class="attendee-chip"><span class="dot ok"></span>r-chikamatsu ✓</span>
-        <span class="attendee-chip"><span class="dot ng"></span>t-adachi</span>
-        <span class="attendee-chip"><span class="dot ng"></span>d-jutori</span>
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>近松虎太郎 ✓</span>
         <span class="zoom-id-text">ID: 859 8385 1036 ／ PW: 859877</span>
       </div>
     </div>
-
-    <!-- 7 -->
-    <div class="card" id="meet-7">
+    <div class="card" id="meet-6">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#5c6bc0,#7e57c2)">古</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#0288d1,#0097a7)">古</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">14:30 〜 15:00</span>
             <span class="status-badge pending">録音待ち</span>
           </div>
-          <div class="card-title">古谷 隆一</div>
+          <div class="card-title">古谷隆一</div>
           <div class="card-company">global.influence.1000com@gmail.com</div>
           <div class="card-purpose">ブランディング顧問について</div>
         </div>
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/81679290118?pwd=KKUNm9aOcJ2TKnaaq8nlVEJWI5NPMX.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=5a1bef5a02610eaec4affff9690e2c4878b14f023ee292c96c3a917e586c578c" target="_blank">📂 過去の議事録（10件）</a>
         </div>
       </div>
       <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>古谷隆一 ✓</span>
-        <span class="attendee-chip"><span class="dot ok"></span>南原竜樹 ✓</span>
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>古谷隆一 ✓</span>
         <span class="zoom-id-text">ID: 816 7929 0118 ／ PW: 505442</span>
       </div>
     </div>
-
-    <!-- 8 -->
+    <div class="card" id="meet-7">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#5c6bc0,#7e57c2)">酒</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">15:00 〜 15:30</span>
+            <span class="status-badge pending">録音待ち</span>
+          </div>
+          <div class="card-title">酒井信彰</div>
+          <div class="card-company">sakai@l-city.co.jp</div>
+          <div class="card-purpose">お世話になります。資金調達にあたり前回、経営計画の修正をしました。よろしくお願いします！</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/88464008458?pwd=k54Lj6Af5OCFnLrhQvJ1TrIMXGX08M.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ng"></span>酒井信彰 </span>
+        <span class="zoom-id-text">ID: 884 6400 8458 ／ PW: 296632</span>
+      </div>
+    </div>
     <div class="card" id="meet-8">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#2e7d32,#388e3c)">山</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#2e7d32,#388e3c)">株</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">15:30 〜 16:00</span>
             <span class="status-badge pending">録音待ち</span>
           </div>
-          <div class="card-title">山下 義彦</div>
-          <div class="card-company">株式会社KINS ／ yamashita_yoshihiko@yourkins.com</div>
-          <div class="card-purpose">宜しくお願い致します！（詳細メッセージなし）</div>
+          <div class="card-title">株式会社KINS山下</div>
+          <div class="card-company">yamashita_yoshihiko@yourkins.com</div>
+          <div class="card-purpose">宜しくお願い致します！</div>
         </div>
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/85487870139?pwd=aChugXXWvHIg96qSxEXFNhigqh32Mx.1" target="_blank">▶ Zoom参加</a>
@@ -759,62 +342,35 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         </div>
       </div>
       <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>山下義彦 ✓</span>
-        <span class="attendee-chip"><span class="dot ng"></span>石野雅文</span>
-        <span class="attendee-chip"><span class="dot ok"></span>南原竜樹 ✓</span>
+        <span class="attendee-chip"><span class="dot ok"></span>株式会社KINS山下 ✓</span><span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span>
         <span class="zoom-id-text">ID: 854 8787 0139 ／ PW: 166582</span>
       </div>
     </div>
-
   </main>
 </div>
-
 <script>
-function jump(id, el) {
-  // サイドバーのアクティブ状態を更新
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  if (el) el.classList.add('active');
-
-  // カードへスクロール
-  const card = document.getElementById(id);
-  if (!card) return;
-  card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-  // ハイライトアニメーション
-  document.querySelectorAll('.card').forEach(c => c.classList.remove('highlighted', 'pop'));
-  setTimeout(() => {
-    card.classList.add('highlighted', 'pop');
-  }, 300);
+function jump(id,el){
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  if(el)el.classList.add('active');
+  const card=document.getElementById(id);
+  if(!card)return;
+  card.scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('.card').forEach(c=>c.classList.remove('highlighted','pop'));
+  setTimeout(()=>{card.classList.add('highlighted','pop')},300);
 }
-
-// 現在時刻のミーティングを自動ハイライト
-function autoHighlight() {
-  const now = new Date();
-  const m = now.getHours() * 60 + now.getMinutes();
-  const schedule = [
-    { start: 11*60+30, end: 12*60,    id: 'meet-1', idx: 0 },
-    { start: 12*60,    end: 12*60+30, id: 'meet-2', idx: 1 },
-    { start: 12*60+30, end: 13*60,    id: 'meet-3', idx: 2 },
-    { start: 13*60,    end: 13*60+30, id: 'meet-4', idx: 3 },
-    { start: 13*60+30, end: 14*60,    id: 'meet-5', idx: 4 },
-    { start: 14*60,    end: 14*60+30, id: 'meet-6', idx: 5 },
-    { start: 14*60+30, end: 15*60,    id: 'meet-7', idx: 6 },
-    { start: 15*60+30, end: 16*60,    id: 'meet-8', idx: 7 },
-  ];
-  const navItems = document.querySelectorAll('.nav-item');
-  schedule.forEach(s => {
-    if (m >= s.start && m < s.end) {
-      const card = document.getElementById(s.id);
-      if (card) card.classList.add('highlighted');
-      if (navItems[s.idx]) {
-        navItems[s.idx].classList.add('active');
-        navItems[s.idx].querySelector('.nav-dot').classList.add('now');
-      }
+(function(){
+  const now=new Date();
+  const m=now.getHours()*60+now.getMinutes();
+  const sch=[{s:660,e:690},{s:750,e:780},{s:780,e:810},{s:810,e:840},{s:840,e:870},{s:870,e:900},{s:900,e:930},{s:930,e:960}];
+  document.querySelectorAll('.nav-item').forEach((el,i)=>{
+    if(!sch[i])return;
+    if(m>=sch[i].s&&m<sch[i].e){
+      el.classList.add('active');
+      el.querySelector('.nav-dot').className='nav-dot now';
+      document.getElementById('meet-'+(i+1))?.classList.add('highlighted');
     }
   });
-}
-
-autoHighlight();
+})();
 </script>
 </body>
 </html>
