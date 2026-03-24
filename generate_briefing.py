@@ -482,7 +482,12 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
 
 def regenerate_index(meetings_by_date=None):
     import glob as _glob
-    files = sorted(_glob.glob("20??-??-??.html"), reverse=True)
+    all_files = _glob.glob("20??-??-??.html")
+    today_str = TODAY.isoformat()
+    future = sorted([f for f in all_files if f.replace(".html","") > today_str])
+    past   = sorted([f for f in all_files if f.replace(".html","") < today_str], reverse=True)
+    today_file = [f for f in all_files if f.replace(".html","") == today_str]
+    files = today_file + future + past
     cards = ""
     for fname in files:
         date_key = fname.replace(".html", "")

@@ -404,7 +404,11 @@ function jump(id,el){{
 # index.html（日付一覧）
 def generate_index():
     cards = ""
-    for date_key, data in sorted(DAYS.items(), reverse=True):
+    today_iso = TODAY.isoformat()
+    today_items  = [(k,v) for k,v in DAYS.items() if k == today_iso]
+    future_items = sorted([(k,v) for k,v in DAYS.items() if k > today_iso])
+    past_items   = sorted([(k,v) for k,v in DAYS.items() if k < today_iso], reverse=True)
+    for date_key, data in (today_items + future_items + past_items):
         label = data["label"]
         events = data["zoom"]
         count = len(events)
