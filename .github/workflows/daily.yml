@@ -40,6 +40,9 @@ jobs:
           GIJIROKU_PASSWORD: ${{ secrets.GIJIROKU_PASSWORD }}
         run: python generate_briefing.py
 
+      - name: 最新コードを取得
+        run: git pull --rebase origin master
+
       - name: GitHub Pages にプッシュ
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
