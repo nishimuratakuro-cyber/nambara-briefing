@@ -155,15 +155,15 @@ def get_all_gijiroku_links(meetings_by_date):
                     # 会社名プレフィックスを除去
                     s = re.sub(r'^(株式会社|有限会社|合同会社|一般社団法人|公益社団法人)\s*', '', n).strip()
                     s = s.replace('\u3000', ' ')  # 全角スペース→半角
-                    # 先頭がASCIIのみの場合（KINS山下等）→ 後ろの日本語部分を使う
+                    # 全て英語の場合は姓（最後の単語）例: Shinji Sugita → Sugita
+                    if re.match(r'^[A-Za-z\s]+$', s):
+                        words = s.split()
+                        return words[-1] if words else n[:4]
+                    # 先頭がASCIIコード+日本語の場合（KINS山下等）→ 日本語部分を使う
                     if re.match(r'^[A-Za-z0-9]', s):
                         j = re.sub(r'^[A-Za-z0-9]+\s*', '', s).strip()
                         if j:
                             return j[:4]  # 山下 など
-                    # 全て英語の場合は姓（最後の単語）
-                    if re.match(r'^[A-Za-z\s]+$', s):
-                        words = s.split()
-                        return words[-1] if words else n[:4]  # Sugita など
                     # スペースがある場合
                     if ' ' in s:
                         before, after = s.rsplit(' ', 1)
