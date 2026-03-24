@@ -435,18 +435,35 @@ function jump(id,el){{
 
 if __name__ == "__main__":
     print(f"📅 {TODAY_STR} のブリーフィングを生成中...")
+    try:
+        print("1. Googleカレンダーを取得中...")
+        meetings = get_calendar_events()
+        print(f"   Zoom面談 {len(meetings)}件 取得")
 
-    print("1. Googleカレンダーを取得中...")
-    meetings = get_calendar_events()
-    print(f"   Zoom面談 {len(meetings)}件 取得")
+        print("2. いきなり議事録を検索中...")
+        gijiroku = get_gijiroku_links(meetings)
 
-    print("2. いきなり議事録を検索中...")
-    gijiroku = get_gijiroku_links(meetings)
+        print("3. HTML生成中...")
+        html = generate_html(meetings, gijiroku)
 
-    print("3. HTML生成中...")
-    html = generate_html(meetings, gijiroku)
+        with open("index.html", "w", encoding="utf-8") as f:
+            f.write(html)
 
-    with open("index.html", "w", encoding="utf-8") as f:
-        f.write(html)
+        print("✅ index.html 生成完了")
 
-    print("✅ index.html 生成完了")
+    except Exception as e:
+        print(f"❌ エラー: {e}")
+        error_html = f"""<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8">
+<title>エラー</title>
+<style>body{{font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f5f6f8}}
+.box{{background:#fff;border-radius:12px;padding:40px;text-align:center;border:1px solid #e8eaf0;max-width:400px}}
+h1{{color:#ea4335;font-size:18px;margin-bottom:12px}}p{{color:#555;font-size:13px;line-height:1.6}}</style>
+</head><body><div class="box">
+<h1>⚠️ 生成エラー</h1>
+<p>{TODAY_STR}（{WEEKDAY}）のブリーフィング生成に失敗しました。</p>
+<p style="margin-top:12px;color:#aaa;font-size:11px">{e}</p>
+</div></body></html>"""
+        with open("index.html", "w", encoding="utf-8") as f:
+            f.write(error_html)
+        raise
