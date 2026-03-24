@@ -49,7 +49,12 @@ header{background:#fff;border-bottom:2px solid #e8eaf0;padding:0 32px;height:56p
 .card-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0;padding-left:8px}
 .btn-zoom{display:inline-flex;align-items:center;gap:6px;background:#1a73e8;color:#fff;text-decoration:none;font-size:12px;font-weight:500;padding:7px 14px;border-radius:6px;white-space:nowrap;transition:background .15s}
 .btn-zoom:hover{background:#1557b0}
+.btn-gijiroku{display:inline-flex;align-items:center;gap:6px;background:#34a853;color:#fff;text-decoration:none;font-size:12px;font-weight:500;padding:7px 14px;border-radius:6px;white-space:nowrap;transition:background .15s}
+.btn-gijiroku:hover{background:#1e8e3e}
 .btn-gijiroku-pending{display:inline-flex;align-items:center;gap:6px;background:#f1f3f4;color:#888;font-size:12px;font-weight:500;padding:7px 14px;border-radius:6px;white-space:nowrap}
+.btn-past{display:inline-flex;align-items:center;gap:6px;background:#fff;color:#5f6368;text-decoration:none;font-size:11px;font-weight:500;padding:5px 12px;border-radius:6px;border:1px solid #dadce0;white-space:nowrap;transition:background .15s}
+.btn-past:hover{background:#f1f3f4}
+.status-badge.recorded{background:#e6f4ea;color:#188038}
 .card-footer{border-top:1px solid #f1f3f4;padding:10px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .attendee-chip{display:inline-flex;align-items:center;gap:5px;background:#f1f3f4;border-radius:12px;padding:3px 10px;font-size:11px;color:#555}
 .attendee-chip .dot{width:5px;height:5px;border-radius:50%}
@@ -149,6 +154,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/88316062126?pwd=xdJ6FomZxi7kdgyTW4gty7ULMXyypE.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
         </div>
       </div>
       <div class="card-footer"><span class="attendee-chip"><span class="dot ok"></span>Shinji Sugita ✓</span><span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="zoom-id-text">ID: 883 1606 2126 ／ PW: 307610</span></div>
@@ -168,6 +174,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/83496520519?pwd=JUm86694F2UtyxGOngGT5UD0a1mSu4.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=37edf1b2b8c55f7822ac39527b6135c7bfd7b692f50948eee543cd6d0acc4415" target="_blank">📂 過去の議事録（10件）</a>
         </div>
       </div>
       <div class="card-footer"><span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>株式会社ウナシ　近藤 ✓</span><span class="zoom-id-text">ID: 834 9652 0519 ／ PW: 309172</span></div>
