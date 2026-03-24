@@ -1,0 +1,40 @@
+name: Generate Briefing
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'  # 2時間ごと
+  workflow_dispatch:          # 手動実行ボタン
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install chromium --with-deps
+
+      - name: Generate briefing
+        env:
+          GOOGLE_TOKEN: ${{ secrets.GOOGLE_TOKEN }}
+          GOOGLE_CLIENT: ${{ secrets.GOOGLE_CLIENT }}
+          CALENDAR_ID: ${{ secrets.CALENDAR_ID }}
+          GIJIROKU_EMAIL: ${{ secrets.GIJIROKU_EMAIL }}
+          GIJIROKU_PASSWORD: ${{ secrets.GIJIROKU_PASSWORD }}
+        run: python generate_briefing.py
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: nambara-briefing
+          directory: .
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
