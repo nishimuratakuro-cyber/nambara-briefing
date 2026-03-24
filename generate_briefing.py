@@ -150,13 +150,16 @@ def get_all_gijiroku_links(meetings_by_date):
                     results[target_date][i] = {"today": None, "past": None, "past_count": 0}
                     continue
 
-                name_key = name[:4]
+                # 「株式会社」「有限会社」「合同会社」などの共通接頭辞を除いた検索キーを使う
+                stripped = re.sub(r'^(株式会社|有限会社|合同会社|一般社団法人|公益社団法人)\s*', '', name)
+                name_key = stripped[:4] if stripped else name[:4]
+                search_keyword = name_key  # 検索キーワード（4文字）
 
                 # 名前ごとに1回だけ全件検索（キャッシュ済みならスキップ）
                 if name_key not in name_cache:
-                    all_links = search_links(name_key)
+                    all_links = search_links(search_keyword)
                     name_cache[name_key] = all_links
-                    print(f"  検索: {name} → {len(all_links)}件")
+                    print(f"  検索: {name} ({search_keyword}) → {len(all_links)}件")
                 else:
                     all_links = name_cache[name_key]
 
