@@ -242,7 +242,7 @@ def make_card(i, meeting, links):
               {'✓ 議事録あり' if today_link else '録音待ち'}
             </span>
           </div>
-          <div class="card-title">{name}</div>
+          <div class="card-title">{f'<a href="{today_link}" target="_blank" class="card-title-link">{name}</a>' if today_link else name}</div>
           <div class="card-company">{guest_email}</div>
           {msg_html}
         </div>
@@ -338,7 +338,7 @@ header{{background:#fff;border-bottom:2px solid #e8eaf0;padding:0 32px;height:56
 .status-badge{{font-size:10px;padding:2px 8px;border-radius:12px;font-weight:500}}
 .status-badge.recorded{{background:#e6f4ea;color:#188038}}
 .status-badge.pending{{background:#f1f3f4;color:#888}}
-.card-title{{font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:3px}}
+.card-title{{font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:3px}}.card-title-link{{color:#1a73e8;text-decoration:none;border-bottom:1px solid #c5d0e6}}.card-title-link:hover{{border-bottom-color:#1a73e8}}
 .card-company{{font-size:12px;color:#777;margin-bottom:6px}}
 .card-purpose{{font-size:12px;color:#555;background:#f8f9fc;border-left:3px solid #e0e4ef;padding:6px 10px;border-radius:0 4px 4px 0;line-height:1.6}}
 .card-actions{{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0;padding-left:8px}}
@@ -482,22 +482,52 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
 """
 
 
-def regenerate_index():
+def regenerate_index(meetings_by_date=None):
     import glob as _glob
     files = sorted(_glob.glob("20??-??-??.html"), reverse=True)
     cards = ""
     for fname in files:
         date_key = fname.replace(".html", "")
         try:
+            page_date = datetime.date.fromisoformat(date_key)
             y, m, d = date_key.split("-")
-            label = f"{y}年{int(m)}月{int(d)}日"
+            weekday = ["月","火","水","木","金","土","日"][page_date.weekday()]
+            label = f"{y}年{int(m)}月{int(d)}日（{weekday}）"
+            is_today  = page_date == TODAY
+            is_future = page_date > TODAY
         except Exception:
             label = date_key
+            is_today = is_future = False
+
+        today_badge  = '<span class="today-badge">今日</span>' if is_today else ""
+        future_badge = '<span class="future-badge">予定</span>' if is_future else ""
+
+        # スケジュール情報
+        events = (meetings_by_date or {}).get(page_date, [])
+        count = len(events)
+        if count == 0:
+            schedule_html = '<div class="day-card-no-meetings">面談なし</div>'
+        else:
+            items = "".join(
+                f'<span class="sch-item"><span class="sch-time">{ev["start"]}</span>'
+                f'<span class="sch-name">{ev["title"].split(" x ")[0].split("×")[0].strip()}</span></span>'
+                for ev in events
+            )
+            schedule_html = f'<div class="day-card-schedule">{items}</div>'
+
         cards += f"""
-        <a class="day-card" href="{fname}">
-          <div class="day-card-date">{label}</div>
+        <a class="day-card{'  day-today' if is_today else ''}" href="{fname}">
+          <div class="day-card-body">
+            <div class="day-card-header">
+              <span class="day-card-date">{label}</span>
+              {today_badge}{future_badge}
+              <span class="day-card-count">Zoom面談 {count}件</span>
+            </div>
+            {schedule_html}
+          </div>
           <div class="day-card-arrow">→</div>
         </a>"""
+
     html = f"""<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -511,12 +541,23 @@ body{{font-family:'Noto Sans JP',sans-serif;background:#f5f6f8;color:#1a1a2e;min
 header{{background:#fff;border-bottom:2px solid #e8eaf0;padding:0 32px;height:56px;display:flex;align-items:center;box-shadow:0 1px 4px rgba(0,0,0,.06)}}
 .logo-badge{{background:#1a73e8;color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:4px}}
 .header-title{{font-size:15px;font-weight:500;color:#2d2d2d;margin-left:12px}}
-.wrap{{max-width:600px;margin:40px auto;padding:0 20px}}
+.wrap{{max-width:640px;margin:40px auto;padding:0 20px}}
 h1{{font-size:16px;font-weight:700;color:#555;margin-bottom:16px}}
-.day-card{{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid #e8eaf0;border-radius:8px;padding:18px 20px;margin-bottom:10px;text-decoration:none;color:inherit;transition:box-shadow .15s,border-color .15s}}
+.day-card{{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid #e8eaf0;border-radius:8px;padding:16px 20px;margin-bottom:10px;text-decoration:none;color:inherit;transition:box-shadow .15s,border-color .15s}}
 .day-card:hover{{box-shadow:0 2px 12px rgba(0,0,0,.08);border-color:#c5d0e6}}
-.day-card-date{{flex:1;font-size:15px;font-weight:700;color:#1a1a2e}}
-.day-card-arrow{{font-size:16px;color:#1a73e8}}
+.day-today{{border-left:4px solid #1a73e8;background:#f0f4ff}}
+.day-card-body{{flex:1;min-width:0}}
+.day-card-header{{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}}
+.day-card-date{{font-size:15px;font-weight:700;color:#1a1a2e}}
+.day-card-count{{font-size:12px;color:#888;margin-left:auto}}
+.today-badge{{background:#1a73e8;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px}}
+.future-badge{{background:#f0f4ff;color:#1a73e8;font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;border:1px solid #c5d0e6}}
+.day-card-schedule{{display:flex;flex-wrap:wrap;gap:6px}}
+.sch-item{{display:flex;align-items:center;gap:4px;background:#f5f6f8;border-radius:4px;padding:3px 8px}}
+.sch-time{{font-size:11px;color:#1a73e8;font-weight:700;min-width:36px}}
+.sch-name{{font-size:12px;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px}}
+.day-card-no-meetings{{font-size:12px;color:#bbb}}
+.day-card-arrow{{font-size:16px;color:#1a73e8;flex-shrink:0}}
 #pw-overlay{{position:fixed;inset:0;background:#1a1a2e;display:flex;align-items:center;justify-content:center;z-index:9999}}
 #pw-box{{background:#fff;border-radius:12px;padding:40px 36px;width:320px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)}}
 #pw-box h2{{font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:6px}}
@@ -608,4 +649,4 @@ h1{{color:#ea4335;font-size:18px;margin-bottom:12px}}p{{color:#555;font-size:13p
                 f.write(error_html)
 
     print("\n4. index.html 再生成中...")
-    regenerate_index()
+    regenerate_index(meetings_by_date)
