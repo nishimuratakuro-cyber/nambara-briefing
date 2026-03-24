@@ -3,3 +3,10 @@ ss_*.png
 *.json
 *.png
 run_log.txt
+
+# ローカル専用スクリプト（認証情報が含まれる）
+fetch_gijiroku.py
+debug_gijiroku.py
+gen_from_data.py
+__pycache__/
+.netlify/
