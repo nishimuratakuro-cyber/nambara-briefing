@@ -150,10 +150,33 @@ def get_all_gijiroku_links(meetings_by_date):
                     results[target_date][i] = {"today": None, "past": None, "past_count": 0}
                     continue
 
-                # 「株式会社」「有限会社」「合同会社」などの共通接頭辞を除いた検索キーを使う
-                stripped = re.sub(r'^(株式会社|有限会社|合同会社|一般社団法人|公益社団法人)\s*', '', name)
-                name_key = stripped[:4] if stripped else name[:4]
-                search_keyword = name_key  # 検索キーワード（4文字）
+                # 検索キーを抽出（会社名+人名の形式に対応）
+                def extract_search_key(n):
+                    # 会社名プレフィックスを除去
+                    s = re.sub(r'^(株式会社|有限会社|合同会社|一般社団法人|公益社団法人)\s*', '', n).strip()
+                    s = s.replace('\u3000', ' ')  # 全角スペース→半角
+                    # 先頭がASCIIのみの場合（KINS山下等）→ 後ろの日本語部分を使う
+                    if re.match(r'^[A-Za-z0-9]', s):
+                        j = re.sub(r'^[A-Za-z0-9]+\s*', '', s).strip()
+                        if j:
+                            return j[:4]  # 山下 など
+                    # 全て英語の場合は姓（最後の単語）
+                    if re.match(r'^[A-Za-z\s]+$', s):
+                        words = s.split()
+                        return words[-1] if words else n[:4]  # Sugita など
+                    # スペースがある場合
+                    if ' ' in s:
+                        before, after = s.rsplit(' ', 1)
+                        if len(before) > 4:
+                            # 「会社名+苗字 名前」形式 → 苗字（田原 章象→田原）
+                            return before[-2:]
+                        else:
+                            # 「会社略称 苗字」形式 → 苗字（ウナシ 近藤→近藤）
+                            return after[:4]
+                    return s[:4]
+
+                name_key = name  # キャッシュキーは衝突防止のためフルネーム
+                search_keyword = extract_search_key(name)
 
                 # 名前ごとに1回だけ全件検索（キャッシュ済みならスキップ）
                 if name_key not in name_cache:
