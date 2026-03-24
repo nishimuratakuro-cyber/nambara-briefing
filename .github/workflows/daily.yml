@@ -1,0 +1,44 @@
+name: 毎朝ブリーフィング自動生成
+
+on:
+  schedule:
+    - cron: '0 0 * * 1-5'   # 毎週月〜金 9:00 JST (UTC 0:00)
+  workflow_dispatch:          # 手動実行ボタン
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Python セットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 依存パッケージをインストール
+        run: |
+          pip install \
+            google-api-python-client \
+            google-auth \
+            google-auth-httplib2 \
+            playwright
+
+      - name: Playwright ブラウザをインストール
+        run: playwright install chromium --with-deps
+
+      - name: ブリーフィングページを生成
+        env:
+          GOOGLE_TOKEN:      ${{ secrets.GOOGLE_TOKEN }}
+          CALENDAR_ID:       ${{ secrets.CALENDAR_ID }}
+          GIJIROKU_EMAIL:    ${{ secrets.GIJIROKU_EMAIL }}
+          GIJIROKU_PASSWORD: ${{ secrets.GIJIROKU_PASSWORD }}
+        run: python generate_briefing.py
+
+      - name: GitHub Pages にプッシュ
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "📅 ブリーフィング自動更新 $(date '+%Y-%m-%d')"
+          file_pattern: index.html
