@@ -51,13 +51,14 @@ h1{font-size:16px;font-weight:700;color:#555;margin-bottom:16px}
 </div>
 <script>
 (function(){
-  if(sessionStorage.getItem('bpw')==='ok'){
+  var d=localStorage.getItem('bpw_exp');
+  if(d&&Date.now()<parseInt(d)){
     document.getElementById('pw-overlay').style.display='none';
   }
 })();
 function checkPw(){
   if(document.getElementById('pw-input').value==='2467'){
-    sessionStorage.setItem('bpw','ok');
+    localStorage.setItem('bpw_exp',Date.now()+86400000);
     document.getElementById('pw-overlay').style.display='none';
   }else{
     document.getElementById('pw-err').style.display='block';
