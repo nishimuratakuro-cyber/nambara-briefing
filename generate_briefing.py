@@ -118,7 +118,8 @@ def get_all_gijiroku_links(meetings_by_date):
     if not email or not password:
         return {d: empty(m) for d, m in meetings_by_date.items()}
 
-    today_str = TODAY.strftime("%Y/%m/%d")
+    # ゼロパディングなし（例: 2026/3/25）でいきなり議事録の表示日付に合わせる
+    today_str = f"{TODAY.year}/{TODAY.month}/{TODAY.day}"
 
     # 全日付から名前一覧を収集（重複除去）
     name_cache = {}  # name_key -> {all_links, today_link}
@@ -226,7 +227,10 @@ def get_lstep_links(meetings_by_date):
     name_cache = {}
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(
+            headless=True,
+            args=["--no-sandbox", "--disable-dev-shm-usage"]
+        )
         page = browser.new_page(viewport={"width": 1400, "height": 900})
 
         # ログイン
