@@ -120,12 +120,8 @@ def get_all_gijiroku_links(meetings_by_date):
     if not email or not password:
         return {d: empty(m) for d, m in meetings_by_date.items()}
 
-    # ゼロパディングなし（例: 2026/3/25）でいきなり議事録の表示日付に合わせる
-    today_str = f"{TODAY.year}/{TODAY.month}/{TODAY.day}"
-
     # 全日付から名前一覧を収集（重複除去）
-    name_cache = {}        # name_key -> all_links（名前のみ検索、キャッシュ）
-    today_cache = {}       # name_key -> today_links（日付+名前で検索、キャッシュ）
+    name_cache = {}  # name_key -> all_links（名前のみ検索、キャッシュ）
 
     results = {d: {} for d in meetings_by_date}
 
@@ -187,7 +183,8 @@ def get_all_gijiroku_links(meetings_by_date):
                 else:
                     all_links = name_cache[name_key]
 
-                # 今日の議事録：日付+名前で専用検索（"all_links[0]=今日"仮定を排除）
+                # 今日の議事録：面談開始済み＆議事録あり → all_links[0]が最新（今日）
+                # いきなり議事録は日付+名前の複合検索に非対応のため名前のみ検索
                 if is_today:
                     now_min = datetime.datetime.now(JST).hour * 60 + datetime.datetime.now(JST).minute
                     start_str = meeting.get("start", "")
@@ -196,19 +193,9 @@ def get_all_gijiroku_links(meetings_by_date):
                         started = now_min >= sh * 60 + sm
                     else:
                         started = False
-
-                    if started:
-                        if name_key not in today_cache:
-                            today_links = search_links(f"{search_keyword} {today_str}")
-                            today_cache[name_key] = today_links
-                            print(f"  今日検索: {name} ({search_keyword} {today_str}) → {len(today_links)}件")
-                        else:
-                            today_links = today_cache[name_key]
-                        today_link = today_links[0] if today_links else None
-                    else:
-                        today_link = None
+                    today_link = all_links[0] if (started and all_links) else None
                     print(f"  今日: {name} 開始{start_str} 経過={started} リンク={'あり' if today_link else 'なし'}")
-                    past_links = [l for l in all_links if l != today_link]
+                    past_links = all_links[1:] if today_link else all_links
                 else:
                     today_link = None  # 未来は今日の議事録なし
                     past_links = all_links
@@ -249,20 +236,19 @@ def get_lstep_links(meetings_by_date):
         )
         page = browser.new_page(viewport={"width": 1400, "height": 900})
 
-        # ログイン
-        page.goto("https://manager.linestep.net/account/login")
+        # ログイン（LステップはIDがメールアドレスでない場合あり）
+        page.goto("https://manager.linestep.net/account/login", timeout=30000)
         page.wait_for_load_state("networkidle")
-        time.sleep(1)
-        try:
-            page.fill('input[type="email"]', email)
-        except:
-            page.locator('input').first.fill(email)
+        time.sleep(2)
+        # ログインIDフィールド（email型・text型どちらにも対応）
+        id_input = page.locator('input[type="email"], input[name="email"], input[name="login_id"], input[type="text"]').first
+        id_input.fill(email)
         page.fill('input[type="password"]', password)
         page.locator('button[type="submit"], input[type="submit"]').first.click()
         try:
-            page.wait_for_url(lambda url: "login" not in url, timeout=8000)
+            page.wait_for_url(lambda url: "login" not in url, timeout=15000)
         except Exception:
-            print("⚠️ Lステップ: ログインに失敗した可能性があります（LSTEP_EMAIL/PASSWORDを確認してください）")
+            print("⚠️ Lステップ: ログインに失敗しました（LSTEP_EMAIL/PASSWORDを確認してください）")
             browser.close()
             return results
         time.sleep(2)
