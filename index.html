@@ -28,6 +28,13 @@ h1{font-size:16px;font-weight:700;color:#555;margin-bottom:16px}
 .sch-name{font-size:12px;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px}
 .day-card-no-meetings{font-size:12px;color:#bbb}
 .day-card-arrow{font-size:16px;color:#1a73e8;flex-shrink:0}
+.past-section{margin-top:24px}
+.past-toggle{display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;padding:10px 0;font-family:inherit;font-size:13px;color:#888;font-weight:500}
+.past-toggle:hover{color:#555}
+.past-toggle-icon{font-size:12px;transition:transform .2s}
+.past-toggle.open .past-toggle-icon{transform:rotate(90deg)}
+.past-cards{display:none}
+.past-cards.open{display:block}
 #pw-overlay{position:fixed;inset:0;background:#1a1a2e;display:flex;align-items:center;justify-content:center;z-index:9999}
 #pw-box{background:#fff;border-radius:12px;padding:40px 36px;width:320px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)}
 #pw-box h2{font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:6px}
@@ -82,9 +89,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
             <div class="day-card-header">
               <span class="day-card-date">2026年3月25日（水）</span>
               <span class="today-badge">今日</span>
-              <span class="day-card-count">Zoom面談 5件</span>
+              <span class="day-card-count">Zoom面談 6件</span>
             </div>
-            <div class="day-card-schedule"><span class="sch-item"><span class="sch-time">09:00</span><span class="sch-name">Shinji Sugita</span></span><span class="sch-item"><span class="sch-time">09:30</span><span class="sch-name">山下嘉彦</span></span><span class="sch-item"><span class="sch-time">11:30</span><span class="sch-name">野田義人</span></span><span class="sch-item"><span class="sch-time">12:00</span><span class="sch-name">西村拓朗</span></span><span class="sch-item"><span class="sch-time">15:00</span><span class="sch-name">株式会社ウナシ　近藤</span></span></div>
+            <div class="day-card-schedule"><span class="sch-item"><span class="sch-time">09:00</span><span class="sch-name">Shinji Sugita</span></span><span class="sch-item"><span class="sch-time">09:30</span><span class="sch-name">山下嘉彦</span></span><span class="sch-item"><span class="sch-time">11:30</span><span class="sch-name">野田義人</span></span><span class="sch-item"><span class="sch-time">12:00</span><span class="sch-name">西村拓朗</span></span><span class="sch-item"><span class="sch-time">15:00</span><span class="sch-name">株式会社ウナシ　近藤</span></span><span class="sch-item"><span class="sch-time">16:00</span><span class="sch-name">渡邊丈二</span></span></div>
           </div>
           <div class="day-card-arrow">→</div>
         </a>
@@ -154,6 +161,11 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
           </div>
           <div class="day-card-arrow">→</div>
         </a>
+  <div class="past-section">
+    <button class="past-toggle" onclick="this.classList.toggle('open');document.getElementById('past-cards').classList.toggle('open')">
+      <span class="past-toggle-icon">▶</span> 過去の記録（7件）
+    </button>
+    <div class="past-cards" id="past-cards">
         <a class="day-card" href="2026-03-24.html">
           <div class="day-card-body">
             <div class="day-card-header">
@@ -164,7 +176,8 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
             <div class="day-card-schedule"><span class="sch-item"><span class="sch-time">11:00</span><span class="sch-name">西村拓朗</span></span><span class="sch-item"><span class="sch-time">12:30</span><span class="sch-name">株式会社ウナシ　近藤</span></span><span class="sch-item"><span class="sch-time">13:00</span><span class="sch-name">氣仙隆造</span></span><span class="sch-item"><span class="sch-time">13:30</span><span class="sch-name">可児</span></span><span class="sch-item"><span class="sch-time">14:00</span><span class="sch-name">近松虎太郎</span></span><span class="sch-item"><span class="sch-time">14:30</span><span class="sch-name">古谷隆一</span></span><span class="sch-item"><span class="sch-time">15:00</span><span class="sch-name">酒井信彰</span></span><span class="sch-item"><span class="sch-time">15:30</span><span class="sch-name">株式会社KINS山下</span></span></div>
           </div>
           <div class="day-card-arrow">→</div>
-        </a>
+        </a></div>
+  </div>
 </div>
 </body>
 </html>
