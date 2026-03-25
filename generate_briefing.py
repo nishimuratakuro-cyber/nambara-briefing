@@ -593,6 +593,7 @@ def regenerate_index(meetings_by_date=None):
     today_file = [f for f in all_files if f.replace(".html","") == today_str]
     files = today_file + future + past
     cards = ""
+    past_cards = ""
     for fname in files:
         date_key = fname.replace(".html", "")
         try:
@@ -641,7 +642,7 @@ def regenerate_index(meetings_by_date=None):
         else:
             schedule_html = '<div class="day-card-no-meetings">面談なし</div>'
 
-        cards += f"""
+        card_html = f"""
         <a class="day-card{'  day-today' if is_today else ''}" href="{fname}">
           <div class="day-card-body">
             <div class="day-card-header">
@@ -653,6 +654,10 @@ def regenerate_index(meetings_by_date=None):
           </div>
           <div class="day-card-arrow">→</div>
         </a>"""
+        if page_date < TODAY:
+            past_cards += card_html
+        else:
+            cards += card_html
 
     html = f"""<!DOCTYPE html>
 <html lang="ja">
@@ -684,6 +689,13 @@ h1{{font-size:16px;font-weight:700;color:#555;margin-bottom:16px}}
 .sch-name{{font-size:12px;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px}}
 .day-card-no-meetings{{font-size:12px;color:#bbb}}
 .day-card-arrow{{font-size:16px;color:#1a73e8;flex-shrink:0}}
+.past-section{{margin-top:24px}}
+.past-toggle{{display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;padding:10px 0;font-family:inherit;font-size:13px;color:#888;font-weight:500}}
+.past-toggle:hover{{color:#555}}
+.past-toggle-icon{{font-size:12px;transition:transform .2s}}
+.past-toggle.open .past-toggle-icon{{transform:rotate(90deg)}}
+.past-cards{{display:none}}
+.past-cards.open{{display:block}}
 #pw-overlay{{position:fixed;inset:0;background:#1a1a2e;display:flex;align-items:center;justify-content:center;z-index:9999}}
 #pw-box{{background:#fff;border-radius:12px;padding:40px 36px;width:320px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.3)}}
 #pw-box h2{{font-size:16px;font-weight:700;color:#1a1a2e;margin-bottom:6px}}
@@ -713,6 +725,12 @@ h1{{font-size:16px;font-weight:700;color:#555;margin-bottom:16px}}
 <div class="wrap">
   <h1>日付を選択</h1>
   {cards}
+  {f'''<div class="past-section">
+    <button class="past-toggle" onclick="this.classList.toggle('open');document.getElementById('past-cards').classList.toggle('open')">
+      <span class="past-toggle-icon">▶</span> 過去の記録（{past_cards.count('day-card')}件）
+    </button>
+    <div class="past-cards" id="past-cards">{past_cards}</div>
+  </div>''' if past_cards else ''}
 </div>
 </body>
 </html>"""
