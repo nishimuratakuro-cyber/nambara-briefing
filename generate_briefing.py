@@ -485,13 +485,14 @@ function jump(id,el){{
 
 PW_SCRIPT = """
 (function(){
-  if(sessionStorage.getItem('bpw')==='ok'){
+  var d=localStorage.getItem('bpw_exp');
+  if(d&&Date.now()<parseInt(d)){
     document.getElementById('pw-overlay').style.display='none';
   }
 })();
 function checkPw(){
   if(document.getElementById('pw-input').value==='2467'){
-    sessionStorage.setItem('bpw','ok');
+    localStorage.setItem('bpw_exp',Date.now()+86400000);
     document.getElementById('pw-overlay').style.display='none';
   }else{
     document.getElementById('pw-err').style.display='block';
