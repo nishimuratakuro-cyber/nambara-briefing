@@ -86,7 +86,9 @@ def get_calendar_events(target_date=None):
 
 # ── 名前から検索キーを抽出（いきなり議事録・Lステップ共用）────────────
 def extract_search_key(n):
-    s = re.sub(r'^(株式会社|有限会社|合同会社|一般社団法人|公益社団法人)\s*', '', n).strip()
+    # 絵文字・記号を除去
+    s = re.sub(r'[^\w\s\u3000-\u9fff\u30a0-\u30ff\u3040-\u309f]', '', n).strip()
+    s = re.sub(r'^(株式会社|有限会社|合同会社|一般社団法人|公益社団法人)\s*', '', s).strip()
     s = s.replace('\u3000', ' ')
     if re.match(r'^[A-Za-z\s]+$', s):
         words = s.split()

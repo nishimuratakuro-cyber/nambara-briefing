@@ -15,10 +15,10 @@ jobs:
 
     steps:
       - name: リポジトリをチェックアウト
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Python セットアップ
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5.6.0
         with:
           python-version: '3.12'
 
@@ -50,7 +50,7 @@ jobs:
         run: python generate_briefing.py
 
       - name: GitHub Pages にプッシュ
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v5.0.1
         with:
           commit_message: "📅 ブリーフィング自動更新 ${{ env.TODAY }}"
           file_pattern: "*.html"
