@@ -84,6 +84,26 @@ def get_calendar_events(target_date=None):
     return zoom_meetings
 
 
+# ── 名前から検索キーを抽出（いきなり議事録・Lステップ共用）────────────
+def extract_search_key(n):
+    s = re.sub(r'^(株式会社|有限会社|合同会社|一般社団法人|公益社団法人)\s*', '', n).strip()
+    s = s.replace('\u3000', ' ')
+    if re.match(r'^[A-Za-z\s]+$', s):
+        words = s.split()
+        return words[-1] if words else n[:4]
+    if re.match(r'^[A-Za-z0-9]', s):
+        j = re.sub(r'^[A-Za-z0-9]+\s*', '', s).strip()
+        if j:
+            return j[:4]
+    if ' ' in s:
+        before, after = s.rsplit(' ', 1)
+        if len(before) > 4:
+            return before[-2:]
+        else:
+            return after[:4]
+    return s[:4]
+
+
 # ── いきなり議事録 ────────────────────────────────────────────
 def get_all_gijiroku_links(meetings_by_date):
     """
@@ -149,31 +169,6 @@ def get_all_gijiroku_links(meetings_by_date):
                     results[target_date][i] = {"today": None, "past": None, "past_count": 0}
                     continue
 
-                # 検索キーを抽出（会社名+人名の形式に対応）
-                def extract_search_key(n):
-                    # 会社名プレフィックスを除去
-                    s = re.sub(r'^(株式会社|有限会社|合同会社|一般社団法人|公益社団法人)\s*', '', n).strip()
-                    s = s.replace('\u3000', ' ')  # 全角スペース→半角
-                    # 全て英語の場合は姓（最後の単語）例: Shinji Sugita → Sugita
-                    if re.match(r'^[A-Za-z\s]+$', s):
-                        words = s.split()
-                        return words[-1] if words else n[:4]
-                    # 先頭がASCIIコード+日本語の場合（KINS山下等）→ 日本語部分を使う
-                    if re.match(r'^[A-Za-z0-9]', s):
-                        j = re.sub(r'^[A-Za-z0-9]+\s*', '', s).strip()
-                        if j:
-                            return j[:4]  # 山下 など
-                    # スペースがある場合
-                    if ' ' in s:
-                        before, after = s.rsplit(' ', 1)
-                        if len(before) > 4:
-                            # 「会社名+苗字 名前」形式 → 苗字（田原 章象→田原）
-                            return before[-2:]
-                        else:
-                            # 「会社略称 苗字」形式 → 苗字（ウナシ 近藤→近藤）
-                            return after[:4]
-                    return s[:4]
-
                 name_key = name  # キャッシュキーは衝突防止のためフルネーム
                 search_keyword = extract_search_key(name)
 
@@ -214,6 +209,74 @@ def get_all_gijiroku_links(meetings_by_date):
     return results
 
 
+# ── Lステップ ─────────────────────────────────────────────────
+def get_lstep_links(meetings_by_date):
+    """
+    Lステップの友だちリストから各参加者のプロフィールリンクを取得する。
+    returns: {date: {index: url_or_none}}
+    """
+    email    = os.environ.get("LSTEP_EMAIL")
+    password = os.environ.get("LSTEP_PASSWORD")
+
+    empty = lambda meetings: {i: None for i in range(len(meetings))}
+    if not email or not password:
+        return {d: empty(m) for d, m in meetings_by_date.items()}
+
+    results = {d: empty(meetings_by_date[d]) for d in meetings_by_date}
+    name_cache = {}
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page(viewport={"width": 1400, "height": 900})
+
+        # ログイン
+        page.goto("https://manager.linestep.net/account/login")
+        page.wait_for_load_state("networkidle")
+        time.sleep(1)
+        try:
+            page.fill('input[type="email"]', email)
+        except:
+            page.locator('input').first.fill(email)
+        page.fill('input[type="password"]', password)
+        page.locator('button[type="submit"], input[type="submit"]').first.click()
+        try:
+            page.wait_for_url(lambda url: "login" not in url, timeout=8000)
+        except:
+            pass
+        time.sleep(2)
+
+        def search_friend(keyword):
+            page.goto("https://manager.linestep.net/line/friends")
+            page.wait_for_load_state("networkidle")
+            time.sleep(2)
+            try:
+                page.fill('input[placeholder="友だち名検索"]', keyword)
+                page.locator("text=検索").first.click()
+                time.sleep(2)
+            except:
+                pass
+            links = page.eval_on_selector_all(
+                'a[href*="/line/detail/"]',
+                'els => els.map(e => e.href)'
+            )
+            return links[0] if links else None
+
+        for target_date, meetings in meetings_by_date.items():
+            for i, meeting in enumerate(meetings):
+                name = meeting["title"].split(" x ")[0].split("×")[0].strip()
+                if not name:
+                    continue
+                search_keyword = extract_search_key(name)
+                if name not in name_cache:
+                    link = search_friend(search_keyword)
+                    name_cache[name] = link
+                    print(f"  Lステップ: {name} ({search_keyword}) → {'あり' if link else 'なし'}")
+                results[target_date][i] = name_cache[name]
+
+        browser.close()
+    return results
+
+
 # ── HTML生成 ──────────────────────────────────────────────────
 COLORS = [
     "linear-gradient(135deg,#1a73e8,#4285f4)",
@@ -236,7 +299,7 @@ def make_attendee_chips(attendees):
         chips += f'<span class="attendee-chip"><span class="dot {cls}"></span>{name} {mark}</span>'
     return chips
 
-def make_card(i, meeting, links):
+def make_card(i, meeting, links, lstep_link=None):
     idx    = i % len(COLORS)
     color  = COLORS[idx]
     name   = meeting["title"].split(" x ")[0].split("×")[0].strip()
@@ -256,6 +319,10 @@ def make_card(i, meeting, links):
     btn_past = (
         f'<a class="btn-past" href="{past_link}" target="_blank">📂 過去の議事録（{past_count}件）</a>'
         if past_link else ""
+    )
+    btn_lstep = (
+        f'<a class="btn-lstep" href="{lstep_link}" target="_blank">💬 Lステップ</a>'
+        if lstep_link else ""
     )
 
     msg = meeting["message"]
@@ -283,6 +350,7 @@ def make_card(i, meeting, links):
           <a class="btn-zoom" href="{meeting["zoom_url"]}" target="_blank">▶ Zoom参加</a>
           {btn_today}
           {btn_past}
+          {btn_lstep}
         </div>
       </div>
       <div class="card-footer">
@@ -310,12 +378,12 @@ def _time_to_min(t):
     h, m = t.split(":")
     return int(h) * 60 + int(m)
 
-def generate_html(meetings, gijiroku, target_date=None):
+def generate_html(meetings, gijiroku, lstep=None, target_date=None):
     if target_date is None:
         target_date = TODAY
     date_str = f"{target_date.year}年{target_date.month}月{target_date.day}日"
     weekday  = ["月","火","水","木","金","土","日"][target_date.weekday()]
-    cards    = "".join(make_card(i, m, gijiroku.get(i, {})) for i, m in enumerate(meetings))
+    cards    = "".join(make_card(i, m, gijiroku.get(i, {}), (lstep or {}).get(i)) for i, m in enumerate(meetings))
     nav      = make_nav_items(meetings, gijiroku)
     count    = len(meetings)
     recorded = sum(1 for v in gijiroku.values() if v.get("today"))
@@ -382,6 +450,8 @@ header{{background:#fff;border-bottom:2px solid #e8eaf0;padding:0 32px;height:56
 .btn-gijiroku-pending{{display:inline-flex;align-items:center;gap:6px;background:#f1f3f4;color:#888;font-size:12px;font-weight:500;padding:7px 14px;border-radius:6px;white-space:nowrap}}
 .btn-past{{display:inline-flex;align-items:center;gap:6px;background:#fff;color:#5f6368;text-decoration:none;font-size:11px;font-weight:500;padding:5px 12px;border-radius:6px;border:1px solid #dadce0;white-space:nowrap;transition:background .15s}}
 .btn-past:hover{{background:#f1f3f4}}
+.btn-lstep{{display:inline-flex;align-items:center;gap:6px;background:#06c755;color:#fff;text-decoration:none;font-size:12px;font-weight:500;padding:7px 14px;border-radius:6px;white-space:nowrap;transition:background .15s}}
+.btn-lstep:hover{{background:#05a847}}
 .card-footer{{border-top:1px solid #f1f3f4;padding:10px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}}
 .attendee-chip{{display:inline-flex;align-items:center;gap:5px;background:#f1f3f4;border-radius:12px;padding:3px 10px;font-size:11px;color:#555}}
 .attendee-chip .dot{{width:5px;height:5px;border-radius:50%}}
@@ -674,8 +744,16 @@ if __name__ == "__main__":
         print(f"⚠️ 議事録取得失敗: {e}")
         all_gijiroku = {d: {} for d in meetings_by_date}
 
-    # 3. 各日付のHTMLを生成
-    print("\n3. HTML生成中...")
+    # 3. Lステップを全日付まとめて取得
+    print("\n3. Lステップを検索中...")
+    try:
+        all_lstep = get_lstep_links(meetings_by_date)
+    except Exception as e:
+        print(f"⚠️ Lステップ取得失敗: {e}")
+        all_lstep = {d: {} for d in meetings_by_date}
+
+    # 4. 各日付のHTMLを生成
+    print("\n4. HTML生成中...")
     for offset in range(GENERATE_DAYS):
         target = TODAY + datetime.timedelta(days=offset)
         date_filename = target.strftime("%Y-%m-%d") + ".html"
@@ -683,7 +761,7 @@ if __name__ == "__main__":
         try:
             meetings = meetings_by_date[target]
             gijiroku = all_gijiroku.get(target, {})
-            html = generate_html(meetings, gijiroku, target)
+            html = generate_html(meetings, gijiroku, all_lstep.get(target, {}), target)
             with open(date_filename, "w", encoding="utf-8") as f:
                 f.write(html)
             print(f"   ✅ {date_filename} ({len(meetings)}件)")
@@ -704,5 +782,5 @@ h1{{color:#ea4335;font-size:18px;margin-bottom:12px}}p{{color:#555;font-size:13p
             with open(date_filename, "w", encoding="utf-8") as f:
                 f.write(error_html)
 
-    print("\n4. index.html 再生成中...")
+    print("\n5. index.html 再生成中...")
     regenerate_index(meetings_by_date)
