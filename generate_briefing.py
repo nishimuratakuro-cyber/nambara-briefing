@@ -185,12 +185,18 @@ def get_all_gijiroku_links(meetings_by_date):
                 else:
                     all_links = name_cache[name_key]
 
-                # 今日の議事録：日付+キーワードで検索して実在するか確認
+                # 今日の議事録：面談開始時刻を過ぎていれば最新リンクが今日のもの
                 if is_today:
-                    today_links = search_links(f"{search_keyword} {today_str}")
-                    print(f"  今日検索: {search_keyword} {today_str} → {len(today_links)}件")
-                    today_link  = today_links[0] if today_links else None
-                    past_links  = [l for l in all_links if l != today_link]
+                    now_min = datetime.datetime.now(JST).hour * 60 + datetime.datetime.now(JST).minute
+                    start_str = meeting.get("start", "")
+                    if start_str:
+                        sh, sm = map(int, start_str.split(":"))
+                        started = now_min >= sh * 60 + sm
+                    else:
+                        started = False
+                    today_link = all_links[0] if (started and all_links) else None
+                    print(f"  今日: {name} 開始{start_str} 経過={started} リンク={'あり' if today_link else 'なし'}")
+                    past_links = all_links[1:] if today_link else all_links
                 else:
                     today_link = None  # 未来は今日の議事録なし
                     past_links = all_links
