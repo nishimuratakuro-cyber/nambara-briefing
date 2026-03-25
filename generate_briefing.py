@@ -188,6 +188,7 @@ def get_all_gijiroku_links(meetings_by_date):
                 # 今日の議事録：日付+キーワードで検索して実在するか確認
                 if is_today:
                     today_links = search_links(f"{search_keyword} {today_str}")
+                    print(f"  今日検索: {search_keyword} {today_str} → {len(today_links)}件")
                     today_link  = today_links[0] if today_links else None
                     past_links  = [l for l in all_links if l != today_link]
                 else:
