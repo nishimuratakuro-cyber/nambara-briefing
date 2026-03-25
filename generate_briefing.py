@@ -185,10 +185,11 @@ def get_all_gijiroku_links(meetings_by_date):
                 else:
                     all_links = name_cache[name_key]
 
-                # 今日の議事録：最新順なので先頭が最新（今日）の議事録
+                # 今日の議事録：日付+キーワードで検索して実在するか確認
                 if is_today:
-                    today_link = all_links[0] if all_links else None
-                    past_links = all_links[1:]
+                    today_links = search_links(f"{search_keyword} {today_str}")
+                    today_link  = today_links[0] if today_links else None
+                    past_links  = [l for l in all_links if l != today_link]
                 else:
                     today_link = None  # 未来は今日の議事録なし
                     past_links = all_links
