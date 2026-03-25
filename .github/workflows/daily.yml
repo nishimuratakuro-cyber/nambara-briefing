@@ -2,8 +2,9 @@ name: 毎朝ブリーフィング自動生成
 
 on:
   schedule:
-    - cron: '30 0 * * 1-5'  # 毎週月〜金 9:30 JST (UTC 0:30)
-  workflow_dispatch:          # 手動実行ボタン
+    - cron: '30 0 * * 1-5'   # 毎週月〜金  9:30 JST (UTC 0:30) 朝実行
+    - cron: '0 9 * * 1-5'    # 毎週月〜金 18:00 JST (UTC 9:00) 夕方再実行（当日議事録を更新）
+  workflow_dispatch:           # 手動実行ボタン
 
 permissions:
   contents: write
