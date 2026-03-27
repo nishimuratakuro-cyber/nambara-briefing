@@ -122,6 +122,11 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
     <div class="sidebar-card">
       <div class="sidebar-title">タイムライン</div>
       
+      <a class="nav-item" href="#meet-1" onclick="jump('meet-1',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">16:00</div>
+        <div class="nav-name">渚　大地</div>
+      </a>
     </div>
   </aside>
   <main class="main">
@@ -131,12 +136,38 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">0</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num">1</div><div class="stat-label">Zoom面談</div></div>
         <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">0</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">1</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
+    <div class="card" id="meet-1">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">渚</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">16:00 〜 16:30</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">渚　大地</div>
+          <div class="card-company">info@vintage-machine.com</div>
+          <div class="card-purpose">進捗ご報告と、</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/88398338164?pwd=bbD9wLaWewbbyVz2GKGtB6hebsfJYq.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=6e044fbac5020bc1954bb519a290e973eddef449529d474aaab3eb01a251437f" target="_blank">📂 過去の議事録（10件）</a>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>渚　大地 ✓</span>
+        <span class="zoom-id-text">ID: 883 9833 8164 ／ PW: 220952</span>
+      </div>
+    </div>
   </main>
 </div>
 <script>
@@ -152,7 +183,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[];
+  const sch=[{s:960,e:990}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
