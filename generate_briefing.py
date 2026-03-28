@@ -237,7 +237,7 @@ def get_lstep_links(meetings_by_date):
         page = browser.new_page(viewport={"width": 1400, "height": 900})
 
         # ログイン（LステップはIDがメールアドレスでない場合あり）
-        page.goto("https://manager.linestep.net/account/login", timeout=30000)
+        page.goto("https://manager.linestep.jp/account/login", timeout=30000)
         page.wait_for_load_state("networkidle")
         time.sleep(2)
         # ログインIDフィールド（email型・text型どちらにも対応）
@@ -254,7 +254,7 @@ def get_lstep_links(meetings_by_date):
         time.sleep(2)
 
         def search_friend(keyword):
-            page.goto("https://manager.linestep.net/line/friends")
+            page.goto("https://manager.linestep.jp/line/friends")
             page.wait_for_load_state("networkidle")
             time.sleep(2)
             try:
@@ -785,6 +785,8 @@ if __name__ == "__main__":
     print("\n4. HTML生成中...")
     for offset in range(GENERATE_DAYS):
         target = TODAY + datetime.timedelta(days=offset)
+        if target.weekday() >= 5:  # 土日はスキップ
+            continue
         date_filename = target.strftime("%Y-%m-%d") + ".html"
         d_str = f"{target.year}年{target.month}月{target.day}日"
         try:
