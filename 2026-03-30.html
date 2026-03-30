@@ -123,11 +123,16 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       <div class="sidebar-title">タイムライン</div>
       
       <a class="nav-item" href="#meet-1" onclick="jump('meet-1',this)">
+        <div class="nav-dot recorded"></div>
+        <div class="nav-time">11:00</div>
+        <div class="nav-name">西村拓朗</div>
+      </a>
+      <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">13:45</div>
         <div class="nav-name">💻しまだしゃちょうウエビナー</div>
       </a>
-      <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
+      <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">15:45</div>
         <div class="nav-name">💻西出さんウエビナー</div>
@@ -141,15 +146,41 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Zoom面談</div></div>
-        <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
+        <div class="stat"><div class="stat-num">3</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num" style="color:#34a853">1</div><div class="stat-label">議事録あり</div></div>
         <div class="stat"><div class="stat-num" style="color:#888">2</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
     <div class="card" id="meet-1">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">💻</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">西</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">11:00 〜 11:30</span>
+            <span class="status-badge recorded">
+              ✓ 議事録あり
+            </span>
+          </div>
+          <div class="card-title"><a href="https://editor.shabelab.com/gijiroku_detail.html?_id=45db82d04b1f037993c8c3dab0a46dfce23eeb05cf4a7e40f66923ba2a414429" target="_blank" class="card-title-link">西村拓朗</a></div>
+          <div class="card-company">nishimuratakuro@luft-hd.co.jp</div>
+          <div class="card-purpose">自動予約</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/87259534985?pwd=XnnZmt0uFUib1X5WuBoaJFWWeSUc8a.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=45db82d04b1f037993c8c3dab0a46dfce23eeb05cf4a7e40f66923ba2a414429" target="_blank">📋 本日の議事録</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=54f942b4ca2b7c025d2481f0527d706522c5e10e4a0d1dff44271356db59dfb7" target="_blank">📂 過去の議事録（9件）</a>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>西村拓朗 ✓</span>
+        <span class="zoom-id-text">ID: 872 5953 4985 ／ PW: 477295</span>
+      </div>
+    </div>
+    <div class="card" id="meet-2">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">💻</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">13:45 〜 15:30</span>
@@ -173,9 +204,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text"></span>
       </div>
     </div>
-    <div class="card" id="meet-2">
+    <div class="card" id="meet-3">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">💻</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">💻</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">15:45 〜 17:15</span>
@@ -214,7 +245,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:825,e:930},{s:945,e:1035}];
+  const sch=[{s:660,e:690},{s:825,e:930},{s:945,e:1035}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
