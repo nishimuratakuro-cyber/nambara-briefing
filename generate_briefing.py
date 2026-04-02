@@ -234,7 +234,8 @@ def get_lstep_links(meetings_by_date):
             headless=True,
             args=["--no-sandbox", "--disable-dev-shm-usage"]
         )
-        page = browser.new_page(viewport={"width": 1400, "height": 900})
+        context = browser.new_context(ignore_https_errors=True, viewport={"width": 1400, "height": 900})
+        page = context.new_page()
 
         # ログイン（LステップはIDがメールアドレスでない場合あり）
         page.goto("https://manager.linestep.jp/account/login", timeout=30000)
