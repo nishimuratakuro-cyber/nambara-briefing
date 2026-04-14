@@ -124,8 +124,8 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       
       <a class="nav-item" href="#meet-1" onclick="jump('meet-1',this)">
         <div class="nav-dot pending"></div>
-        <div class="nav-time">09:00</div>
-        <div class="nav-name">西村拓朗</div>
+        <div class="nav-time">09:30</div>
+        <div class="nav-name">株式会社YONEDA</div>
       </a>
       <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
         <div class="nav-dot pending"></div>
@@ -154,28 +154,28 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
     
     <div class="card" id="meet-1">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">西</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">株</div>
         <div class="card-main">
           <div class="card-meta">
-            <span class="card-time-badge">09:00 〜 09:30</span>
+            <span class="card-time-badge">09:30 〜 10:00</span>
             <span class="status-badge pending">
               録音待ち
             </span>
           </div>
-          <div class="card-title">西村拓朗</div>
-          <div class="card-company">nishimuratakuro@luft-hd.co.jp</div>
-          <div class="card-purpose">自動予約</div>
+          <div class="card-title">株式会社YONEDA</div>
+          <div class="card-company">hide@yonekin.jp</div>
+          <div class="card-purpose">動画編集の経験の有る息子がオンラインに参加します。</div>
         </div>
         <div class="card-actions">
-          <a class="btn-zoom" href="https://us06web.zoom.us/j/85217598758?pwd=7CYl7E4aYV4amwiVZvr9G2gVwtFpgt.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/89364197041?pwd=VF3lAVjWTMbn4a4aj47zx7GSJLQxAq.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=5974c49582a725f8ed03a927db3090e987f9d521c777e0668597416a3c1086ff" target="_blank">📂 過去の議事録（10件）</a>
+          
           
         </div>
       </div>
       <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>西村拓朗 ✓</span>
-        <span class="zoom-id-text">ID: 852 1759 8758 ／ PW: 090432</span>
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>株式会社YONEDA ✓</span>
+        <span class="zoom-id-text">ID: 893 6419 7041 ／ PW: 520899</span>
       </div>
     </div>
     <div class="card" id="meet-2">
@@ -245,7 +245,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:540,e:570},{s:600,e:630},{s:630,e:660}];
+  const sch=[{s:570,e:600},{s:600,e:630},{s:630,e:660}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
