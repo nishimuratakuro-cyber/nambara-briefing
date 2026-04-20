@@ -124,8 +124,13 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       
       <a class="nav-item" href="#meet-1" onclick="jump('meet-1',this)">
         <div class="nav-dot pending"></div>
-        <div class="nav-time">16:00</div>
+        <div class="nav-time">16:30</div>
         <div class="nav-name">可児直美</div>
+      </a>
+      <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">17:00</div>
+        <div class="nav-name">秋田</div>
       </a>
     </div>
   </aside>
@@ -136,9 +141,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">1</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Zoom面談</div></div>
         <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">1</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">2</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
@@ -147,7 +152,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">可</div>
         <div class="card-main">
           <div class="card-meta">
-            <span class="card-time-badge">16:00 〜 16:30</span>
+            <span class="card-time-badge">16:30 〜 17:00</span>
             <span class="status-badge pending">
               録音待ち
             </span>
@@ -164,8 +169,34 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         </div>
       </div>
       <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>可児直美 ✓</span>
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ng"></span>可児直美 </span>
         <span class="zoom-id-text">ID: 895 6866 5453 ／ PW: 223932</span>
+      </div>
+    </div>
+    <div class="card" id="meet-2">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">秋</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">17:00 〜 17:30</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">秋田</div>
+          <div class="card-company">akita@berte.jp</div>
+          <div class="card-purpose">お世話になります。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/83760742020?pwd=VVRUoKQelQzH3HXa0DWDBNKv0j3WXK.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=261c35e6051ba7de52925218f5c8def6e0d6e4aa5ed5dbb8d6beb43d42f0c635" target="_blank">📂 過去の議事録（6件）</a>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>秋田洋徳 ✓</span>
+        <span class="zoom-id-text">ID: 837 6074 2020 ／ PW: 586005</span>
       </div>
     </div>
   </main>
@@ -183,7 +214,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:960,e:990}];
+  const sch=[{s:990,e:1020},{s:1020,e:1050}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
