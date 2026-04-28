@@ -129,6 +129,16 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       </a>
       <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
         <div class="nav-dot pending"></div>
+        <div class="nav-time">10:30</div>
+        <div class="nav-name">SUGITA</div>
+      </a>
+      <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">11:00</div>
+        <div class="nav-name">SUGITA</div>
+      </a>
+      <a class="nav-item" href="#meet-4" onclick="jump('meet-4',this)">
+        <div class="nav-dot pending"></div>
         <div class="nav-time">16:00</div>
         <div class="nav-name">能宗　雅明</div>
       </a>
@@ -141,9 +151,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num">4</div><div class="stat-label">Zoom面談</div></div>
         <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">2</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">4</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
@@ -175,7 +185,59 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
     </div>
     <div class="card" id="meet-2">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">能</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">S</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">10:30 〜 11:00</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">SUGITA</div>
+          <div class="card-company">sugita@ufrcs.com</div>
+          <div class="card-purpose">事務担当について</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/85965169253?pwd=xcoRyrwXqXwItBWb1PRgKj7AcQ4ZDI.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>SUGITA ✓</span><span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span>
+        <span class="zoom-id-text">ID: 859 6516 9253 ／ PW: 658085</span>
+      </div>
+    </div>
+    <div class="card" id="meet-3">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">S</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">11:00 〜 11:30</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">SUGITA</div>
+          <div class="card-company">sugita@ufrcs.com</div>
+          <div class="card-purpose">事務担当について</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/87004274582?pwd=47W6ed6pwe5QGQHuegLIassvDCV1Cx.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>SUGITA ✓</span><span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span>
+        <span class="zoom-id-text">ID: 870 0427 4582 ／ PW: 740718</span>
+      </div>
+    </div>
+    <div class="card" id="meet-4">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#00897b,#00acc1)">能</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">16:00 〜 16:30</span>
@@ -214,7 +276,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:600,e:630},{s:960,e:990}];
+  const sch=[{s:600,e:630},{s:630,e:660},{s:660,e:690},{s:960,e:990}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
