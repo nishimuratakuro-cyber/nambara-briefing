@@ -122,6 +122,16 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
     <div class="sidebar-card">
       <div class="sidebar-title">タイムライン</div>
       
+      <a class="nav-item" href="#meet-1" onclick="jump('meet-1',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">09:30</div>
+        <div class="nav-name">伊藤数馬</div>
+      </a>
+      <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">17:00</div>
+        <div class="nav-name">株式会社YONEDA</div>
+      </a>
     </div>
   </aside>
   <main class="main">
@@ -131,12 +141,64 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">0</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Zoom面談</div></div>
         <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">0</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">2</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
+    <div class="card" id="meet-1">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">伊</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">09:30 〜 10:00</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">伊藤数馬</div>
+          <div class="card-company">kazumaito110@gmail.com</div>
+          <div class="card-purpose">さいたま15区ボランティアの、伊藤です。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/81210459498?pwd=e7P6FO6hwt9OMwdA3bE0iFLTN2zQ9j.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=569788738d052659eb32991c0ed54d8f6da50685d6f87e2812b92ace4c684ffd" target="_blank">📂 過去の議事録（1件）</a>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>伊藤数馬 ✓</span>
+        <span class="zoom-id-text">ID: 812 1045 9498 ／ PW: 706556</span>
+      </div>
+    </div>
+    <div class="card" id="meet-2">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">株</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">17:00 〜 17:30</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">株式会社YONEDA</div>
+          <div class="card-company">masa@yonekin.jp</div>
+          <div class="card-purpose">動画編集の打ち合わせ</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/82688343801?pwd=aWQa7X2vINb2kvo8qk0U9jV2MbkHaE.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=97e229c1056b57b78126b2080cd7808ee6702f0201b38b526ec7df6ee2268186" target="_blank">📂 過去の議事録（1件）</a>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>株式会社YONEDA ✓</span>
+        <span class="zoom-id-text">ID: 826 8834 3801 ／ PW: 622012</span>
+      </div>
+    </div>
   </main>
 </div>
 <script>
@@ -152,7 +214,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[];
+  const sch=[{s:570,e:600},{s:1020,e:1050}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
