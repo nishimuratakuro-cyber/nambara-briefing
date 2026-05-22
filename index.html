@@ -84,25 +84,14 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
 <div class="wrap">
   <h1>日付を選択</h1>
   
-        <a class="day-card  day-today" href="2026-05-21.html">
-          <div class="day-card-body">
-            <div class="day-card-header">
-              <span class="day-card-date">2026年5月21日（木）</span>
-              <span class="today-badge">今日</span>
-              <span class="day-card-count">Zoom面談 1件</span>
-            </div>
-            <div class="day-card-schedule"><span class="sch-item"><span class="sch-time">10:00</span><span class="sch-name">Byside株式会社　村上貴文</span></span></div>
-          </div>
-          <div class="day-card-arrow">→</div>
-        </a>
-        <a class="day-card" href="2026-05-22.html">
+        <a class="day-card  day-today" href="2026-05-22.html">
           <div class="day-card-body">
             <div class="day-card-header">
               <span class="day-card-date">2026年5月22日（金）</span>
-              <span class="future-badge">予定</span>
-              <span class="day-card-count">Zoom面談 1件</span>
+              <span class="today-badge">今日</span>
+              <span class="day-card-count">Zoom面談 2件</span>
             </div>
-            <div class="day-card-schedule"><span class="sch-item"><span class="sch-time">18:00</span><span class="sch-name">株式会社ちきゅうのうたげ佐東 祐丞</span></span></div>
+            <div class="day-card-schedule"><span class="sch-item"><span class="sch-time">09:00</span><span class="sch-name">西村拓朗</span></span><span class="sch-item"><span class="sch-time">18:00</span><span class="sch-name">株式会社ちきゅうのうたげ佐東 祐丞</span></span></div>
           </div>
           <div class="day-card-arrow">→</div>
         </a>
@@ -139,11 +128,33 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
           </div>
           <div class="day-card-arrow">→</div>
         </a>
+        <a class="day-card" href="2026-05-28.html">
+          <div class="day-card-body">
+            <div class="day-card-header">
+              <span class="day-card-date">2026年5月28日（木）</span>
+              <span class="future-badge">予定</span>
+              <span class="day-card-count">Zoom面談 2件</span>
+            </div>
+            <div class="day-card-schedule"><span class="sch-item"><span class="sch-time">14:00</span><span class="sch-name">北澤大樹</span></span><span class="sch-item"><span class="sch-time">14:30</span><span class="sch-name">株式会社アルファクス・フード・システム</span></span></div>
+          </div>
+          <div class="day-card-arrow">→</div>
+        </a>
   <div class="past-section">
     <button class="past-toggle" onclick="this.classList.toggle('open');document.getElementById('past-cards').classList.toggle('open')">
       <span class="past-toggle-icon">▶</span> 過去の記録（21件）
     </button>
     <div class="past-cards" id="past-cards">
+        <a class="day-card" href="2026-05-21.html">
+          <div class="day-card-body">
+            <div class="day-card-header">
+              <span class="day-card-date">2026年5月21日（木）</span>
+              
+              <span class="day-card-count">Zoom面談 1件</span>
+            </div>
+            <div class="day-card-schedule"><span class="sch-item"><span class="sch-time">10:00</span><span class="sch-name">Byside株式会社　村上貴文</span></span></div>
+          </div>
+          <div class="day-card-arrow">→</div>
+        </a>
         <a class="day-card" href="2026-05-20.html">
           <div class="day-card-body">
             <div class="day-card-header">
@@ -361,17 +372,6 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
               <span class="day-card-count">Zoom面談 10件</span>
             </div>
             <div class="day-card-schedule"><span class="sch-item"><span class="sch-time">09:30</span><span class="sch-name">阿部尚史</span></span><span class="sch-item"><span class="sch-time">10:00</span><span class="sch-name">渚　大地</span></span><span class="sch-item"><span class="sch-time">10:30</span><span class="sch-name">株式会社ウナシ　近藤</span></span><span class="sch-item"><span class="sch-time">11:00</span><span class="sch-name">西村拓朗</span></span><span class="sch-item"><span class="sch-time">13:00</span><span class="sch-name">氣仙隆造</span></span><span class="sch-item"><span class="sch-time">14:30</span><span class="sch-name">株式会社新日本コンサルティング　佐々木</span></span><span class="sch-item"><span class="sch-time">15:00</span><span class="sch-name">古江厳太郎</span></span><span class="sch-item"><span class="sch-time">15:30</span><span class="sch-name">水野義邦</span></span><span class="sch-item"><span class="sch-time">16:00</span><span class="sch-name">大河原しおり</span></span><span class="sch-item"><span class="sch-time">17:30</span><span class="sch-name">池村真一郎</span></span></div>
-          </div>
-          <div class="day-card-arrow">→</div>
-        </a>
-        <a class="day-card" href="2026-04-22.html">
-          <div class="day-card-body">
-            <div class="day-card-header">
-              <span class="day-card-date">2026年4月22日（水）</span>
-              
-              <span class="day-card-count">Zoom面談 5件</span>
-            </div>
-            <div class="day-card-schedule"><span class="sch-item"><span class="sch-time">09:00</span><span class="sch-name">高橋順子</span></span><span class="sch-item"><span class="sch-time">16:00</span><span class="sch-name">可児直美</span></span><span class="sch-item"><span class="sch-time">16:30</span><span class="sch-name">藤井様、山口様</span></span><span class="sch-item"><span class="sch-time">17:00</span><span class="sch-name">秋田</span></span><span class="sch-item"><span class="sch-time">17:30</span><span class="sch-name">NPO法人キッズサーカス</span></span></div>
           </div>
           <div class="day-card-arrow">→</div>
         </a></div>
