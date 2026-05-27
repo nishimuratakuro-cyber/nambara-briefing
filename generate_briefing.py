@@ -217,57 +217,55 @@ def get_all_gijiroku_links(meetings_by_date):
 def get_lstep_links(meetings_by_date):
     """
     Lステップの友だちリストから各参加者のプロフィールリンクを取得する。
+    セッション保存方式（reCAPTCHA回避のため）。
     returns: {date: {index: url_or_none}}
     """
-    email    = os.environ.get("LSTEP_EMAIL")
-    password = os.environ.get("LSTEP_PASSWORD")
+    session_json = os.environ.get("LSTEP_SESSION")
 
     empty = lambda meetings: {i: None for i in range(len(meetings))}
-    if not email or not password:
+    if not session_json:
         return {d: empty(m) for d, m in meetings_by_date.items()}
 
     results = {d: empty(meetings_by_date[d]) for d in meetings_by_date}
     name_cache = {}
+
+    import tempfile
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
+        f.write(session_json)
+        session_path = f.name
 
     with sync_playwright() as p:
         browser = p.chromium.launch(
             headless=True,
             args=["--no-sandbox", "--disable-dev-shm-usage"]
         )
-        context = browser.new_context(ignore_https_errors=True, viewport={"width": 1400, "height": 900})
+        context = browser.new_context(
+            storage_state=session_path,
+            ignore_https_errors=True,
+            viewport={"width": 1400, "height": 900}
+        )
         page = context.new_page()
 
-        # ログイン（LステップはIDがメールアドレスでない場合あり）
+        # セッションが有効か確認（友だちリストへ直接アクセス）
         try:
-            page.goto("https://manager.linestep.net/account/login", timeout=60000)
+            page.goto("https://manager.linestep.net/line/friends", timeout=60000)
             page.wait_for_load_state("networkidle", timeout=30000)
         except Exception as goto_err:
             print(f"  ページ読み込みエラー: {goto_err}")
         time.sleep(2)
-        # デバッグ: ログインページのスクリーンショット（読み込み失敗時も撮影）
+
+        # デバッグ: スクリーンショット
         try:
             page.screenshot(path="lstep_login_debug.png")
         except Exception:
             pass
-        # ログインIDフィールド（複数セレクターを順に試す）
-        try:
-            id_input = page.locator(
-                'input[type="email"], input[name="email"], input[name="login_id"], '
-                'input[type="text"], input[autocomplete="email"], input[autocomplete="username"]'
-            ).first
-            id_input.fill(email, timeout=10000)
-        except Exception:
-            id_input = page.get_by_role('textbox').first
-            id_input.fill(email, timeout=10000)
-        page.fill('input[type="password"]', password)
-        page.locator('button[type="submit"], input[type="submit"]').first.click()
-        try:
-            page.wait_for_url(lambda url: "login" not in url, timeout=15000)
-        except Exception:
-            print("⚠️ Lステップ: ログインに失敗しました（LSTEP_EMAIL/PASSWORDを確認してください）")
+
+        # ログインページにリダイレクトされた場合はセッション期限切れ
+        if "login" in page.url:
+            print("⚠️ Lステップ: セッション期限切れ。setup_lstep_session.py を再実行してLSTEP_SESSIONを更新してください。")
             browser.close()
+            import os as _os; _os.unlink(session_path)
             return results
-        time.sleep(2)
 
         def search_friend(keyword):
             page.goto("https://manager.linestep.net/line/friends")
@@ -298,6 +296,12 @@ def get_lstep_links(meetings_by_date):
                 results[target_date][i] = name_cache[name]
 
         browser.close()
+
+    import os as _os
+    try:
+        _os.unlink(session_path)
+    except Exception:
+        pass
     return results
 
 

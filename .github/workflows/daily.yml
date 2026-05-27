@@ -52,8 +52,7 @@ jobs:
           CALENDAR_ID:       ${{ secrets.CALENDAR_ID }}
           GIJIROKU_EMAIL:    ${{ secrets.GIJIROKU_EMAIL }}
           GIJIROKU_PASSWORD: ${{ secrets.GIJIROKU_PASSWORD }}
-          LSTEP_EMAIL:       ${{ secrets.LSTEP_EMAIL }}
-          LSTEP_PASSWORD:    ${{ secrets.LSTEP_PASSWORD }}
+          LSTEP_SESSION:     ${{ secrets.LSTEP_SESSION }}
         run: python generate_briefing.py
 
       - name: Lステップ ログインデバッグ画像をアップロード
