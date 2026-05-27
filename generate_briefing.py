@@ -238,7 +238,7 @@ def get_lstep_links(meetings_by_date):
         page = context.new_page()
 
         # ログイン（LステップはIDがメールアドレスでない場合あり）
-        page.goto("https://manager.linestep.jp/account/login", timeout=30000)
+        page.goto("https://manager.linestep.net/account/login", timeout=30000)
         page.wait_for_load_state("networkidle")
         time.sleep(2)
         # デバッグ: ログインページのスクリーンショット
@@ -264,7 +264,7 @@ def get_lstep_links(meetings_by_date):
         time.sleep(2)
 
         def search_friend(keyword):
-            page.goto("https://manager.linestep.jp/line/friends")
+            page.goto("https://manager.linestep.net/line/friends")
             page.wait_for_load_state("networkidle")
             time.sleep(2)
             try:
