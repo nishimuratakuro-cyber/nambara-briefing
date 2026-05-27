@@ -238,11 +238,17 @@ def get_lstep_links(meetings_by_date):
         page = context.new_page()
 
         # ログイン（LステップはIDがメールアドレスでない場合あり）
-        page.goto("https://manager.linestep.net/account/login", timeout=30000)
-        page.wait_for_load_state("networkidle")
+        try:
+            page.goto("https://manager.linestep.net/account/login", timeout=60000)
+            page.wait_for_load_state("networkidle", timeout=30000)
+        except Exception as goto_err:
+            print(f"  ページ読み込みエラー: {goto_err}")
         time.sleep(2)
-        # デバッグ: ログインページのスクリーンショット
-        page.screenshot(path="lstep_login_debug.png")
+        # デバッグ: ログインページのスクリーンショット（読み込み失敗時も撮影）
+        try:
+            page.screenshot(path="lstep_login_debug.png")
+        except Exception:
+            pass
         # ログインIDフィールド（複数セレクターを順に試す）
         try:
             id_input = page.locator(
