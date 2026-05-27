@@ -56,6 +56,15 @@ jobs:
           LSTEP_PASSWORD:    ${{ secrets.LSTEP_PASSWORD }}
         run: python generate_briefing.py
 
+      - name: Lステップ ログインデバッグ画像をアップロード
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: lstep-login-debug
+          path: lstep_login_debug.png
+          if-no-files-found: ignore
+          retention-days: 7
+
       - name: GitHub Pages にプッシュ
         uses: stefanzweifel/git-auto-commit-action@v7.1.0
         with:

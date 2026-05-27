@@ -241,9 +241,18 @@ def get_lstep_links(meetings_by_date):
         page.goto("https://manager.linestep.jp/account/login", timeout=30000)
         page.wait_for_load_state("networkidle")
         time.sleep(2)
-        # ログインIDフィールド（email型・text型どちらにも対応）
-        id_input = page.locator('input[type="email"], input[name="email"], input[name="login_id"], input[type="text"]').first
-        id_input.fill(email)
+        # デバッグ: ログインページのスクリーンショット
+        page.screenshot(path="lstep_login_debug.png")
+        # ログインIDフィールド（複数セレクターを順に試す）
+        try:
+            id_input = page.locator(
+                'input[type="email"], input[name="email"], input[name="login_id"], '
+                'input[type="text"], input[autocomplete="email"], input[autocomplete="username"]'
+            ).first
+            id_input.fill(email, timeout=10000)
+        except Exception:
+            id_input = page.get_by_role('textbox').first
+            id_input.fill(email, timeout=10000)
         page.fill('input[type="password"]', password)
         page.locator('button[type="submit"], input[type="submit"]').first.click()
         try:
