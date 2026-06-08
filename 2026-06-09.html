@@ -134,8 +134,18 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       </a>
       <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
         <div class="nav-dot pending"></div>
+        <div class="nav-time">11:00</div>
+        <div class="nav-name">みやはらゆきこ 　株式会社みやっぷる代表</div>
+      </a>
+      <a class="nav-item" href="#meet-4" onclick="jump('meet-4',this)">
+        <div class="nav-dot pending"></div>
         <div class="nav-time">15:00</div>
         <div class="nav-name">株式会社ウィニングフィールド　勝原</div>
+      </a>
+      <a class="nav-item" href="#meet-5" onclick="jump('meet-5',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">17:00</div>
+        <div class="nav-name">竹林紅</div>
       </a>
     </div>
   </aside>
@@ -146,9 +156,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">3</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num">5</div><div class="stat-label">Zoom面談</div></div>
         <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">3</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">5</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
@@ -206,7 +216,33 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
     </div>
     <div class="card" id="meet-3">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">株</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">み</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">11:00 〜 11:30</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">みやはらゆきこ 　株式会社みやっぷる代表</div>
+          <div class="card-company">yukiko.miyahara10@gmail.com</div>
+          <div class="card-purpose">SNS　Xスペースのライブ配信でご登壇お願いいたします。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/81838684674?pwd=P1mj7Kb6iK2ECqCpjfPRQXb9V3mUhC.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=0055e5ad65ce1c85475636d1894d9307be228180056daa20e6ee975be30cf987" target="_blank">📂 過去の議事録（10件）</a>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>みやはらゆきこ 　株式会社みやっぷる代表 ✓</span>
+        <span class="zoom-id-text">ID: 818 3868 4674 ／ PW: 932579</span>
+      </div>
+    </div>
+    <div class="card" id="meet-4">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#00897b,#00acc1)">株</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">15:00 〜 15:30</span>
@@ -230,6 +266,32 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 899 0362 8385 ／ PW: 215558</span>
       </div>
     </div>
+    <div class="card" id="meet-5">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#f4511e,#ff8f00)">竹</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">17:00 〜 17:30</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">竹林紅</div>
+          <div class="card-company">kurenai@medicalproducer.org</div>
+          <div class="card-purpose">100,000円で、クリニックのシステムを構築してくださる方、ご紹介くださいませ！</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/88462221541?pwd=gRN9GiZSP3D94BYCUV34zuWjAMiOqV.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>竹林紅 ✓</span>
+        <span class="zoom-id-text">ID: 884 6222 1541 ／ PW: 740892</span>
+      </div>
+    </div>
   </main>
 </div>
 <script>
@@ -245,7 +307,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:600,e:630},{s:630,e:660},{s:900,e:930}];
+  const sch=[{s:600,e:630},{s:630,e:660},{s:660,e:690},{s:900,e:930},{s:1020,e:1050}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){

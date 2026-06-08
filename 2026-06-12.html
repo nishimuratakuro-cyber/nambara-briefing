@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ブリーフィング — 2026年5月8日</title>
+<title>ブリーフィング — 2026年6月12日</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -112,7 +112,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
     <span class="header-title">南原竜樹 — 本日の面談</span>
   </div>
   <div style="display:flex;align-items:center;gap:12px">
-    <div class="header-date">2026年5月8日（金）</div>
+    <div class="header-date">2026年6月12日（金）</div>
     <a href="index.html" style="background:#f1f3f4;color:#444;font-size:11px;font-weight:500;padding:5px 12px;border-radius:6px;text-decoration:none;border:1px solid #ddd">← 日付一覧</a>
     <a href="https://editor.shabelab.com/login.html" target="_blank" style="background:#f1f3f4;color:#444;font-size:11px;font-weight:500;padding:5px 12px;border-radius:6px;text-decoration:none;border:1px solid #ddd">いきなり議事録 ログイン</a>
   </div>
@@ -122,52 +122,21 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
     <div class="sidebar-card">
       <div class="sidebar-title">タイムライン</div>
       
-      <a class="nav-item" href="#meet-1" onclick="jump('meet-1',this)">
-        <div class="nav-dot recorded"></div>
-        <div class="nav-time">14:00</div>
-        <div class="nav-name">南原秘書室</div>
-      </a>
     </div>
   </aside>
   <main class="main">
     <div class="day-banner">
       <div class="day-info">
-        <h1>2026年5月8日（金）</h1>
+        <h1>2026年6月12日（金）</h1>
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">1</div><div class="stat-label">Zoom面談</div></div>
-        <div class="stat"><div class="stat-num" style="color:#34a853">1</div><div class="stat-label">議事録あり</div></div>
+        <div class="stat"><div class="stat-num">0</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
         <div class="stat"><div class="stat-num" style="color:#888">0</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
-    <div class="card" id="meet-1">
-      <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">南</div>
-        <div class="card-main">
-          <div class="card-meta">
-            <span class="card-time-badge">14:00 〜 14:30</span>
-            <span class="status-badge recorded">
-              ✓ 議事録あり
-            </span>
-          </div>
-          <div class="card-title"><a href="https://editor.shabelab.com/gijiroku_detail.html?_id=266b277307d2a551bd46e63bb171aff38eb8956c391c7f47479c6842c56f1450" target="_blank" class="card-title-link">南原秘書室</a></div>
-          <div class="card-company">secretary@luft-hd.co.jp</div>
-          <div class="card-purpose">切り抜き動画の件</div>
-        </div>
-        <div class="card-actions">
-          <a class="btn-zoom" href="https://us06web.zoom.us/j/87870933246?pwd=iyKPouhwhOuUDVcxwqtaaEdMb4UXmt.1" target="_blank">▶ Zoom参加</a>
-          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=266b277307d2a551bd46e63bb171aff38eb8956c391c7f47479c6842c56f1450" target="_blank">📋 本日の議事録</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=fb4854cd32e18e805eae81b8d0deddba44f7b3bcd3d930dcb7789bd58239be35" target="_blank">📂 過去の議事録（1件）</a>
-          
-        </div>
-      </div>
-      <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>南原秘書室 ✓</span>
-        <span class="zoom-id-text">ID: 878 7093 3246 ／ PW: 578507</span>
-      </div>
-    </div>
   </main>
 </div>
 <script>
@@ -183,7 +152,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:840,e:870}];
+  const sch=[];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
