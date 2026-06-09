@@ -127,6 +127,16 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="nav-time">12:00</div>
         <div class="nav-name">株式会社匠 河野匠哉</div>
       </a>
+      <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">12:30</div>
+        <div class="nav-name">株式会社エスコート　三宅俊輝</div>
+      </a>
+      <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">13:00</div>
+        <div class="nav-name">株式会社 橋本-investment</div>
+      </a>
     </div>
   </aside>
   <main class="main">
@@ -136,9 +146,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">1</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num">3</div><div class="stat-label">Zoom面談</div></div>
         <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">1</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">3</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
@@ -168,6 +178,58 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 871 4087 5994 ／ PW: 917910</span>
       </div>
     </div>
+    <div class="card" id="meet-2">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">株</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">12:30 〜 13:00</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">株式会社エスコート　三宅俊輝</div>
+          <div class="card-company">info@escort-inc.co.jp</div>
+          <div class="card-purpose">5ヵ年計画のうち、一先ず1年を作ってみましたので、フィードバックを頂きたいです。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/87070375380?pwd=cmUZ421srgJdNuH2ez5Bxn234l9p4g.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=6356772b71dc8c97bf8f7c1543d10779d124923959f398be5ef0755b8231b2b3" target="_blank">📂 過去の議事録（1件）</a>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>株式会社エスコート　三宅俊輝 ✓</span>
+        <span class="zoom-id-text">ID: 870 7037 5380 ／ PW: 564613</span>
+      </div>
+    </div>
+    <div class="card" id="meet-3">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">株</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">13:00 〜 13:30</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">株式会社 橋本-investment</div>
+          <div class="card-company">hashimoto@h-i.co.jp</div>
+          <div class="card-purpose">10日(水)13時より予約しました。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/87934021032?pwd=QjhnOK4wAYYQj2F60cxu43VH3io3lK.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>株式会社 橋本-investment ✓</span><span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span>
+        <span class="zoom-id-text">ID: 879 3402 1032 ／ PW: 324216</span>
+      </div>
+    </div>
   </main>
 </div>
 <script>
@@ -183,7 +245,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:720,e:750}];
+  const sch=[{s:720,e:750},{s:750,e:780},{s:780,e:810}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
