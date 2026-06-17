@@ -139,8 +139,8 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       </a>
       <a class="nav-item" href="#meet-4" onclick="jump('meet-4',this)">
         <div class="nav-dot pending"></div>
-        <div class="nav-time">17:00</div>
-        <div class="nav-name">中村未来彦さんからiPadで返事待ち中　南原竜樹　メッセージはXからきましたとか、何を打ち合わせしたいとか細かく入れてください</div>
+        <div class="nav-time">16:00</div>
+        <div class="nav-name">中村未来彦さんiPad　南原竜樹　メッセージはXからきましたとか、何を打ち合わせしたいとか細かく入れてください</div>
       </a>
     </div>
   </aside>
@@ -240,19 +240,19 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-avatar" style="background:linear-gradient(135deg,#00897b,#00acc1)">中</div>
         <div class="card-main">
           <div class="card-meta">
-            <span class="card-time-badge">17:00 〜 17:30</span>
+            <span class="card-time-badge">16:00 〜 16:30</span>
             <span class="status-badge pending">
               録音待ち
             </span>
           </div>
-          <div class="card-title">中村未来彦さんからiPadで返事待ち中　南原竜樹　メッセージはXからきましたとか、何を打ち合わせしたいとか細かく入れてください</div>
+          <div class="card-title">中村未来彦さんiPad　南原竜樹　メッセージはXからきましたとか、何を打ち合わせしたいとか細かく入れてください</div>
           <div class="card-company"></div>
           <div class="card-purpose">橋本さん中村さん</div>
         </div>
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/86374534047?pwd=iBtj3ETl7wYt9gbPWcrdiemULJdW4A.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=b049ac3b5c78be91a07437b2ef12de422d76c4d2c5c510f425e3c40ee426ae8e" target="_blank">📂 過去の議事録（10件）</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=be4a7539a5af4771d6c5607c83161f50ca8396535c16963ed301800a78d1b626" target="_blank">📂 過去の議事録（9件）</a>
           
         </div>
       </div>
@@ -276,7 +276,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:600,e:630},{s:750,e:780},{s:930,e:960},{s:1020,e:1050}];
+  const sch=[{s:600,e:630},{s:750,e:780},{s:930,e:960},{s:960,e:990}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
