@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ブリーフィング — 2026年7月14日</title>
+<title>ブリーフィング — 2026年7月20日</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -112,7 +112,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
     <span class="header-title">南原竜樹 — 本日の面談</span>
   </div>
   <div style="display:flex;align-items:center;gap:12px">
-    <div class="header-date">2026年7月14日（火）</div>
+    <div class="header-date">2026年7月20日（月）</div>
     <a href="index.html" style="background:#f1f3f4;color:#444;font-size:11px;font-weight:500;padding:5px 12px;border-radius:6px;text-decoration:none;border:1px solid #ddd">← 日付一覧</a>
     <a href="https://editor.shabelab.com/login.html" target="_blank" style="background:#f1f3f4;color:#444;font-size:11px;font-weight:500;padding:5px 12px;border-radius:6px;text-decoration:none;border:1px solid #ddd">いきなり議事録 ログイン</a>
   </div>
@@ -123,142 +123,49 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       <div class="sidebar-title">タイムライン</div>
       
       <a class="nav-item" href="#meet-1" onclick="jump('meet-1',this)">
-        <div class="nav-dot recorded"></div>
+        <div class="nav-dot pending"></div>
         <div class="nav-time">11:00</div>
-        <div class="nav-name">西村拓朗</div>
-      </a>
-      <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
-        <div class="nav-dot pending"></div>
-        <div class="nav-time">15:00</div>
-        <div class="nav-name">渚　大地</div>
-      </a>
-      <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
-        <div class="nav-dot pending"></div>
-        <div class="nav-time">16:00</div>
-        <div class="nav-name">株式会社UPRON</div>
-      </a>
-      <a class="nav-item" href="#meet-4" onclick="jump('meet-4',this)">
-        <div class="nav-dot pending"></div>
-        <div class="nav-time">18:30</div>
-        <div class="nav-name">藤澤昌隆</div>
+        <div class="nav-name">みやはらゆきこ 　株式会社みやっぷる代表</div>
       </a>
     </div>
   </aside>
   <main class="main">
     <div class="day-banner">
       <div class="day-info">
-        <h1>2026年7月14日（火）</h1>
+        <h1>2026年7月20日（月）</h1>
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">4</div><div class="stat-label">Zoom面談</div></div>
-        <div class="stat"><div class="stat-num" style="color:#34a853">1</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">3</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num">1</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">1</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
     <div class="card" id="meet-1">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">西</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">み</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">11:00 〜 11:30</span>
-            <span class="status-badge recorded">
-              ✓ 議事録あり
-            </span>
-          </div>
-          <div class="card-title"><a href="https://editor.shabelab.com/gijiroku_detail.html?_id=e2e966bbc51a728f6601bb75d1881eba6c592d3e8e0eb1e2ea92262ed6a1d56c" target="_blank" class="card-title-link">西村拓朗</a></div>
-          <div class="card-company">nishimuratakuro@luft-hd.co.jp</div>
-          <div class="card-purpose">自動予約</div>
-        </div>
-        <div class="card-actions">
-          <a class="btn-zoom" href="https://us06web.zoom.us/j/84080737486?pwd=kDQPSFqOK2bWpXW7JkZ2HqDsdbAFh0.1" target="_blank">▶ Zoom参加</a>
-          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=e2e966bbc51a728f6601bb75d1881eba6c592d3e8e0eb1e2ea92262ed6a1d56c" target="_blank">📋 本日の議事録</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=6aef102e4995b62d5f7ed3dd811f231e27b09a9b5fd84a35d579f75313c59c0a" target="_blank">📂 過去の議事録（9件）</a>
-          
-        </div>
-      </div>
-      <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>西村拓朗 ✓</span>
-        <span class="zoom-id-text">ID: 840 8073 7486 ／ PW: 302269</span>
-      </div>
-    </div>
-    <div class="card" id="meet-2">
-      <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">渚</div>
-        <div class="card-main">
-          <div class="card-meta">
-            <span class="card-time-badge">15:00 〜 15:30</span>
             <span class="status-badge pending">
               録音待ち
             </span>
           </div>
-          <div class="card-title">渚　大地</div>
-          <div class="card-company">info@vintage-machine.com</div>
-          <div class="card-purpose">大きめの競合店で、従業員数もキャッシュも持っているお店が似た商材を売り出し私のお店のやり方を真似してきたらどう対応していくべきか。という想定を元に、ご意見を伺いたいと思っています。</div>
+          <div class="card-title">みやはらゆきこ 　株式会社みやっぷる代表</div>
+          <div class="card-company">yukiko.miyahara10@gmail.com</div>
+          <div class="card-purpose">SNS/Xのライブ配信スペースでお話いただけましたらと思います。いつも本当に感謝です。当日のリンクも添付いたしました。よろしくお願いいたします。</div>
         </div>
         <div class="card-actions">
-          <a class="btn-zoom" href="https://us06web.zoom.us/j/86972207383?pwd=PMe9dtWGFOTm8y9DV5FhHGrbRQamLN.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/88376578128?pwd=NV7GJ8PzDy19k5k39YeOxOdil5ql8w.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=4e431c94d543ea773fbac55741dbdcfd5ea5085908ae959365ec0e70ec6104b8" target="_blank">📂 過去の議事録（1件）</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=e2e966bbc51a728f6601bb75d1881eba6c592d3e8e0eb1e2ea92262ed6a1d56c" target="_blank">📂 過去の議事録（10件）</a>
           
         </div>
       </div>
       <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>渚　大地 ✓</span>
-        <span class="zoom-id-text">ID: 869 7220 7383 ／ PW: 279013</span>
-      </div>
-    </div>
-    <div class="card" id="meet-3">
-      <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">株</div>
-        <div class="card-main">
-          <div class="card-meta">
-            <span class="card-time-badge">16:00 〜 16:30</span>
-            <span class="status-badge pending">
-              録音待ち
-            </span>
-          </div>
-          <div class="card-title">株式会社UPRON</div>
-          <div class="card-company">info@upron.jp</div>
-          <div class="card-purpose">松下さんから紹介頂きました。当日顧問制度に関しましてよろしくお願いいたします。</div>
-        </div>
-        <div class="card-actions">
-          <a class="btn-zoom" href="https://us06web.zoom.us/j/81924967109?pwd=kpYzcGVI2bolA099yVeUFo0sMf4beh.1" target="_blank">▶ Zoom参加</a>
-          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          
-          
-        </div>
-      </div>
-      <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>株式会社UPRON ✓</span>
-        <span class="zoom-id-text">ID: 819 2496 7109 ／ PW: 729182</span>
-      </div>
-    </div>
-    <div class="card" id="meet-4">
-      <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#00897b,#00acc1)">藤</div>
-        <div class="card-main">
-          <div class="card-meta">
-            <span class="card-time-badge">18:30 〜 19:00</span>
-            <span class="status-badge pending">
-              録音待ち
-            </span>
-          </div>
-          <div class="card-title">藤澤昌隆</div>
-          <div class="card-company">fujisawa@pavlov-inc.co.jp</div>
-          <div class="card-purpose">パブロフ株式会社の藤澤です。</div>
-        </div>
-        <div class="card-actions">
-          <a class="btn-zoom" href="https://us06web.zoom.us/j/85116557903?pwd=jkbqxuA9cTsFMJWVCT7C2LoiO1tP2a.1" target="_blank">▶ Zoom参加</a>
-          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          
-          
-        </div>
-      </div>
-      <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>藤澤昌隆 ✓</span>
-        <span class="zoom-id-text">ID: 851 1655 7903 ／ PW: 358694</span>
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>みやはらゆきこ 　株式会社みやっぷる代表 ✓</span>
+        <span class="zoom-id-text">ID: 883 7657 8128 ／ PW: 255666</span>
       </div>
     </div>
   </main>
@@ -276,7 +183,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:660,e:690},{s:900,e:930},{s:960,e:990},{s:1110,e:1140}];
+  const sch=[{s:660,e:690}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
