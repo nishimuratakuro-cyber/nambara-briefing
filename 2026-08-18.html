@@ -132,6 +132,11 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="nav-time">14:30</div>
         <div class="nav-name">株式会社L&B小西</div>
       </a>
+      <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">15:30</div>
+        <div class="nav-name">UNMD荒井</div>
+      </a>
     </div>
   </aside>
   <main class="main">
@@ -141,9 +146,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num">3</div><div class="stat-label">Zoom面談</div></div>
         <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">2</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">3</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
@@ -164,7 +169,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/86234912736?pwd=LHXMoakbnWeL5VMTMGGxAneneaSNcT.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=c4a6f577ab6edc146b8ccedbab86ca59e8e7663fdca04cc0d14d84ca0e3121f5" target="_blank">📂 過去の議事録（1件）</a>
           
         </div>
       </div>
@@ -190,13 +195,39 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/89086218899?pwd=7FkHkxHxYKtfBaYsLX1KVrF1hcFejX.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=c4a6f577ab6edc146b8ccedbab86ca59e8e7663fdca04cc0d14d84ca0e3121f5" target="_blank">📂 過去の議事録（1件）</a>
           
         </div>
       </div>
       <div class="card-footer">
         <span class="attendee-chip"><span class="dot ok"></span>株式会社L&B小西 ✓</span><span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span>
         <span class="zoom-id-text">ID: 890 8621 8899 ／ PW: 044880</span>
+      </div>
+    </div>
+    <div class="card" id="meet-3">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">U</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">15:30 〜 16:00</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">UNMD荒井</div>
+          <div class="card-company">promote.arai@gmail.com</div>
+          <div class="card-purpose">よろしくお願い致します。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/84926399655?pwd=aO1ahCaRzZex6fiMYHdJbIkfNMLvBW.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=6746397215929c8310a26c4f6ed4b35327117902538d3985e324ae497b7c5dba" target="_blank">📂 過去の議事録（2件）</a>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>UNMD荒井 ✓</span>
+        <span class="zoom-id-text">ID: 849 2639 9655 ／ PW: 089157</span>
       </div>
     </div>
   </main>
@@ -214,7 +245,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:840,e:870},{s:870,e:900}];
+  const sch=[{s:840,e:870},{s:870,e:900},{s:930,e:960}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
