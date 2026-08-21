@@ -127,6 +127,16 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="nav-time">10:30</div>
         <div class="nav-name">西村拓朗</div>
       </a>
+      <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
+        <div class="nav-dot recorded"></div>
+        <div class="nav-time">13:30</div>
+        <div class="nav-name">西村拓朗</div>
+      </a>
+      <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
+        <div class="nav-dot recorded"></div>
+        <div class="nav-time">16:30</div>
+        <div class="nav-name">田代</div>
+      </a>
     </div>
   </aside>
   <main class="main">
@@ -136,8 +146,8 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">1</div><div class="stat-label">Zoom面談</div></div>
-        <div class="stat"><div class="stat-num" style="color:#34a853">1</div><div class="stat-label">議事録あり</div></div>
+        <div class="stat"><div class="stat-num">3</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num" style="color:#34a853">3</div><div class="stat-label">議事録あり</div></div>
         <div class="stat"><div class="stat-num" style="color:#888">0</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
@@ -152,20 +162,72 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
               ✓ 議事録あり
             </span>
           </div>
-          <div class="card-title"><a href="https://editor.shabelab.com/gijiroku_detail.html?_id=e816d4ca3cd6a8beffad9e7a8d163148871c1a47a9292c312c23537219867360" target="_blank" class="card-title-link">西村拓朗</a></div>
+          <div class="card-title"><a href="https://editor.shabelab.com/gijiroku_detail.html?_id=7d48306c0467937624c08457ba634c600d41c67a1cd2bb99b7bb8306b21afc53" target="_blank" class="card-title-link">西村拓朗</a></div>
           <div class="card-company">nishimuratakuro@luft-hd.co.jp</div>
           <div class="card-purpose">手動予約</div>
         </div>
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/84587572604?pwd=dVlZs7tOxAaFY8pBsYbNaJ6EeGlbtk.1" target="_blank">▶ Zoom参加</a>
-          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=e816d4ca3cd6a8beffad9e7a8d163148871c1a47a9292c312c23537219867360" target="_blank">📋 本日の議事録</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=1da5d8d374a99e7932b1072fc3e30e85003f996aa8fbecff2ae3535bd30ed561" target="_blank">📂 過去の議事録（9件）</a>
+          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=7d48306c0467937624c08457ba634c600d41c67a1cd2bb99b7bb8306b21afc53" target="_blank">📋 本日の議事録</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=f905f206e460c6cd087f5160d4ad4fb692f3994428b80ca4aa862f625164d7fa" target="_blank">📂 過去の議事録（9件）</a>
           
         </div>
       </div>
       <div class="card-footer">
         <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>西村拓朗 ✓</span>
         <span class="zoom-id-text">ID: 845 8757 2604 ／ PW: 000251</span>
+      </div>
+    </div>
+    <div class="card" id="meet-2">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">西</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">13:30 〜 14:00</span>
+            <span class="status-badge recorded">
+              ✓ 議事録あり
+            </span>
+          </div>
+          <div class="card-title"><a href="https://editor.shabelab.com/gijiroku_detail.html?_id=7d48306c0467937624c08457ba634c600d41c67a1cd2bb99b7bb8306b21afc53" target="_blank" class="card-title-link">西村拓朗</a></div>
+          <div class="card-company">nishimuratakuro@luft-hd.co.jp</div>
+          <div class="card-purpose">手動予約</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/88910576562?pwd=aeyFXydTccEo11Ki5EqGZowY3CCQRT.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=7d48306c0467937624c08457ba634c600d41c67a1cd2bb99b7bb8306b21afc53" target="_blank">📋 本日の議事録</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=f905f206e460c6cd087f5160d4ad4fb692f3994428b80ca4aa862f625164d7fa" target="_blank">📂 過去の議事録（9件）</a>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>西村拓朗 ✓</span>
+        <span class="zoom-id-text">ID: 889 1057 6562 ／ PW: 367018</span>
+      </div>
+    </div>
+    <div class="card" id="meet-3">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">田</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">16:30 〜 17:00</span>
+            <span class="status-badge recorded">
+              ✓ 議事録あり
+            </span>
+          </div>
+          <div class="card-title"><a href="https://editor.shabelab.com/gijiroku_detail.html?_id=c88650254ae1a3a0d04e36a0ce0ece594e1257d6b0e5f93c5f18dfac41a3b9e7" target="_blank" class="card-title-link">田代</a></div>
+          <div class="card-company">t.brain4-1@takt-japan.co.jp</div>
+          <div class="card-purpose">サンライフホールディングの提案が来週に迫りましたがこちらの提案があまり上手く決まってないので相談したい</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/81347696977?pwd=SXGaFv9P9HW9usj4H5qQwSAAHvsB1v.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=c88650254ae1a3a0d04e36a0ce0ece594e1257d6b0e5f93c5f18dfac41a3b9e7" target="_blank">📋 本日の議事録</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>田代 ✓</span><span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span>
+        <span class="zoom-id-text">ID: 813 4769 6977 ／ PW: 156539</span>
       </div>
     </div>
   </main>
@@ -183,7 +245,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:630,e:660}];
+  const sch=[{s:630,e:660},{s:810,e:840},{s:990,e:1020}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
