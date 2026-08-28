@@ -134,18 +134,18 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       </a>
       <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
         <div class="nav-dot pending"></div>
-        <div class="nav-time">15:00</div>
-        <div class="nav-name">井上岬亮</div>
+        <div class="nav-time">14:30</div>
+        <div class="nav-name">藤川奈々</div>
       </a>
       <a class="nav-item" href="#meet-4" onclick="jump('meet-4',this)">
         <div class="nav-dot pending"></div>
-        <div class="nav-time">15:30</div>
-        <div class="nav-name">KAITAKU OKADA</div>
+        <div class="nav-time">15:00</div>
+        <div class="nav-name">井上岬亮</div>
       </a>
       <a class="nav-item" href="#meet-5" onclick="jump('meet-5',this)">
         <div class="nav-dot pending"></div>
-        <div class="nav-time">16:00</div>
-        <div class="nav-name">藤川奈々</div>
+        <div class="nav-time">15:30</div>
+        <div class="nav-name">KAITAKU OKADA</div>
       </a>
     </div>
   </aside>
@@ -216,7 +216,33 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
     </div>
     <div class="card" id="meet-3">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">井</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">藤</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">14:30 〜 15:00</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">藤川奈々</div>
+          <div class="card-company">nanayakko7777@gmail.com</div>
+          <div class="card-purpose">こんにちは。元フジテレビ、元吉本のアナウンサーでキャスティングの藤川奈々です。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/82597812283?pwd=KfYQT2KkvQgV9eSTIKJK3bZE0bNMrK.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ng"></span>藤川奈々 </span>
+        <span class="zoom-id-text">ID: 825 9781 2283 ／ PW: 464171</span>
+      </div>
+    </div>
+    <div class="card" id="meet-4">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#00897b,#00acc1)">井</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">15:00 〜 15:30</span>
@@ -240,9 +266,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 882 5686 5934 ／ PW: 404262</span>
       </div>
     </div>
-    <div class="card" id="meet-4">
+    <div class="card" id="meet-5">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#00897b,#00acc1)">K</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#f4511e,#ff8f00)">K</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">15:30 〜 16:00</span>
@@ -266,32 +292,6 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 861 2917 9502 ／ PW: 693774</span>
       </div>
     </div>
-    <div class="card" id="meet-5">
-      <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#f4511e,#ff8f00)">藤</div>
-        <div class="card-main">
-          <div class="card-meta">
-            <span class="card-time-badge">16:00 〜 16:30</span>
-            <span class="status-badge pending">
-              録音待ち
-            </span>
-          </div>
-          <div class="card-title">藤川奈々</div>
-          <div class="card-company">nanayakko7777@gmail.com</div>
-          <div class="card-purpose">こんにちは。元フジテレビ、元吉本のアナウンサーでキャスティングの藤川奈々です。</div>
-        </div>
-        <div class="card-actions">
-          <a class="btn-zoom" href="https://us06web.zoom.us/j/82597812283?pwd=KfYQT2KkvQgV9eSTIKJK3bZE0bNMrK.1" target="_blank">▶ Zoom参加</a>
-          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          
-          
-        </div>
-      </div>
-      <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>藤川奈々 ✓</span>
-        <span class="zoom-id-text">ID: 825 9781 2283 ／ PW: 464171</span>
-      </div>
-    </div>
   </main>
 </div>
 <script>
@@ -307,7 +307,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:600,e:630},{s:630,e:660},{s:900,e:930},{s:930,e:960},{s:960,e:990}];
+  const sch=[{s:600,e:630},{s:630,e:660},{s:870,e:900},{s:900,e:930},{s:930,e:960}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
