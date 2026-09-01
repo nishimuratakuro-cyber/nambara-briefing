@@ -129,10 +129,20 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       </a>
       <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
         <div class="nav-dot pending"></div>
+        <div class="nav-time">14:00</div>
+        <div class="nav-name">氣仙隆造</div>
+      </a>
+      <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
+        <div class="nav-dot pending"></div>
         <div class="nav-time">14:30</div>
         <div class="nav-name">T A</div>
       </a>
-      <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
+      <a class="nav-item" href="#meet-4" onclick="jump('meet-4',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">16:30</div>
+        <div class="nav-name">株式会社imokoro</div>
+      </a>
+      <a class="nav-item" href="#meet-5" onclick="jump('meet-5',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">17:30</div>
         <div class="nav-name">伊東李祐　株式会社スケールメディア</div>
@@ -146,9 +156,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">3</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num">5</div><div class="stat-label">Zoom面談</div></div>
         <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">3</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">5</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
@@ -180,7 +190,33 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
     </div>
     <div class="card" id="meet-2">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">T</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">氣</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">14:00 〜 14:30</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">氣仙隆造</div>
+          <div class="card-company">info@bouekisupport.co.jp</div>
+          <div class="card-purpose">主催者へのメッセージ:</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/88095794505?pwd=iGjhwWDgB4eakJtzlMlzfaS8GoHPoQ.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=160b80fd05b28e3b20ddb52da15b42f4551412942587657e2e86af1c0a558265" target="_blank">📂 過去の議事録（1件）</a>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>氣仙隆造 ✓</span>
+        <span class="zoom-id-text">ID: 880 9579 4505 ／ PW: 260383</span>
+      </div>
+    </div>
+    <div class="card" id="meet-3">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">T</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">14:30 〜 15:00</span>
@@ -195,7 +231,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/81673151349?pwd=ATFoLJgIL9oOag5Uy4NIXL9fRzmLsN.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=5e018b7553a86f3281dab45397f6e4c5e12f70619e7392e5b47c8656604c6de8" target="_blank">📂 過去の議事録（10件）</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=21b9b830208dd5f853c09819222ffcc2eed6e87cee2a89efeb6b06fd6ebe629c" target="_blank">📂 過去の議事録（10件）</a>
           
         </div>
       </div>
@@ -204,9 +240,35 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 816 7315 1349 ／ PW: 354316</span>
       </div>
     </div>
-    <div class="card" id="meet-3">
+    <div class="card" id="meet-4">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">伊</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#00897b,#00acc1)">株</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">16:30 〜 17:00</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">株式会社imokoro</div>
+          <div class="card-company">imokoro56@icloud.com</div>
+          <div class="card-purpose">近況報告とAIの損保レンタカーシステム後輩が作ったので成果報告と僕が取り次ぎ代理店で同業に案内しようか相談したいです。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/84480001587?pwd=1EwQbjUaUTFxdwcX3tSF0O4MrcHwxi.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>株式会社imokoro ✓</span>
+        <span class="zoom-id-text">ID: 844 8000 1587 ／ PW: 561787</span>
+      </div>
+    </div>
+    <div class="card" id="meet-5">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#f4511e,#ff8f00)">伊</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">17:30 〜 18:00</span>
@@ -221,7 +283,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/84438347159?pwd=ugDWb3ApV1wl4TWzlH8T5Q8aOHGfOK.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=5e018b7553a86f3281dab45397f6e4c5e12f70619e7392e5b47c8656604c6de8" target="_blank">📂 過去の議事録（10件）</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=21b9b830208dd5f853c09819222ffcc2eed6e87cee2a89efeb6b06fd6ebe629c" target="_blank">📂 過去の議事録（10件）</a>
           
         </div>
       </div>
@@ -245,7 +307,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:660,e:690},{s:870,e:900},{s:1050,e:1080}];
+  const sch=[{s:660,e:690},{s:840,e:870},{s:870,e:900},{s:990,e:1020},{s:1050,e:1080}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){

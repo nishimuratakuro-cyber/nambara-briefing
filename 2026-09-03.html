@@ -152,6 +152,11 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="nav-time">13:00</div>
         <div class="nav-name">利根</div>
       </a>
+      <a class="nav-item" href="#meet-7" onclick="jump('meet-7',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">13:30</div>
+        <div class="nav-name">橋本‐investment　橋本</div>
+      </a>
     </div>
   </aside>
   <main class="main">
@@ -161,9 +166,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">6</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Zoom面談</div></div>
         <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">6</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">7</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
@@ -184,7 +189,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/87873287875?pwd=byaUvLeNFsCYhlliIjAFjRQLapCnxG.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=518340343c726766dffe7cb34d94df2d731580740957c442b10a0282d0cd5706" target="_blank">📂 過去の議事録（2件）</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=21b9b830208dd5f853c09819222ffcc2eed6e87cee2a89efeb6b06fd6ebe629c" target="_blank">📂 過去の議事録（10件）</a>
           
         </div>
       </div>
@@ -323,6 +328,32 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 874 2708 5142 ／ PW: 119288</span>
       </div>
     </div>
+    <div class="card" id="meet-7">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#5c6bc0,#7e57c2)">橋</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">13:30 〜 14:00</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">橋本‐investment　橋本</div>
+          <div class="card-company">hashimoto@h-i.co.jp</div>
+          <div class="card-purpose">広告の相談</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/83324559837?pwd=lzSh95baVMRI8KAfbACfLC0ibzKg9b.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=82a70446ab42b53e24ff819605b2e26b9c3eec04c708b6483f38e3dc0b6219b4" target="_blank">📂 過去の議事録（1件）</a>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>橋本‐investment　橋本 ✓</span><span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span>
+        <span class="zoom-id-text">ID: 833 2455 9837 ／ PW: 356501</span>
+      </div>
+    </div>
   </main>
 </div>
 <script>
@@ -338,7 +369,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:540,e:570},{s:570,e:600},{s:600,e:630},{s:630,e:660},{s:750,e:780},{s:780,e:810}];
+  const sch=[{s:540,e:570},{s:570,e:600},{s:600,e:630},{s:630,e:660},{s:750,e:780},{s:780,e:810},{s:810,e:840}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
