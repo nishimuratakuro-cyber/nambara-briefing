@@ -124,8 +124,73 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       
       <a class="nav-item" href="#meet-1" onclick="jump('meet-1',this)">
         <div class="nav-dot pending"></div>
+        <div class="nav-time">11:00</div>
+        <div class="nav-name">株式会社Actory</div>
+      </a>
+      <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
+        <div class="nav-dot recorded"></div>
+        <div class="nav-time">11:30</div>
+        <div class="nav-name">山本稔</div>
+      </a>
+      <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
+        <div class="nav-dot recorded"></div>
+        <div class="nav-time">12:00</div>
+        <div class="nav-name">吉田光政</div>
+      </a>
+      <a class="nav-item" href="#meet-4" onclick="jump('meet-4',this)">
+        <div class="nav-dot recorded"></div>
         <div class="nav-time">13:00</div>
         <div class="nav-name">シンガークレンタカー株式会社　松内</div>
+      </a>
+      <a class="nav-item" href="#meet-5" onclick="jump('meet-5',this)">
+        <div class="nav-dot recorded"></div>
+        <div class="nav-time">13:30</div>
+        <div class="nav-name">一般社団法人KURUMIRAI 山室徳紘</div>
+      </a>
+      <a class="nav-item" href="#meet-6" onclick="jump('meet-6',this)">
+        <div class="nav-dot recorded"></div>
+        <div class="nav-time">14:00</div>
+        <div class="nav-name">AiWiLL株式会社</div>
+      </a>
+      <a class="nav-item" href="#meet-7" onclick="jump('meet-7',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">14:30</div>
+        <div class="nav-name">合同会社GOSHN  堀　剛大（ほり　こうだい）</div>
+      </a>
+      <a class="nav-item" href="#meet-8" onclick="jump('meet-8',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">15:00</div>
+        <div class="nav-name">三野敬太</div>
+      </a>
+      <a class="nav-item" href="#meet-9" onclick="jump('meet-9',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">15:30</div>
+        <div class="nav-name">松村直博</div>
+      </a>
+      <a class="nav-item" href="#meet-10" onclick="jump('meet-10',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">16:00</div>
+        <div class="nav-name">やまがたはるき</div>
+      </a>
+      <a class="nav-item" href="#meet-11" onclick="jump('meet-11',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">16:30</div>
+        <div class="nav-name">FLAMINGOPLUS株式会社</div>
+      </a>
+      <a class="nav-item" href="#meet-12" onclick="jump('meet-12',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">17:00</div>
+        <div class="nav-name">株式会社choice aid  可児裕英</div>
+      </a>
+      <a class="nav-item" href="#meet-13" onclick="jump('meet-13',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">17:30</div>
+        <div class="nav-name">喜多田幸佑</div>
+      </a>
+      <a class="nav-item" href="#meet-14" onclick="jump('meet-14',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">18:00</div>
+        <div class="nav-name">株式会社バーディアンドカンパニー</div>
       </a>
     </div>
   </aside>
@@ -136,36 +201,374 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">1</div><div class="stat-label">Zoom面談</div></div>
-        <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">1</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num">14</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num" style="color:#34a853">5</div><div class="stat-label">議事録あり</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">9</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
     <div class="card" id="meet-1">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">シ</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">株</div>
         <div class="card-main">
           <div class="card-meta">
-            <span class="card-time-badge">13:00 〜 13:30</span>
+            <span class="card-time-badge">11:00 〜 11:30</span>
             <span class="status-badge pending">
               録音待ち
             </span>
           </div>
-          <div class="card-title">シンガークレンタカー株式会社　松内</div>
+          <div class="card-title">株式会社Actory</div>
+          <div class="card-company">sota.baba@actory.jp</div>
+          <div class="card-purpose">①Xを拝見し応募しました。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/84076240799?pwd=reeQ7YNtV0VQzq98rxP1Sg5rb98oXV.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>株式会社Actory ✓</span>
+        <span class="zoom-id-text">ID: 840 7624 0799 ／ PW: 946162</span>
+      </div>
+    </div>
+    <div class="card" id="meet-2">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">山</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">11:30 〜 12:00</span>
+            <span class="status-badge recorded">
+              ✓ 議事録あり
+            </span>
+          </div>
+          <div class="card-title"><a href="https://editor.shabelab.com/gijiroku_detail.html?_id=e3c94ac5b9234b7a0cd35fc4a80121f885b3afb525cc9edb88d36d11346a1429" target="_blank" class="card-title-link">山本稔</a></div>
+          <div class="card-company">j.yamamoto@nexusadvisors.co.jp</div>
+          <div class="card-purpose">株式会社NexusAdvisorsの山本と申します。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/87561228193?pwd=8ergpKPIxtOkQe9JP2fW3JNNvM17rB.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=e3c94ac5b9234b7a0cd35fc4a80121f885b3afb525cc9edb88d36d11346a1429" target="_blank">📋 本日の議事録</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>山本稔 ✓</span>
+        <span class="zoom-id-text">ID: 875 6122 8193 ／ PW: 938795</span>
+      </div>
+    </div>
+    <div class="card" id="meet-3">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">吉</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">12:00 〜 12:30</span>
+            <span class="status-badge recorded">
+              ✓ 議事録あり
+            </span>
+          </div>
+          <div class="card-title"><a href="https://editor.shabelab.com/gijiroku_detail.html?_id=5cd34f880ae44724416c355f0df7294bec9993eb6ad63fe5f77bb022b3095da1" target="_blank" class="card-title-link">吉田光政</a></div>
+          <div class="card-company">yoshida@life-on-earth.co.jp</div>
+          <div class="card-purpose">NBC収支・Xサーバー</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/86170329620?pwd=s7JXMvg6EQVJPFUTrEw4qznk3cbwEa.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=5cd34f880ae44724416c355f0df7294bec9993eb6ad63fe5f77bb022b3095da1" target="_blank">📋 本日の議事録</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=8698ef523739076f98c9b3fc83c6b93f4b450ccce5d6c65c76bc6a1789e1fd5c" target="_blank">📂 過去の議事録（1件）</a>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>吉田光政 ✓</span>
+        <span class="zoom-id-text">ID: 861 7032 9620 ／ PW: 951695</span>
+      </div>
+    </div>
+    <div class="card" id="meet-4">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#00897b,#00acc1)">シ</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">13:00 〜 13:30</span>
+            <span class="status-badge recorded">
+              ✓ 議事録あり
+            </span>
+          </div>
+          <div class="card-title"><a href="https://editor.shabelab.com/gijiroku_detail.html?_id=1625df5de890e168b997824fe84b2613ea05994a2905f7c6a059f867a0e67bba" target="_blank" class="card-title-link">シンガークレンタカー株式会社　松内</a></div>
           <div class="card-company">info@singark.co.jp</div>
           <div class="card-purpose">この度はお世話になります。</div>
         </div>
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/83807282158?pwd=guJMwKgZmaaYnCXqxUcOyXZJcdsDsk.1" target="_blank">▶ Zoom参加</a>
-          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=dd67ed6626a678caae566ea7aee344e5d1978222b0638bb4cbc0bde168ee1fbf" target="_blank">📂 過去の議事録（10件）</a>
+          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=1625df5de890e168b997824fe84b2613ea05994a2905f7c6a059f867a0e67bba" target="_blank">📋 本日の議事録</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=84cb13196aa33eda24282259626b5c687faad8cbd17afce56a3d8c10ee545517" target="_blank">📂 過去の議事録（9件）</a>
           
         </div>
       </div>
       <div class="card-footer">
         <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>シンガークレンタカー株式会社　松内 ✓</span>
         <span class="zoom-id-text">ID: 838 0728 2158 ／ PW: 541859</span>
+      </div>
+    </div>
+    <div class="card" id="meet-5">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#f4511e,#ff8f00)">一</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">13:30 〜 14:00</span>
+            <span class="status-badge recorded">
+              ✓ 議事録あり
+            </span>
+          </div>
+          <div class="card-title"><a href="https://editor.shabelab.com/gijiroku_detail.html?_id=1625df5de890e168b997824fe84b2613ea05994a2905f7c6a059f867a0e67bba" target="_blank" class="card-title-link">一般社団法人KURUMIRAI 山室徳紘</a></div>
+          <div class="card-company">yamamurodt@miraful.co.jp</div>
+          <div class="card-purpose">はじめまして。山室と申します。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/82766328566?pwd=bRXhvWgs4kFkcLgau5kqJfFMXC5M1s.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=1625df5de890e168b997824fe84b2613ea05994a2905f7c6a059f867a0e67bba" target="_blank">📋 本日の議事録</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>一般社団法人KURUMIRAI 山室徳紘 ✓</span>
+        <span class="zoom-id-text">ID: 827 6632 8566 ／ PW: 102432</span>
+      </div>
+    </div>
+    <div class="card" id="meet-6">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#0288d1,#0097a7)">A</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">14:00 〜 14:30</span>
+            <span class="status-badge recorded">
+              ✓ 議事録あり
+            </span>
+          </div>
+          <div class="card-title"><a href="https://editor.shabelab.com/gijiroku_detail.html?_id=1625df5de890e168b997824fe84b2613ea05994a2905f7c6a059f867a0e67bba" target="_blank" class="card-title-link">AiWiLL株式会社</a></div>
+          <div class="card-company">wakahori@aiandwill.com</div>
+          <div class="card-purpose">はじめまして。AI顧問サービスを提供するAiWiLL株式会社を経営しております、赤堀亘と申します。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/84574641898?pwd=J2WEtK23SwqrFIBh4lpfJIWEBlGjOY.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=1625df5de890e168b997824fe84b2613ea05994a2905f7c6a059f867a0e67bba" target="_blank">📋 本日の議事録</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=84cb13196aa33eda24282259626b5c687faad8cbd17afce56a3d8c10ee545517" target="_blank">📂 過去の議事録（9件）</a>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>AiWiLL株式会社 ✓</span>
+        <span class="zoom-id-text">ID: 845 7464 1898 ／ PW: 972816</span>
+      </div>
+    </div>
+    <div class="card" id="meet-7">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#5c6bc0,#7e57c2)">合</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">14:30 〜 15:00</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">合同会社GOSHN  堀　剛大（ほり　こうだい）</div>
+          <div class="card-company">k.h.casino777@gmail.com</div>
+          <div class="card-purpose">お世話になります。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/81642108373?pwd=jCjYlJPX7TIbc2248mR3b55DYhl0Y3.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>合同会社GOSHN  堀　剛大（ほり　こうだい） ✓</span>
+        <span class="zoom-id-text">ID: 816 4210 8373 ／ PW: 925417</span>
+      </div>
+    </div>
+    <div class="card" id="meet-8">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#2e7d32,#388e3c)">三</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">15:00 〜 15:30</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">三野敬太</div>
+          <div class="card-company">keita.mino@noble-inc.net</div>
+          <div class="card-purpose">人生の先輩に色々なお話をお伺いさせて頂きたいです。どうぞ宜しくお願い致します。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/82358742301?pwd=uibqMBkZaFhQ0udgWK0XLa4YBDEbMz.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>三野敬太 ✓</span>
+        <span class="zoom-id-text">ID: 823 5874 2301 ／ PW: 938270</span>
+      </div>
+    </div>
+    <div class="card" id="meet-9">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">松</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">15:30 〜 16:00</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">松村直博</div>
+          <div class="card-company">aimshd@aimshd.com</div>
+          <div class="card-purpose">Xで南原さんの発信を拝見し、興味を持ちご連絡させていただきました。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/89763320715?pwd=jbEEr52q5XJJYoWeCkmww4mGjlU7ou.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>松村直博 ✓</span>
+        <span class="zoom-id-text">ID: 897 6332 0715 ／ PW: 572130</span>
+      </div>
+    </div>
+    <div class="card" id="meet-10">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">や</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">16:00 〜 16:30</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">やまがたはるき</div>
+          <div class="card-company">ymgt1986@gmail.com</div>
+          <div class="card-purpose">新規事業のご相談になります。よろしくお願いします。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/82142627960?pwd=sLJcDdLAHefZGQnRbzydo3bWYzYsot.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>やまがたはるき ✓</span>
+        <span class="zoom-id-text">ID: 821 4262 7960 ／ PW: 327844</span>
+      </div>
+    </div>
+    <div class="card" id="meet-11">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">F</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">16:30 〜 17:00</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">FLAMINGOPLUS株式会社</div>
+          <div class="card-company">ryo0313y1994@gmail.com</div>
+          <div class="card-purpose">今後の方向性や拡大についてアドバイスをいただきたいです。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/83436493110?pwd=bbVqJ4VwegZ8IhBYubAWHaKUx21zsc.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=9a2c3de1bcc7d0738563eeb031932f0a0936c309a1c006e756e89d42cb8eceae" target="_blank">📂 過去の議事録（10件）</a>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>FLAMINGOPLUS株式会社 ✓</span>
+        <span class="zoom-id-text">ID: 834 3649 3110 ／ PW: 522023</span>
+      </div>
+    </div>
+    <div class="card" id="meet-12">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#00897b,#00acc1)">株</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">17:00 〜 17:30</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">株式会社choice aid  可児裕英</div>
+          <div class="card-company">h.kani@choiceaid.co.jp</div>
+          <div class="card-purpose">よろしくお願いいたします。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/89915343814?pwd=asLqRgWN2BukP1f6sJawuQ74tXcfOO.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>株式会社choice aid  可児裕英 ✓</span>
+        <span class="zoom-id-text">ID: 899 1534 3814 ／ PW: 933768</span>
+      </div>
+    </div>
+    <div class="card" id="meet-13">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#f4511e,#ff8f00)">喜</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">17:30 〜 18:00</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">喜多田幸佑</div>
+          <div class="card-company">k.kitada@k-2-cinc.com</div>
+          <div class="card-purpose">顧問を検討していますので、一度お話しさせてくださいませ。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/87385586638?pwd=hdB717BsqtdIjaf4O8nMqIshSqyXbe.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>喜多田幸佑 ✓</span>
+        <span class="zoom-id-text">ID: 873 8558 6638 ／ PW: 780040</span>
+      </div>
+    </div>
+    <div class="card" id="meet-14">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#0288d1,#0097a7)">株</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">18:00 〜 18:30</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">株式会社バーディアンドカンパニー</div>
+          <div class="card-company">k.nakao@birdie-company.jp</div>
+          <div class="card-purpose">初めまして。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/89834205471?pwd=TPLy8EGapwu6jyOQxctZ95kyTDIjhk.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>株式会社バーディアンドカンパニー ✓</span>
+        <span class="zoom-id-text">ID: 898 3420 5471 ／ PW: 906292</span>
       </div>
     </div>
   </main>
@@ -183,7 +586,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:780,e:810}];
+  const sch=[{s:660,e:690},{s:690,e:720},{s:720,e:750},{s:780,e:810},{s:810,e:840},{s:840,e:870},{s:870,e:900},{s:900,e:930},{s:930,e:960},{s:960,e:990},{s:990,e:1020},{s:1020,e:1050},{s:1050,e:1080},{s:1080,e:1110}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
