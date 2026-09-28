@@ -122,6 +122,16 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
     <div class="sidebar-card">
       <div class="sidebar-title">タイムライン</div>
       
+      <a class="nav-item" href="#meet-1" onclick="jump('meet-1',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">10:00</div>
+        <div class="nav-name">竹端優一郎</div>
+      </a>
+      <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">10:30</div>
+        <div class="nav-name">室龍哉</div>
+      </a>
     </div>
   </aside>
   <main class="main">
@@ -131,12 +141,64 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">0</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Zoom面談</div></div>
         <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">0</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">2</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
+    <div class="card" id="meet-1">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">竹</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">10:00 〜 10:30</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">竹端優一郎</div>
+          <div class="card-company">gr8@hachiya-ramen.com</div>
+          <div class="card-purpose">大変恐縮なのですが、最近こちらからお願いすることやご相談させていただく機会が以前より少なくなってきており、今後の顧問について一度お話しさせていただければと思っています。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/89684402224?pwd=tJz9XmBuiauxGBS35abrK3CPymc6CN.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>竹端優一郎 ✓</span>
+        <span class="zoom-id-text">ID: 896 8440 2224 ／ PW: 591383</span>
+      </div>
+    </div>
+    <div class="card" id="meet-2">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">室</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">10:30 〜 11:00</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">室龍哉</div>
+          <div class="card-company">r.muro@ifl-edu.co.jp</div>
+          <div class="card-purpose">南原さん、これからよろしくお願いいたします。今後の方針を立てていきたいです。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/87394635107?pwd=OoKB7o3lfRLpIEOMabD0YpH5tlS15v.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=75877733175d6bb6a6b122bdc34e2827051a92e64100097dd0e5cd34458a5362" target="_blank">📂 過去の議事録（2件）</a>
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>室龍哉 ✓</span>
+        <span class="zoom-id-text">ID: 873 9463 5107 ／ PW: 748644</span>
+      </div>
+    </div>
   </main>
 </div>
 <script>
@@ -152,7 +214,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[];
+  const sch=[{s:600,e:630},{s:630,e:660}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
