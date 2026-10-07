@@ -123,7 +123,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       <div class="sidebar-title">タイムライン</div>
       
       <a class="nav-item" href="#meet-1" onclick="jump('meet-1',this)">
-        <div class="nav-dot recorded"></div>
+        <div class="nav-dot pending"></div>
         <div class="nav-time">09:30</div>
         <div class="nav-name">石山秀信</div>
       </a>
@@ -133,12 +133,12 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="nav-name">西　英悦</div>
       </a>
       <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
-        <div class="nav-dot recorded"></div>
+        <div class="nav-dot pending"></div>
         <div class="nav-time">10:30</div>
         <div class="nav-name">株式会社NOBLE 三野</div>
       </a>
       <a class="nav-item" href="#meet-4" onclick="jump('meet-4',this)">
-        <div class="nav-dot recorded"></div>
+        <div class="nav-dot pending"></div>
         <div class="nav-time">11:00</div>
         <div class="nav-name">高橋涼太</div>
       </a>
@@ -155,7 +155,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       <a class="nav-item" href="#meet-7" onclick="jump('meet-7',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">16:30</div>
-        <div class="nav-name">株式会社ヘルスコンサルティング</div>
+        <div class="nav-name">桑原啓行　株式会社ヘルスコンサルティング</div>
       </a>
     </div>
   </aside>
@@ -167,8 +167,8 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       </div>
       <div class="day-stats">
         <div class="stat"><div class="stat-num">7</div><div class="stat-label">Zoom面談</div></div>
-        <div class="stat"><div class="stat-num" style="color:#34a853">3</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">4</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">7</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
@@ -178,18 +178,18 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">09:30 〜 10:00</span>
-            <span class="status-badge recorded">
-              ✓ 議事録あり
+            <span class="status-badge pending">
+              録音待ち
             </span>
           </div>
-          <div class="card-title"><a href="https://editor.shabelab.com/gijiroku_detail.html?_id=457a743cb9a346ed22b6b3060151991ba88bb4ffbe85d7546e4308092a1f7e8d" target="_blank" class="card-title-link">石山秀信</a></div>
+          <div class="card-title">石山秀信</div>
           <div class="card-company">ishiyama@nextgroup-n.jp</div>
           <div class="card-purpose">先日はご面接いただき有難うございました。</div>
         </div>
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/86023602164?pwd=PG4oUG4u5JJOcc7RxQPCx675biLMmZ.1" target="_blank">▶ Zoom参加</a>
-          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=457a743cb9a346ed22b6b3060151991ba88bb4ffbe85d7546e4308092a1f7e8d" target="_blank">📋 本日の議事録</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=15a7376aff45cf2c62866e77357e70b6d2a5296349a8fdfd2d4a923eceaec40f" target="_blank">📂 過去の議事録（1件）</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=457a743cb9a346ed22b6b3060151991ba88bb4ffbe85d7546e4308092a1f7e8d" target="_blank">📂 過去の議事録（2件）</a>
           
         </div>
       </div>
@@ -230,18 +230,18 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">10:30 〜 11:00</span>
-            <span class="status-badge recorded">
-              ✓ 議事録あり
+            <span class="status-badge pending">
+              録音待ち
             </span>
           </div>
-          <div class="card-title"><a href="https://editor.shabelab.com/gijiroku_detail.html?_id=3542de4fe78d208e321d105651f6340baa09f280bcd67b9754d336e0631edf1a" target="_blank" class="card-title-link">株式会社NOBLE 三野</a></div>
+          <div class="card-title">株式会社NOBLE 三野</div>
           <div class="card-company">keita.mino@noble-inc.net</div>
           <div class="card-purpose">対面にてお願いしたく、貴社お伺いさせていただくことは可能でしょうか。</div>
         </div>
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/83384841191?pwd=sL5XWkznqbHnjVjjWG1yMWinRrz5Rw.1" target="_blank">▶ Zoom参加</a>
-          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=3542de4fe78d208e321d105651f6340baa09f280bcd67b9754d336e0631edf1a" target="_blank">📋 本日の議事録</a>
-          
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=3542de4fe78d208e321d105651f6340baa09f280bcd67b9754d336e0631edf1a" target="_blank">📂 過去の議事録（1件）</a>
           
         </div>
       </div>
@@ -256,18 +256,18 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">11:00 〜 11:30</span>
-            <span class="status-badge recorded">
-              ✓ 議事録あり
+            <span class="status-badge pending">
+              録音待ち
             </span>
           </div>
-          <div class="card-title"><a href="https://editor.shabelab.com/gijiroku_detail.html?_id=5be571e2e56f3f4e94b3d4406b7ae68f05c085fc730ef6973e352e0208a6f48a" target="_blank" class="card-title-link">高橋涼太</a></div>
+          <div class="card-title">高橋涼太</div>
           <div class="card-company">ryota.takahashi@with-lab.net</div>
           <div class="card-purpose">前回のバックオフィス代行等、</div>
         </div>
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/88223655995?pwd=OBDCZvHfEdbECuaRZP9kKWgj3NibUa.1" target="_blank">▶ Zoom参加</a>
-          <a class="btn-gijiroku" href="https://editor.shabelab.com/gijiroku_detail.html?_id=5be571e2e56f3f4e94b3d4406b7ae68f05c085fc730ef6973e352e0208a6f48a" target="_blank">📋 本日の議事録</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=2e4f5e36393033a82de11c69b758440de277d1370d9af80dbeb37f67068e3165" target="_blank">📂 過去の議事録（1件）</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=5be571e2e56f3f4e94b3d4406b7ae68f05c085fc730ef6973e352e0208a6f48a" target="_blank">📂 過去の議事録（2件）</a>
           
         </div>
       </div>
@@ -293,7 +293,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/84683260359?pwd=a4RLeOO78kDf09TWOW257Hm1ZiQGWn.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=5be571e2e56f3f4e94b3d4406b7ae68f05c085fc730ef6973e352e0208a6f48a" target="_blank">📂 過去の議事録（9件）</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=75fdc2df3f15cc701ca48fc62e854128c04d918523ae535633cb6d214d97f752" target="_blank">📂 過去の議事録（9件）</a>
           
         </div>
       </div>
@@ -319,7 +319,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/82186364225?pwd=KJQJlzyppfK8e5NyeLj1awrMDWeCAR.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=4f4bd9bd4795995e75c4c3d60a5b0041ab39563a01700f3c638f7680445ac7bf" target="_blank">📂 過去の議事録（1件）</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=8a396a6a7b6059a41654afbb4a7064a1683e0b8394b0a0e7857256ec7eb13e2f" target="_blank">📂 過去の議事録（2件）</a>
           
         </div>
       </div>
@@ -330,7 +330,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
     </div>
     <div class="card" id="meet-7">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#5c6bc0,#7e57c2)">株</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#5c6bc0,#7e57c2)">桑</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">16:30 〜 17:00</span>
@@ -338,14 +338,14 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
               録音待ち
             </span>
           </div>
-          <div class="card-title">株式会社ヘルスコンサルティング</div>
+          <div class="card-title">桑原啓行　株式会社ヘルスコンサルティング</div>
           <div class="card-company">healthconsulting@outlook.jp</div>
           <div class="card-purpose">顧問契約させていただきました。お願いいたします、</div>
         </div>
         <div class="card-actions">
           <a class="btn-zoom" href="https://us06web.zoom.us/j/84644764374?pwd=Qn9yuvZOLYMCgCKuvCabAU1ixchsqa.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=9a2c3de1bcc7d0738563eeb031932f0a0936c309a1c006e756e89d42cb8eceae" target="_blank">📂 過去の議事録（1件）</a>
+          <a class="btn-past" href="https://editor.shabelab.com/gijiroku_detail.html?_id=75fdc2df3f15cc701ca48fc62e854128c04d918523ae535633cb6d214d97f752" target="_blank">📂 過去の議事録（9件）</a>
           
         </div>
       </div>
