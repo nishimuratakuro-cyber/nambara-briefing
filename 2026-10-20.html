@@ -147,6 +147,16 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="nav-time">14:30</div>
         <div class="nav-name">古谷隆一</div>
       </a>
+      <a class="nav-item" href="#meet-6" onclick="jump('meet-6',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">16:15</div>
+        <div class="nav-name">【確定】竹内・小川・高橋・葛本</div>
+      </a>
+      <a class="nav-item" href="#meet-7" onclick="jump('meet-7',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">16:15</div>
+        <div class="nav-name">竹内亮介・小川取締役・高橋涼太</div>
+      </a>
     </div>
   </aside>
   <main class="main">
@@ -156,9 +166,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">5</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num">7</div><div class="stat-label">Zoom面談</div></div>
         <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">5</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">7</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
@@ -292,6 +302,58 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 881 7371 6295 ／ PW: 299451</span>
       </div>
     </div>
+    <div class="card" id="meet-6">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#0288d1,#0097a7)">【</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">16:15 〜 16:45</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">【確定】竹内・小川・高橋・葛本</div>
+          <div class="card-company"></div>
+          <div class="card-purpose">（メッセージなし）</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/89034286241?pwd=UFivKi5uYaQKKwh4tT7sN1uRpVStfX.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span>
+        <span class="zoom-id-text"></span>
+      </div>
+    </div>
+    <div class="card" id="meet-7">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#5c6bc0,#7e57c2)">竹</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">16:15 〜 16:45</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">竹内亮介・小川取締役・高橋涼太</div>
+          <div class="card-company"></div>
+          <div class="card-purpose">（メッセージなし）</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/89034286241?pwd=UFivKi5uYaQKKwh4tT7sN1uRpVStfX.1&jst=2" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        
+        <span class="zoom-id-text">ID: 890 3428 6241 ／ PW: </span>
+      </div>
+    </div>
   </main>
 </div>
 <script>
@@ -307,7 +369,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:720,e:750},{s:780,e:810},{s:810,e:840},{s:840,e:870},{s:870,e:900}];
+  const sch=[{s:720,e:750},{s:780,e:810},{s:810,e:840},{s:840,e:870},{s:870,e:900},{s:975,e:1005},{s:975,e:1005}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
