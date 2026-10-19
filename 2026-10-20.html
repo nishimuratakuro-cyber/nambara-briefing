@@ -124,45 +124,50 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       
       <a class="nav-item" href="#meet-1" onclick="jump('meet-1',this)">
         <div class="nav-dot pending"></div>
+        <div class="nav-time">11:30</div>
+        <div class="nav-name">株式会社Global Stride</div>
+      </a>
+      <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
+        <div class="nav-dot pending"></div>
         <div class="nav-time">12:30</div>
         <div class="nav-name">合同会社sapiens 林出</div>
       </a>
-      <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
+      <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">13:00</div>
         <div class="nav-name">吉田光政</div>
       </a>
-      <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
+      <a class="nav-item" href="#meet-4" onclick="jump('meet-4',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">13:30</div>
         <div class="nav-name">株式会社Asucre</div>
       </a>
-      <a class="nav-item" href="#meet-4" onclick="jump('meet-4',this)">
+      <a class="nav-item" href="#meet-5" onclick="jump('meet-5',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">14:00</div>
         <div class="nav-name">株式会社すけっと</div>
       </a>
-      <a class="nav-item" href="#meet-5" onclick="jump('meet-5',this)">
+      <a class="nav-item" href="#meet-6" onclick="jump('meet-6',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">14:30</div>
         <div class="nav-name">古谷隆一</div>
       </a>
-      <a class="nav-item" href="#meet-6" onclick="jump('meet-6',this)">
+      <a class="nav-item" href="#meet-7" onclick="jump('meet-7',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">16:15</div>
         <div class="nav-name">【確定】竹内・小川・高橋・葛本</div>
       </a>
-      <a class="nav-item" href="#meet-7" onclick="jump('meet-7',this)">
+      <a class="nav-item" href="#meet-8" onclick="jump('meet-8',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">16:15</div>
         <div class="nav-name">竹内亮介・小川取締役・高橋涼太</div>
       </a>
-      <a class="nav-item" href="#meet-8" onclick="jump('meet-8',this)">
+      <a class="nav-item" href="#meet-9" onclick="jump('meet-9',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">17:00</div>
         <div class="nav-name">Leo Kudo</div>
       </a>
-      <a class="nav-item" href="#meet-9" onclick="jump('meet-9',this)">
+      <a class="nav-item" href="#meet-10" onclick="jump('meet-10',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">17:30</div>
         <div class="nav-name">Leo Kudo</div>
@@ -176,15 +181,41 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">9</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num">10</div><div class="stat-label">Zoom面談</div></div>
         <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">9</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">10</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
     <div class="card" id="meet-1">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">合</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">株</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">11:30 〜 12:00</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">株式会社Global Stride</div>
+          <div class="card-company">amon.lami@globalstride.jp</div>
+          <div class="card-purpose">初回面談となります。よろしくお願いします。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/83195045218?pwd=gCgB1Y58WG67GFML7Y51AitfAlYqa0.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>株式会社Global Stride ✓</span>
+        <span class="zoom-id-text">ID: 831 9504 5218 ／ PW: 317451</span>
+      </div>
+    </div>
+    <div class="card" id="meet-2">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">合</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">12:30 〜 13:00</span>
@@ -208,9 +239,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 825 4059 0494 ／ PW: 150490</span>
       </div>
     </div>
-    <div class="card" id="meet-2">
+    <div class="card" id="meet-3">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">吉</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">吉</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">13:00 〜 13:30</span>
@@ -234,9 +265,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 816 0082 7273 ／ PW: 734417</span>
       </div>
     </div>
-    <div class="card" id="meet-3">
+    <div class="card" id="meet-4">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">株</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#00897b,#00acc1)">株</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">13:30 〜 14:00</span>
@@ -260,9 +291,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 852 2851 8962 ／ PW: 479959</span>
       </div>
     </div>
-    <div class="card" id="meet-4">
+    <div class="card" id="meet-5">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#00897b,#00acc1)">株</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#f4511e,#ff8f00)">株</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">14:00 〜 14:30</span>
@@ -286,9 +317,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 864 2436 3539 ／ PW: 130711</span>
       </div>
     </div>
-    <div class="card" id="meet-5">
+    <div class="card" id="meet-6">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#f4511e,#ff8f00)">古</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#0288d1,#0097a7)">古</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">14:30 〜 15:00</span>
@@ -312,9 +343,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 881 7371 6295 ／ PW: 299451</span>
       </div>
     </div>
-    <div class="card" id="meet-6">
+    <div class="card" id="meet-7">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#0288d1,#0097a7)">【</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#5c6bc0,#7e57c2)">【</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">16:15 〜 16:45</span>
@@ -338,9 +369,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text"></span>
       </div>
     </div>
-    <div class="card" id="meet-7">
+    <div class="card" id="meet-8">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#5c6bc0,#7e57c2)">竹</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#2e7d32,#388e3c)">竹</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">16:15 〜 16:45</span>
@@ -364,9 +395,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 890 3428 6241 ／ PW: </span>
       </div>
     </div>
-    <div class="card" id="meet-8">
+    <div class="card" id="meet-9">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#2e7d32,#388e3c)">L</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">L</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">17:00 〜 17:30</span>
@@ -390,9 +421,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 840 1739 9997 ／ PW: 276139</span>
       </div>
     </div>
-    <div class="card" id="meet-9">
+    <div class="card" id="meet-10">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">L</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">L</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">17:30 〜 18:00</span>
@@ -431,7 +462,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:750,e:780},{s:780,e:810},{s:810,e:840},{s:840,e:870},{s:870,e:900},{s:975,e:1005},{s:975,e:1005},{s:1020,e:1050},{s:1050,e:1080}];
+  const sch=[{s:690,e:720},{s:750,e:780},{s:780,e:810},{s:810,e:840},{s:840,e:870},{s:870,e:900},{s:975,e:1005},{s:975,e:1005},{s:1020,e:1050},{s:1050,e:1080}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
