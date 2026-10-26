@@ -129,8 +129,8 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       </a>
       <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
         <div class="nav-dot pending"></div>
-        <div class="nav-time">15:00</div>
-        <div class="nav-name">田代</div>
+        <div class="nav-time">16:30</div>
+        <div class="nav-name">山口裕義</div>
       </a>
     </div>
   </aside>
@@ -175,28 +175,28 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
     </div>
     <div class="card" id="meet-2">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">田</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">山</div>
         <div class="card-main">
           <div class="card-meta">
-            <span class="card-time-badge">15:00 〜 15:30</span>
+            <span class="card-time-badge">16:30 〜 17:00</span>
             <span class="status-badge pending">
               録音待ち
             </span>
           </div>
-          <div class="card-title">田代</div>
-          <div class="card-company">t.brain4-1@takt-japan.co.jp</div>
-          <div class="card-purpose">AIで動画編集の仕方</div>
+          <div class="card-title">山口裕義</div>
+          <div class="card-company">yamaguchicpa19710918@gmail.com</div>
+          <div class="card-purpose">よろしくお願いいたします</div>
         </div>
         <div class="card-actions">
-          <a class="btn-zoom" href="https://us06web.zoom.us/j/86782214711?pwd=3MQPhiyfGjk5MuXljocWkDaszYiVHj.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/83794474169?pwd=PTM9C4VZ2OgZbc6vKenlOnISQ7yB6Z.1" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
           
           
         </div>
       </div>
       <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>田代 ✓</span><span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span>
-        <span class="zoom-id-text">ID: 867 8221 4711 ／ PW: 957655</span>
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>山口裕義 ✓</span>
+        <span class="zoom-id-text">ID: 837 9447 4169 ／ PW: 245053</span>
       </div>
     </div>
   </main>
@@ -214,7 +214,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:720,e:750},{s:900,e:930}];
+  const sch=[{s:720,e:750},{s:990,e:1020}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
