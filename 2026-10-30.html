@@ -333,7 +333,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-avatar" style="background:linear-gradient(135deg,#5c6bc0,#7e57c2)">田</div>
         <div class="card-main">
           <div class="card-meta">
-            <span class="card-time-badge">20:00 〜 21:30</span>
+            <span class="card-time-badge">20:00 〜 20:30</span>
             <span class="status-badge pending">
               録音待ち
             </span>
@@ -350,7 +350,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         </div>
       </div>
       <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span>
+        
         <span class="zoom-id-text"></span>
       </div>
     </div>
@@ -369,7 +369,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:540,e:570},{s:570,e:600},{s:600,e:630},{s:660,e:690},{s:690,e:720},{s:720,e:750},{s:1200,e:1290}];
+  const sch=[{s:540,e:570},{s:570,e:600},{s:600,e:630},{s:660,e:690},{s:690,e:720},{s:720,e:750},{s:1200,e:1230}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
