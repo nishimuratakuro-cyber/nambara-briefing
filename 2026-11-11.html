@@ -124,17 +124,17 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       
       <a class="nav-item" href="#meet-1" onclick="jump('meet-1',this)">
         <div class="nav-dot pending"></div>
-        <div class="nav-time">14:30</div>
-        <div class="nav-name">丸山マナブ</div>
-      </a>
-      <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
-        <div class="nav-dot pending"></div>
         <div class="nav-time">15:00</div>
         <div class="nav-name">木村　健人</div>
       </a>
-      <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
+      <a class="nav-item" href="#meet-2" onclick="jump('meet-2',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">15:30</div>
+        <div class="nav-name">丸山マナブ</div>
+      </a>
+      <a class="nav-item" href="#meet-3" onclick="jump('meet-3',this)">
+        <div class="nav-dot pending"></div>
+        <div class="nav-time">16:00</div>
         <div class="nav-name">丸山マナブ</div>
       </a>
     </div>
@@ -154,33 +154,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
     
     <div class="card" id="meet-1">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">丸</div>
-        <div class="card-main">
-          <div class="card-meta">
-            <span class="card-time-badge">14:30 〜 15:00</span>
-            <span class="status-badge pending">
-              録音待ち
-            </span>
-          </div>
-          <div class="card-title">丸山マナブ</div>
-          <div class="card-company">manabu.maruyama.no1@gmail.com</div>
-          <div class="card-purpose">ドットコンの</div>
-        </div>
-        <div class="card-actions">
-          <a class="btn-zoom" href="https://us06web.zoom.us/j/84537300927?pwd=89vnFn3LL5FRUbJkA81OFwWubabamT.1" target="_blank">▶ Zoom参加</a>
-          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
-          
-          
-        </div>
-      </div>
-      <div class="card-footer">
-        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>丸山マナブ ✓</span>
-        <span class="zoom-id-text">ID: 845 3730 0927 ／ PW: 323266</span>
-      </div>
-    </div>
-    <div class="card" id="meet-2">
-      <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">木</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">木</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">15:00 〜 15:30</span>
@@ -204,9 +178,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 883 4503 5482 ／ PW: 476223</span>
       </div>
     </div>
-    <div class="card" id="meet-3">
+    <div class="card" id="meet-2">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">丸</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">丸</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">15:30 〜 16:00</span>
@@ -230,6 +204,32 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 852 5337 8594 ／ PW: 005327</span>
       </div>
     </div>
+    <div class="card" id="meet-3">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#9c27b0,#673ab7)">丸</div>
+        <div class="card-main">
+          <div class="card-meta">
+            <span class="card-time-badge">16:00 〜 16:30</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">丸山マナブ</div>
+          <div class="card-company">manabu.maruyama.no1@gmail.com</div>
+          <div class="card-purpose">ドットコンの</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/84537300927?pwd=89vnFn3LL5FRUbJkA81OFwWubabamT.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ng"></span>丸山マナブ </span>
+        <span class="zoom-id-text">ID: 845 3730 0927 ／ PW: 323266</span>
+      </div>
+    </div>
   </main>
 </div>
 <script>
@@ -245,7 +245,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:870,e:900},{s:900,e:930},{s:930,e:960}];
+  const sch=[{s:900,e:930},{s:930,e:960},{s:960,e:990}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
