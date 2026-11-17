@@ -170,7 +170,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       <a class="nav-item" href="#meet-10" onclick="jump('meet-10',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">17:00</div>
-        <div class="nav-name">株式会社シナジーデザイン</div>
+        <div class="nav-name">【本日参加不可・再調整待ち】株式会社シナジーデザイン</div>
       </a>
       <a class="nav-item" href="#meet-11" onclick="jump('meet-11',this)">
         <div class="nav-dot pending"></div>
@@ -389,7 +389,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-avatar" style="background:linear-gradient(135deg,#2e7d32,#388e3c)">池</div>
         <div class="card-main">
           <div class="card-meta">
-            <span class="card-time-badge">13:45 〜 16:00</span>
+            <span class="card-time-badge">13:45 〜 14:30</span>
             <span class="status-badge pending">
               録音待ち
             </span>
@@ -438,7 +438,7 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
     </div>
     <div class="card" id="meet-10">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">株</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">【</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">17:00 〜 17:30</span>
@@ -446,12 +446,12 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
               録音待ち
             </span>
           </div>
-          <div class="card-title">株式会社シナジーデザイン</div>
+          <div class="card-title">【本日参加不可・再調整待ち】株式会社シナジーデザイン</div>
           <div class="card-company">iwama@synergy-d.com</div>
           <div class="card-purpose">宜しくお願い致します。</div>
         </div>
         <div class="card-actions">
-          <a class="btn-zoom" href="https://us06web.zoom.us/j/84772591539?pwd=v7Ev5MEFOwiecPCUU8RdhWCgGVKdds.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/84772591539?pwd=v7Ev5MEFOwiecPCUU8RdhWCgGVKdds.1&gt;" target="_blank">▶ Zoom参加</a>
           <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
           
           
@@ -555,7 +555,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:600,e:630},{s:630,e:660},{s:660,e:690},{s:690,e:720},{s:720,e:750},{s:750,e:780},{s:780,e:810},{s:825,e:960},{s:870,e:900},{s:1020,e:1050},{s:1050,e:1080},{s:1080,e:1110},{s:1110,e:1140}];
+  const sch=[{s:600,e:630},{s:630,e:660},{s:660,e:690},{s:690,e:720},{s:720,e:750},{s:750,e:780},{s:780,e:810},{s:825,e:870},{s:870,e:900},{s:1020,e:1050},{s:1050,e:1080},{s:1080,e:1110},{s:1110,e:1140}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
