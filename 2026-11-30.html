@@ -154,15 +154,20 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
       </a>
       <a class="nav-item" href="#meet-7" onclick="jump('meet-7',this)">
         <div class="nav-dot pending"></div>
+        <div class="nav-time">13:00</div>
+        <div class="nav-name">株式会社IFL　室龍哉</div>
+      </a>
+      <a class="nav-item" href="#meet-8" onclick="jump('meet-8',this)">
+        <div class="nav-dot pending"></div>
         <div class="nav-time">15:00</div>
         <div class="nav-name">株式会社K.SS</div>
       </a>
-      <a class="nav-item" href="#meet-8" onclick="jump('meet-8',this)">
+      <a class="nav-item" href="#meet-9" onclick="jump('meet-9',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">15:30</div>
         <div class="nav-name">都筑ひかり</div>
       </a>
-      <a class="nav-item" href="#meet-9" onclick="jump('meet-9',this)">
+      <a class="nav-item" href="#meet-10" onclick="jump('meet-10',this)">
         <div class="nav-dot pending"></div>
         <div class="nav-time">16:00</div>
         <div class="nav-name">株式会社耐熱性酵素研究所　奥　崇</div>
@@ -176,9 +181,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <p>本日のZoom面談スケジュール</p>
       </div>
       <div class="day-stats">
-        <div class="stat"><div class="stat-num">9</div><div class="stat-label">Zoom面談</div></div>
+        <div class="stat"><div class="stat-num">10</div><div class="stat-label">Zoom面談</div></div>
         <div class="stat"><div class="stat-num" style="color:#34a853">0</div><div class="stat-label">議事録あり</div></div>
-        <div class="stat"><div class="stat-num" style="color:#888">9</div><div class="stat-label">録音待ち</div></div>
+        <div class="stat"><div class="stat-num" style="color:#888">10</div><div class="stat-label">録音待ち</div></div>
       </div>
     </div>
     
@@ -343,6 +348,32 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <div class="card-avatar" style="background:linear-gradient(135deg,#5c6bc0,#7e57c2)">株</div>
         <div class="card-main">
           <div class="card-meta">
+            <span class="card-time-badge">13:00 〜 13:30</span>
+            <span class="status-badge pending">
+              録音待ち
+            </span>
+          </div>
+          <div class="card-title">株式会社IFL　室龍哉</div>
+          <div class="card-company">r.muro@ifl-edu.co.jp</div>
+          <div class="card-purpose">事業計画の件、お願いいたします。</div>
+        </div>
+        <div class="card-actions">
+          <a class="btn-zoom" href="https://us06web.zoom.us/j/86755354989?pwd=mX85sjjODlzy6zIBd3wCA0azLoEZbo.1" target="_blank">▶ Zoom参加</a>
+          <a class="btn-gijiroku-pending">📋 面談後に議事録生成</a>
+          
+          
+        </div>
+      </div>
+      <div class="card-footer">
+        <span class="attendee-chip"><span class="dot ok"></span>t.nambara.autotrading ✓</span><span class="attendee-chip"><span class="dot ok"></span>株式会社IFL　室龍哉 ✓</span>
+        <span class="zoom-id-text">ID: 867 5535 4989 ／ PW: 650783</span>
+      </div>
+    </div>
+    <div class="card" id="meet-8">
+      <div class="card-top">
+        <div class="card-avatar" style="background:linear-gradient(135deg,#2e7d32,#388e3c)">株</div>
+        <div class="card-main">
+          <div class="card-meta">
             <span class="card-time-badge">15:00 〜 15:30</span>
             <span class="status-badge pending">
               録音待ち
@@ -364,9 +395,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 875 7976 5435 ／ PW: 081256</span>
       </div>
     </div>
-    <div class="card" id="meet-8">
+    <div class="card" id="meet-9">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#2e7d32,#388e3c)">都</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">都</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">15:30 〜 16:00</span>
@@ -390,9 +421,9 @@ document.getElementById('pw-input').addEventListener('keydown',function(e){
         <span class="zoom-id-text">ID: 839 1497 0675 ／ PW: 401557</span>
       </div>
     </div>
-    <div class="card" id="meet-9">
+    <div class="card" id="meet-10">
       <div class="card-top">
-        <div class="card-avatar" style="background:linear-gradient(135deg,#1a73e8,#4285f4)">株</div>
+        <div class="card-avatar" style="background:linear-gradient(135deg,#ea4335,#ff6d00)">株</div>
         <div class="card-main">
           <div class="card-meta">
             <span class="card-time-badge">16:00 〜 16:30</span>
@@ -431,7 +462,7 @@ function jump(id,el){
 (function(){
   const now=new Date();
   const m=now.getHours()*60+now.getMinutes();
-  const sch=[{s:600,e:630},{s:630,e:660},{s:660,e:690},{s:690,e:720},{s:720,e:750},{s:750,e:780},{s:900,e:930},{s:930,e:960},{s:960,e:990}];
+  const sch=[{s:600,e:630},{s:630,e:660},{s:660,e:690},{s:690,e:720},{s:720,e:750},{s:750,e:780},{s:780,e:810},{s:900,e:930},{s:930,e:960},{s:960,e:990}];
   document.querySelectorAll('.nav-item').forEach((el,i)=>{
     if(!sch[i])return;
     if(m>=sch[i].s&&m<sch[i].e){
